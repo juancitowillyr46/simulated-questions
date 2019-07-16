@@ -1,0 +1,34 @@
+<form [formGroup]="formGroup">
+    <div class="form-group">
+        <label class="control-label" for="disabledInput">Nombre de la pregunta</label>
+        <input class="form-control" id="disabledInput" type="text" formControlName="question" placeholder="Ingrese el Nombre de la pregunta">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleSelect1">Seleccione el tipo de pregunta</label>
+        <select class="custom-select" (change)="seleccion($event)" formControlName="type">
+      <option selected="" disabled="disabled">Tipo de Pregunta</option>
+      <option value="TRUE_OR_FALSE">Verdadero / Falso</option>
+      <option value="MULTIPLE_CHOICE">Múltiples opciones</option>
+      <option value="MULTIPLE_CHOICE_WITH_IMAGE">Con imagen</option>
+    </select>
+    </div>
+
+    <div class="form-group" *ngIf="type==='MULTIPLE_CHOICE_WITH_IMAGE'">
+        <label for="exampleSelect1">Seleccione una imagen</label>
+        <input type="file" class="form-control-file" id="exampleInputFile" formControlName="file">
+    </div>
+
+    <div class="form-group" *ngIf="type==='MULTIPLE_CHOICE' || type==='MULTIPLE_CHOICE_WITH_IMAGE'">
+        <label for="exampleSelect1">Ingrese las opciones separados por comas</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" formControlName="options"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="disabledInput">Indicar la respuesta correcta según la posición ejem.: 1</label>
+        <input class="form-control" id="disabledInput" type="text" placeholder="Respuesta" formControlName="answer">
+    </div>
+
+    <button type="button" class="btn btn-info mr-2" (click)="ir($event)">Retornar</button>
+    <button type="button" class="btn btn-primary" (click)="save($event)">Guardar</button>
+</form>
