@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: "mantainers/questions/form/:id",
     component: QuestionsPostComponent
+  },
+  {
+    path: "",
+    component: QuestionsComponent
   }
 ];
 
