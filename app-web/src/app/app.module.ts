@@ -18,54 +18,31 @@ import { QuestionsService } from './maintainers/questions.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AnswersComponent } from './maintainers/answers/answers.component';
 
-import { NotifierModule, NotifierOptions } from 'angular-notifier';
+import { LoginComponent } from './simulacrum/login/login.component';
+import { ExamsAvailableComponent } from './simulacrum/exams-available/exams-available.component';
+import { ExamComponent } from './simulacrum/exam/exam.component';
+import { SuccessMessageComponent } from './simulacrum/success-message/success-message.component';
+import { HeaderComponent } from './shared/header/header.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { SharedObservable } from './observables/shared.observable';
 
 /**
  * Custom angular notifier options
  */
-const customNotifierOptions: NotifierOptions = {
-  position: {
-		horizontal: {
-			position: 'left',
-			distance: 12
-		},
-		vertical: {
-			position: 'bottom',
-			distance: 12,
-			gap: 10
-		}
-	},
-  // theme: 'material',
-  behaviour: {
-    autoHide: 5000,
-    onClick: 'hide',
-    onMouseover: 'pauseAutoHide',
-    showDismissButton: true,
-    stacking: 4
-  },
-  animations: {
-    enabled: true,
-    show: {
-      preset: 'slide',
-      speed: 300,
-      easing: 'ease'
-    },
-    hide: {
-      preset: 'fade',
-      speed: 300,
-      easing: 'ease',
-      offset: 50
-    },
-    shift: {
-      speed: 300,
-      easing: 'ease'
-    },
-    overlap: 150
-  }
-};
+
 
 @NgModule({
-  declarations: [AppComponent, QuestionsComponent, QuestionsPostComponent, AnswersComponent],
+  declarations: [
+    AppComponent,
+    QuestionsComponent,
+    QuestionsPostComponent,
+    AnswersComponent,
+    LoginComponent,
+    ExamsAvailableComponent,
+    ExamComponent,
+    SuccessMessageComponent,
+    HeaderComponent,
+    FooterComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -77,10 +54,9 @@ const customNotifierOptions: NotifierOptions = {
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule, // imports firebase/storage only needed for storage features,
     HttpClientModule,
-    FontAwesomeModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    FontAwesomeModule
   ],
-  providers: [QuestionsService],
+  providers: [QuestionsService, SharedObservable],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

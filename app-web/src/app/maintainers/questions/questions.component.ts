@@ -1,13 +1,22 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from '../questions.service';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimes,
+  faPlus,
+  faInfoCircle,
+  faCheckCircle,
+  faCheck,
+  faPen,
+  faTrash,
+  faArrowCircleLeft
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "app-questions",
-  templateUrl: "./questions.component.html",
-  styleUrls: ["./questions.component.css"]
+  selector: 'app-questions',
+  templateUrl: './questions.component.html',
+  styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
 
@@ -43,11 +52,11 @@ export class QuestionsComponent implements OnInit {
 
   public form(id: number, event) {
     event.preventDefault();
-    this.router.navigate(["/mantainers/questions/form/", id]);
+    this.router.navigate(['/mantainers/questions/form/', id]);
   }
 
   public ir() {
-    this.router.navigate(["/mantainers/questions/form/", '0']);
+    this.router.navigate(['/mantainers/questions/form/', '0']);
   }
 
 }

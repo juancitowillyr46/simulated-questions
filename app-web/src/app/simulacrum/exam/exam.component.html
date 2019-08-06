@@ -1,0 +1,100 @@
+<div class="list-group">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title text-uppercase">
+                <div style="display: flex;">
+                    <div class="col-10 pl-0 pr-0">simulacro: PMI</div>
+                    <div class="col-2 pl-0 pr-0 text-right">
+                        <fa-icon class="mr-1" [icon]="['fas', 'clock']"></fa-icon> <span>00:59:59</span>
+                    </div>
+                </div>
+            </h5>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-action pl-0 pr-0" style="display: flex;" *ngIf="nextQuestion===false">
+                    <div class="col-12">
+                        <p class="mb-1">1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur molestiae optio officia cumque doloremque. Doloribus molestiae temporibus nihil architecto exercitationem, accusamus culpa tempore quaerat sed assumenda incidunt
+                            commodi corporis voluptate?</p>
+                        <br>
+                        <label>Respuestas</label>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                            <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input">
+                            <label class="custom-control-label" for="customRadio3">Disabled custom radio</label>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-action pl-0 pr-0" style="display: flex;" *ngIf="nextQuestion===true">
+                    <div class="col-12">
+                        <p class="mb-1">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur molestiae optio officia cumque doloremque. Doloribus molestiae temporibus nihil architecto exercitationem, accusamus culpa tempore quaerat sed assumenda incidunt
+                            commodi corporis voluptate?</p>
+                        <br>
+                        <label>Respuestas</label>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                        </div>
+                    </div>
+                </li>
+                <!-- <li class="list-group-item list-group-item-action pl-0 pr-0" style="display: flex;">
+                    <div class="col-12">
+                        <p class="mb-1">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur molestiae optio officia cumque doloremque. Doloribus molestiae temporibus nihil architecto exercitationem, accusamus culpa tempore quaerat sed assumenda incidunt
+                            commodi corporis voluptate?</p>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                            </div>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item list-group-item-action pl-0 pr-0" style="display: flex;">
+                    <div class="col-12">
+                        <p class="mb-1">3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur molestiae optio officia cumque doloremque. Doloribus molestiae temporibus nihil architecto exercitationem, accusamus culpa tempore quaerat sed assumenda incidunt
+                            commodi corporis voluptate?</p>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked="">
+                                <label class="custom-control-label" for="customRadio1">Verdadero</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">Falso</label>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+            </ul>
+            <div class="mt-4">
+                <button type="button" class="btn btn-primary mr-2" routerLink="/simulacrum/examenavailable"><fa-icon class="mr-1" [icon]="['fas', 'home']"></fa-icon>Inicio</button>
+
+                <button type="button" class="btn btn-primary mr-2" (click)="last()"><fa-icon class="mr-1" [icon]="['fas', 'arrow-alt-circle-left']"></fa-icon>Anterior</button>
+                <button type="button" class="btn btn-primary mr-2" (click)="next()"><fa-icon class="mr-1" [icon]="['fas', 'arrow-alt-circle-right']"></fa-icon>Siguiente</button>
+                <button type="button" class="btn btn-primary" routerLink="/simulacrum/success-message"><fa-icon class="mr-1" [icon]="['fas', 'paper-plane']"></fa-icon>Finalizar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
