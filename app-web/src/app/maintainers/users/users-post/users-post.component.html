@@ -1,0 +1,29 @@
+<form [formGroup]="formGroup" enctype="multipart/form-data">
+    <div class="alert alert-dismissible alert-success" *ngIf="submit==true">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Well done!</strong> Usuario creado satisfactoriamente
+        <!-- <a href="#" class="alert-link">this important alert message</a>. -->
+    </div>
+    <div class="card border-secondary">
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'users']"></fa-icon> Create User</div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Username: </label>
+                <input type="text" class="form-control" id="disabledInput" formControlName="username" placeholder="Ingrese el nombre de usuario">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Email: </label>
+                <input type="email" class="form-control" id="disabledInput" formControlName="email" placeholder="Ingrese el correo electrónico">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Password: </label>
+                <input type="password" class="form-control" id="disabledInput" formControlName="password" placeholder="Ingrese la contraseña">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-info mr-2"><fa-icon class="mr-1" [icon]="['fas', 'arrow-circle-left']"></fa-icon>Retornar</button>
+            <button type="button" class="btn btn-info mr-2" (click)="save()"><fa-icon class="mr-1" [icon]="['fas', 'save']"></fa-icon>Guardar</button>
+        </div>
+    </div>
+</form>

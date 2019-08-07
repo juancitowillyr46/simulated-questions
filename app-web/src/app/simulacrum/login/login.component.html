@@ -2,34 +2,36 @@
     <div class="col-lg-5">
         <div style="text-align: center;
         font-size: 64px; display: block; margin-bottom: 5%;">
-            <!-- <img src=""> -->
-            <fa-icon [icon]="['fas', 'apple-alt']"></fa-icon>
+            <img src="../../../assets/images/logo.png">
+            <!-- <fa-icon [icon]="['fas', 'apple-alt']"></fa-icon> -->
         </div>
         <div class="card">
 
             <div class="card-body p-8">
 
-                <h5 class="card-title text-center mb-8 text-uppercase" style="margin-bottom: 32px">Ingreso al Simulacro</h5>
-                <form action="">
-                    <div class="form-group">
+                <h5 class="card-title text-center mb-8 text-uppercase" style="margin-bottom: 32px">Sign In</h5>
+                <form [formGroup]="formGroup" enctype="multipart/form-data">
+                    <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.username.errors)? 'has-danger' : '']">
                         <!-- <label class="control-label">Usuario</label> -->
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'user']"></fa-icon></span>
-                                </div>
-                                <input type="text" class="form-control" type="text" placeholder="Usuario">
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'user']"></fa-icon></span>
                             </div>
+                            <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.username.errors)? 'is-invalid' : '']" type="text" placeholder="Usuario" formControlName="username">
+                            <div *ngIf="formGroup.invalid === true && submit === true && f.username.errors" class="invalid-feedback">El campo usuario es requerido</div>
                         </div>
+
                     </div>
-                    <div class="form-group">
+                    <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.password.errors)? 'has-danger' : '']">
                         <!-- <label class="control-label">Password</label> -->
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'lock']"></fa-icon></span>
                                 </div>
-                                <input type="text" class="form-control" type="password" placeholder="Contraseña">
+                                <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.password.errors)? 'is-invalid' : '']" type="password" placeholder="Contraseña" formControlName="password">
+                                <div *ngIf="formGroup.invalid === true && submit === true && f.password.errors" class="invalid-feedback">La contraseña es requerida</div>
                             </div>
                         </div>
                     </div>
@@ -42,13 +44,13 @@
                         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                     </div> -->
                     <div class="d-flex justify-content-center">
-                        <button type="button" class="btn btn-primary btn-block" routerLink="/simulacrum/examenavailable">Iniciar sesión</button>
+                        <button type="button" class="btn btn-primary btn-block" (click)="login()">Iniciar sesión</button>
                     </div>
                 </form>
-                <!-- <div class="alert alert-dismissible alert-danger mt-2">
+                <div class="alert alert-dismissible alert-danger mt-4" *ngIf="error === true">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Error!</strong> Existe campos que son obligatorios.
-                </div> -->
+                    <strong>Error!</strong> El usuario o la clave son incorrectas.
+                </div>
             </div>
         </div>
     </div>
