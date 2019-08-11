@@ -79,7 +79,7 @@
             <ul class="list-group" *ngIf="buildAnswers.length > 0">
                 <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let answer of buildAnswers; let i = index">
                     <div [ngClass]="['custom-control', (formQuestion.changeTypeInput.input === 'radio')? 'custom-radio' : 'custom-checkbox']">
-                        <input [type]="formQuestion.changeTypeInput.input" [id]="'customRadio' + i" name="customRadio" class="custom-control-input" [checked]="answer.isCorrect" [value]="answer.value" (change)="isCorrectEvent($event, answer)">
+                        <input [type]="formQuestion.changeTypeInput.input" [id]="'customRadio' + i" name="customRadio" class="custom-control-input" [checked]="answer.isCorrect" (change)="isCorrectEvent($event, answer)">
                         <label class="custom-control-label" [for]="'customRadio' + i">{{answer.name}}</label>
                     </div>
                     <div class="text-right">

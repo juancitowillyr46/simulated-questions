@@ -13,9 +13,11 @@ import {
   ValidatorFn,
   AbstractControl
 } from '@angular/forms';
+
 import { AngularFireDatabase } from '@angular/fire/database';
 import { User } from '../../core/models/user.model';
 import { GeneratePassword } from '../../commons/generatePassword';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -30,13 +32,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   public error: boolean;
 
   constructor(
-    private routeActive: ActivatedRoute,
-    private router: Router,
-    private sharedObservable: SharedObservable,
-    private formBuilder: FormBuilder,
-    private db: AngularFireDatabase,
-    private generatePassword: GeneratePassword
-    ) {
+      private routeActive: ActivatedRoute,
+      private router: Router,
+      private sharedObservable: SharedObservable,
+      private formBuilder: FormBuilder,
+      private db: AngularFireDatabase,
+      private generatePassword: GeneratePassword,
+      private loginService: LoginService
+  ) {
     library.add(faLock, faUser, faAppleAlt);
   }
 
@@ -46,11 +49,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
-    this.sharedObservable.changeHeader(false);
+    // this.sharedObservable.changeHeader(false);
   }
 
   ngOnDestroy(): void {
-    this.sharedObservable.changeHeader(true);
+    // this.sharedObservable.changeHeader(true);
   }
 
   get f() { return this.formGroup.controls; }
@@ -64,24 +67,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     that.error = false;
-    const users = this.db.list('/users', ref => ref.orderByChild('username').equalTo(that.formGroup.value.username));
-    users.valueChanges().subscribe(res => {
+
+    const username = that.formGroup.value.username;
+    const users = that.loginService.login(username).subscribe(res => {
       if (res.length > 0) {
-        const findUsers: any = res[0];
+        const findUsers: any = res[0].data;
+        const token: any = res[0].key;
         const password = that.generatePassword.encriptarPassword(that.formGroup.value.password);
         if (password === findUsers.password) {
-          that.user = findUsers;
-          this.router.navigate(['/simulacrum/examenavailable']);
-          that.error = true;
+            window.sessionStorage.setItem('token', token);
+            that.sharedObservable.changeHeaderUser(res[0]);
+            this.router.navigate(['/simulacrum/examsavailable']);
+            that.error = true;
         } else {
           that.error = true;
         }
       } else {
         that.error = true;
       }
-    }, (err) => {
-      console.log(err);
-      that.error = true;
     });
 
   }

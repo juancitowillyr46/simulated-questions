@@ -1,27 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="sharedHeader==true">
-    <a class="navbar-brand" routerLink="/mantainers/questions">APP</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" *ngIf="data!==null">
+    <div class="container">
+        <!-- <a class="navbar-brand" routerLink="/mantainers/questions">
+            Gals
+        </a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <!-- <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/mantainers/questions">
+                            <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Questions <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" routerLink="/users/post">
+                            <fa-icon class="mr-1" [icon]="['fas', 'users']"></fa-icon> Users <span class="sr-only">(current)</span>
+                        </a>
+                    </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#" routerLink="/simulacrum/examsavailable">
+                        <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Simulacrums <span class="sr-only">(current)</span>
+                    </a>
+                </li>
 
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <!-- <li class="nav-item ">active -->
-            <li class="nav-item">
-                <a class="nav-link" href="#" routerLink="/mantainers/questions">
-                    <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Questions <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" routerLink="/users/post">
-                    <fa-icon class="mr-1" [icon]="['fas', 'users']"></fa-icon> Users <span class="sr-only">(current)</span></a>
-            </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="#" routerLink="/mantainers/questions">Simulacrum</a>
-            </li> -->
-        </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
+
+
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <fa-icon class="mr-1" [icon]="['fas', 'user']" class="mr-1"></fa-icon>{{ data.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a href="#" class="dropdown-item" (click)="logout($event)">
+                            <fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <!-- <span class="navbar-text">
+                    
+                </span> -->
+        </div>
     </div>
+
 </nav>

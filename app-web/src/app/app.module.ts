@@ -21,6 +21,9 @@ import { SharedObservable } from './observables/shared.observable';
 import { SimulacrumModule } from './simulacrum/simulacrum.module';
 import { UsersModule } from './maintainers/users/users.module';
 import { GeneratePassword } from './commons/generatePassword';
+import { LoginService } from './simulacrum/login/login.service';
+import { LogoutUser } from './commons/logoutUser';
+import { ExamObservable } from './simulacrum/exam/exam.observable';
 
 /**
  * Custom angular notifier options
@@ -50,7 +53,14 @@ import { GeneratePassword } from './commons/generatePassword';
     HttpClientModule,
     FontAwesomeModule
   ],
-  providers: [QuestionsService, SharedObservable, GeneratePassword],
+  providers: [
+    QuestionsService,
+    SharedObservable,
+    GeneratePassword,
+    LoginService,
+    LogoutUser,
+    ExamObservable
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

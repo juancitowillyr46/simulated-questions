@@ -16,7 +16,7 @@ const routes: Routes = [
        component: LoginComponent
      },
      {
-       path: 'examenavailable',
+       path: 'examsavailable',
        component: ExamsAvailableComponent
      },
      {

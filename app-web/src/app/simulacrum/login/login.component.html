@@ -2,7 +2,7 @@
     <div class="col-lg-5">
         <div style="text-align: center;
         font-size: 64px; display: block; margin-bottom: 5%;">
-            <img src="../../../assets/images/logo.png">
+            <img src="http://yapacode.com/projects/questions/assets/images/logo.png">
             <!-- <fa-icon [icon]="['fas', 'apple-alt']"></fa-icon> -->
         </div>
         <div class="card">
@@ -18,7 +18,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'user']"></fa-icon></span>
                             </div>
-                            <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.username.errors)? 'is-invalid' : '']" type="text" placeholder="Usuario" formControlName="username">
+                            <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.username.errors)? 'is-invalid' : '']" type="text" placeholder="Usuario" formControlName="username" autocomplete="off">
                             <div *ngIf="formGroup.invalid === true && submit === true && f.username.errors" class="invalid-feedback">El campo usuario es requerido</div>
                         </div>
 
@@ -30,7 +30,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'lock']"></fa-icon></span>
                                 </div>
-                                <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.password.errors)? 'is-invalid' : '']" type="password" placeholder="Contraseña" formControlName="password">
+                                <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.password.errors)? 'is-invalid' : '']" type="password" placeholder="Contraseña" formControlName="password" autocomplete="off">
                                 <div *ngIf="formGroup.invalid === true && submit === true && f.password.errors" class="invalid-feedback">La contraseña es requerida</div>
                             </div>
                         </div>
