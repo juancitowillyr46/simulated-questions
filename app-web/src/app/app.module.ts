@@ -24,6 +24,7 @@ import { GeneratePassword } from './commons/generatePassword';
 import { LoginService } from './simulacrum/login/login.service';
 import { LogoutUser } from './commons/logoutUser';
 import { ExamObservable } from './simulacrum/exam/exam.observable';
+import { SuccessMessageObservable } from './simulacrum/success-message/sucess-message.observable';
 
 /**
  * Custom angular notifier options
@@ -59,7 +60,8 @@ import { ExamObservable } from './simulacrum/exam/exam.observable';
     GeneratePassword,
     LoginService,
     LogoutUser,
-    ExamObservable
+    ExamObservable,
+    SuccessMessageObservable
   ],
   bootstrap: [AppComponent]
 })

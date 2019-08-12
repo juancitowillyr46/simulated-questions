@@ -76,13 +76,15 @@ export class ExamComponent implements OnInit, OnDestroy {
             question.input = that.typeAnswers.find(f => f.key === question.typeAnswer).input;
             question.class = that.typeAnswers.find(f => f.key === question.typeAnswer).class;
             question.answers.forEach(answer => {
-              answer.userIsCorrect = false;
+              answer.userIsCorrect = null;
             });
           });
 
 
 
           that.currentQuestion = that.exam.questionsAvailable[that.questionCurrent];
+
+          console.log(that.exam.questionsAvailable);
 
         } catch (error) {
           // console.log(error);
@@ -104,21 +106,64 @@ export class ExamComponent implements OnInit, OnDestroy {
     that.currentQuestion = that.exam.questionsAvailable[that.questionCurrent];
   }
 
-  public isCorrectEvent(event, answer, input) {
+  public isCorrectEvent(event, answer, idx) {
     const that = this;
 
-    if(input === 'radio') {
+    if (that.currentQuestion.input === 'radio') {
+      that.exam.questionsAvailable[idx].answers.forEach(answer => {
+        answer.userIsCorrect = null;
+      });
       that.currentQuestion.answers.forEach(answer => {
-        answer.userIsCorrect = false;
+        answer.userIsCorrect = null;
       });
     }
 
     answer.userIsCorrect = event.target.checked;
 
-    // that.answerModel = that.buildAnswers.find(f => f.value === answerModel.value);
-    // that.answerModel.isCorrect = event.target.checked;
-
   }
+
+
+  public finishExam() {
+    const that = this;
+
+    that.exam.percentage = 0;
+    that.exam.questionsAvailable.forEach(q => {
+
+      q.answersCorrects = 0;
+      q.answersIncorrects = 0;
+      q.answersNulls = 0;
+      q.questionApproved = false;
+
+      q.correctAnswers = q.answers.filter(a => a.isCorrect === true);
+
+      q.answers.forEach(answer => {
+        // Respuestas Correctas
+        if(answer.isCorrect === answer.userIsCorrect && answer.userIsCorrect !== null) {
+          q.answersCorrects = q.answersCorrects + 1;
+        // Respuestas Incorrectas
+        } else if (answer.userIsCorrect !== answer.isCorrect && answer.userIsCorrect !== null) {
+          q.answersIncorrects = q.answersIncorrects + 1;
+        // Respuestas Nulas
+        } else if (answer.userIsCorrect === null) {
+          q.answersNulls = q.answersNulls + 1;
+        }
+      });
+
+      if (q.correctAnswers.length === q.answersCorrects) {
+        q.questionApproved = true;
+      }
+
+
+      console.log(q);
+
+    });
+
+    console.log(that.exam.questionsAvailable.filter(p => p.questionApproved === true));
+    const questionApproved = that.exam.questionsAvailable.filter(p => p.questionApproved === true).length;
+    that.exam.percentage = Math.round((questionApproved / that.exam.questionsAvailable.length) * 100);
+    that.examObservable.changeQuestions(that.exam);
+  }
+
 
   ngOnDestroy(): void {
     const that = this;
