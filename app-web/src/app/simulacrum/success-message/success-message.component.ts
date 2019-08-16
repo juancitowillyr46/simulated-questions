@@ -1,8 +1,9 @@
 import { ExamObservable } from './../exam/exam.observable';
 import { Component, OnInit } from '@angular/core';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheckCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
+import { SharedObservable } from '../../observables/shared.observable';
 
 @Component({
   selector: 'app-success-message',
@@ -11,12 +12,13 @@ import { Subscription } from 'rxjs';
 })
 export class SuccessMessageComponent implements OnInit {
 
-  public exam;
+  public exam = null;
   private suscription: Subscription = null;
   constructor(
     private examObservable: ExamObservable,
+    private sharedObservable: SharedObservable
   ) {
-    library.add(faCheckCircle, faSignOutAlt);
+    library.add(faCheckCircle, faSignOutAlt, faTimes);
   }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class SuccessMessageComponent implements OnInit {
       if (res) {
         console.log(res);
         that.exam = res;
+        that.exam.percentage = Math.floor(that.exam.percentage);
       }
     });
   }
@@ -44,9 +47,8 @@ export class SuccessMessageComponent implements OnInit {
           answer.userIsCorrect = null;
         });
       });
+      that.sharedObservable.changeHeaderUser(null);
     }
   }
-
-  
 
 }

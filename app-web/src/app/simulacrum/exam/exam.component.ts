@@ -70,15 +70,15 @@ export class ExamComponent implements OnInit, OnDestroy {
           that.questionNext = 0;
           that.questionLast = (that.exam.questionsAvailable.length - 1);
 
-          let n = 0;
-          that.exam.questionsAvailable.forEach(question => {
-            question.idx = n += 1;
-            question.input = that.typeAnswers.find(f => f.key === question.typeAnswer).input;
-            question.class = that.typeAnswers.find(f => f.key === question.typeAnswer).class;
-            question.answers.forEach(answer => {
-              answer.userIsCorrect = null;
-            });
-          });
+          // let n = 0;
+          // that.exam.questionsAvailable.forEach(question => {
+          //   question.idx = n += 1;
+          //   question.input = that.typeAnswers.find(f => f.key === question.typeAnswer).input;
+          //   question.class = that.typeAnswers.find(f => f.key === question.typeAnswer).class;
+          //   question.answers.forEach(answer => {
+          //     // answer.userIsCorrect = null;
+          //   });
+          // });
 
 
 
@@ -110,11 +110,11 @@ export class ExamComponent implements OnInit, OnDestroy {
     const that = this;
 
     if (that.currentQuestion.input === 'radio') {
-      that.exam.questionsAvailable[idx].answers.forEach(answer => {
-        answer.userIsCorrect = null;
+      that.exam.questionsAvailable[idx].answers.forEach(aq => {
+        aq.userIsCorrect = null;
       });
-      that.currentQuestion.answers.forEach(answer => {
-        answer.userIsCorrect = null;
+      that.currentQuestion.answers.forEach(aw => {
+        aw.userIsCorrect = null;
       });
     }
 
@@ -125,9 +125,9 @@ export class ExamComponent implements OnInit, OnDestroy {
 
   public finishExam() {
     const that = this;
-
-    that.exam.percentage = 0;
-    that.exam.questionsAvailable.forEach(q => {
+    const exameEdit = that.exam;
+    exameEdit.percentage = 0;
+    exameEdit.questionsAvailable.forEach(q => {
 
       q.answersCorrects = 0;
       q.answersIncorrects = 0;
@@ -138,7 +138,7 @@ export class ExamComponent implements OnInit, OnDestroy {
 
       q.answers.forEach(answer => {
         // Respuestas Correctas
-        if(answer.isCorrect === answer.userIsCorrect && answer.userIsCorrect !== null) {
+        if (answer.isCorrect === answer.userIsCorrect && answer.userIsCorrect !== null) {
           q.answersCorrects = q.answersCorrects + 1;
         // Respuestas Incorrectas
         } else if (answer.userIsCorrect !== answer.isCorrect && answer.userIsCorrect !== null) {
@@ -154,14 +154,16 @@ export class ExamComponent implements OnInit, OnDestroy {
       }
 
 
-      console.log(q);
+      // console.log(q);
 
     });
 
-    console.log(that.exam.questionsAvailable.filter(p => p.questionApproved === true));
-    const questionApproved = that.exam.questionsAvailable.filter(p => p.questionApproved === true).length;
-    that.exam.percentage = Math.round((questionApproved / that.exam.questionsAvailable.length) * 100);
-    that.examObservable.changeQuestions(that.exam);
+    // console.log(exameEdit.questionsAvailable.filter(p => p.questionApproved === true));
+    const questionApproved = exameEdit.questionsAvailable.filter(p => p.questionApproved === true).length;
+    exameEdit.percentage = Math.round((questionApproved / exameEdit.questionsAvailable.length) * 100);
+    console.log(exameEdit);
+    that.examObservable.changeQuestions(exameEdit);
+    that.router.navigate(['/simulacrum/success-message']);
   }
 
 
