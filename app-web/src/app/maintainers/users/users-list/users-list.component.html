@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<h5>Usuario Registrados</h5>
+<!-- <button type="button" class="btn btn-primary" (click)="ir($event)"><fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Registrar</button><br><br> -->
+<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Well done!</strong> {{ message.message }}
+    <!-- <a href="#" class="alert-link">this important alert message</a>. -->
+</div>
+<div class="list-group">
+    <a href="javascript:void(0)" [routerLink]="'/users/post/' + user.key" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let user of users; let i = index;">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"></h5>
+            <small>
+                <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+            </small>
+        </div>
+        <p class="mb-1">{{ (i + 1) }}. {{ user.displayName }} - {{ user.email }}</p>
+        <small>{{ user.role }}</small>
+    </a>
+</div>

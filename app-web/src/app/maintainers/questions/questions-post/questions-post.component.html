@@ -1,0 +1,135 @@
+<form [formGroup]="formGroup" enctype="multipart/form-data">
+    <div class="card border-secondary">
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Preguntas
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Pregunta: </label>
+                <textarea class="form-control" id="disabledInput" formControlName="question" placeholder="Ingrese el nombre de la pregunta"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleSelect1">Tipo de respuesta: </label>
+                <select class="custom-select" (change)="changeTypeAnswer($event)" formControlName="typeAnswer" placeholder="Seleccione el tipo de pregunta">
+                    <option selected="selected" disabled="disabled">Tipo de Pregunta</option>
+                    <option [value]="typeAnswer.key" *ngFor="let typeAnswer of typeAnswer">{{ typeAnswer.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleSelect1">Categoria de pregunta: </label>
+                <select class="custom-select" formControlName="category" placeholder="Seleccione el tipo de pregunta">
+                    <option selected="selected" disabled="disabled">Categoria</option>
+                    <option [value]="typeCategory.key" *ngFor="let typeCategory of typeCategories">{{ typeCategory.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" formControlName="withImage" id="customSwitch1" (change)="switchWithImage($event)">
+                    <label class="custom-control-label" for="customSwitch1">Con imagen</label>
+                </div>
+            </div>
+
+            <div class="form-group" *ngIf="formQuestion.withImage">
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputGroupFile02" formControlName="image" (change)="changeListener($event)">
+                        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="">Upload</span>
+                    </div>
+                </div>
+                <img [src]="formQuestion.image" *ngIf="formQuestion.image">
+            </div>
+
+            <div>
+
+                <div class="form-group">
+                    <label for="exampleSelect1">Lista de respuestas:</label>
+                    <small id="emailHelp" class="form-text text-muted">Agregar las posibles respuestas e indicar una o varias respuestas correctas</small>
+                    <!-- <app-answers></app-answers> -->
+                    <div class="mb-2 text-right">
+                        <button type="button" [disabled]="formQuestion.changeTypeInput.key === 'TRUE_OR_FALSE'" (click)="formQuestion.showModal=true" class="btn btn-primary"><fa-icon [icon]="['fas', 'plus']" class="mr-1"></fa-icon>Respuestas</button>
+                    </div>
+
+                    <div class="card text-white bg-secondary mb-3" *ngIf="formQuestion.showModal === true">
+
+                        <div class="card-header text-right">
+                            <a class="" href="#" (click)="formQuestion.showModal=false">
+                                <fa-icon [icon]="['fas', 'times']"></fa-icon>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-text">
+                                <div class="form-group">
+                                    <label class="control-label" for="disabledInput">Respuesta: </label>
+                                    <textarea class="form-control" id="disabledInput" [(ngModel)]="answerModel.name" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese el nombre de la pregunta"></textarea>
+                                </div>
+                                <div class="text-right" *ngIf="answerModel.action === 'new'">
+                                    <button type="button" class="btn btn-primary" [disabled]="(answerModel.name === '')" (click)="addAnswer(answerModel)">
+                                    <fa-icon [icon]="['fas', 'check']" class="mr-1"></fa-icon>Agregar</button>
+                                </div>
+                                <div class="text-right" *ngIf="answerModel.action === 'edit'">
+                                    <button type="button" class="btn btn-primary" [disabled]="(answerModel.name === '')" (click)="updateAnswer(answerModel)">
+                                    <fa-icon [icon]="['fas', 'check']" class="mr-1"></fa-icon>Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <ul class="list-group" *ngIf="buildAnswers.length > 0">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let answer of buildAnswers; let i = index">
+                            <div [ngClass]="['custom-control', (formQuestion.changeTypeInput.input === 'radio')? 'custom-radio' : 'custom-checkbox']">
+                                <input [type]="formQuestion.changeTypeInput.input" [id]="'customRadio' + i" name="customRadio" class="custom-control-input" [checked]="answer.isCorrect" (change)="isCorrectEvent($event, answer)">
+                                <label class="custom-control-label" [for]="'customRadio' + i">{{answer.name}}</label>
+                            </div>
+                            <div class="text-right">
+                                <a href="javascript: void(0)" class="mr-2" *ngIf="formQuestion.changeTypeInput.key !== 'TRUE_OR_FALSE'" (click)="getAnswer(answer)">
+                                    <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+                                </a>
+                                <a href="javascript: void(0)" *ngIf="formQuestion.changeTypeInput.key !== 'TRUE_OR_FALSE'" (click)="deleteAnswer(answer)">
+                                    <fa-icon [icon]="['fas', 'trash']"></fa-icon>
+                                </a>
+                            </div>
+
+                        </li>
+                    </ul>
+
+                    <div class="alert alert-dismissible alert-info" *ngIf="buildAnswers.length === 0">
+                        <strong><fa-icon [icon]="['fas', 'info-circle']"></fa-icon></strong> Agrega opciones a tu pregunta.
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="button" class="btn btn-info mr-2" (click)="ir($event)">
+                <fa-icon class="mr-1" [icon]="['fas', 'arrow-circle-left']"></fa-icon>
+                Retornar
+            </button>
+            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true)" *ngIf="formQuestion.key === '0'">
+                <fa-icon class="mr-1" [icon]="['fas', 'save']"></fa-icon>
+                Guardar
+            </button>
+            <button type="button" class="btn btn-primary" (click)="update()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true)" *ngIf="formQuestion.key !== '0'">
+                <fa-icon class="mr-1" [icon]="['fas', 'pen']"></fa-icon>
+                Actualizar
+            </button>
+        </div>
+    </div>
+
+
+    <div class="mt-2 alert alert-dismissible alert-success" *ngIf="formQuestion.submit === true">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Listo!</strong> {{ submitMessage.message }} <a href="#" routerLink="/mantainers/questions" class="alert-link">Ver Lista</a>
+    </div>
+
+
+
+
+
+</form>

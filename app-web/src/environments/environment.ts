@@ -4,12 +4,12 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'CcEHc3VKu8dMqAwJr4Fsk5RckbtNdjnDAAKT6fN8',
+    apiKey: 'AIzaSyAmTPUXH--qqICZqPDQuiPgtSNPIi-VkrY',
     authDomain: 'simulated-questions-2019.firebaseio.com',
     databaseURL: 'https://simulated-questions-2019.firebaseio.com',
     projectId: 'simulated-questions-2019',
-    storageBucket: 'vwise-2ed94.appspot.com',
-    messagingSenderId: '698934152542'
+    // storageBucket: 'vwise-2ed94.appspot.com',
+    // messagingSenderId: '698934152542'
   }
 };
 

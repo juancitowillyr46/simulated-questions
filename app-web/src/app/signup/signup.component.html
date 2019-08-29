@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-5">
+                <div style="text-align: center;
+              font-size: 64px; display: block; margin-bottom: 5%;">
+                    <img src="http://yapacode.com/projects/questions/assets/images/logo.png">
+                    <!-- <fa-icon [icon]="['fas', 'apple-alt']"></fa-icon> -->
+                </div>
+                <div class="card">
+
+                    <div class="card-body p-8">
+
+                        <h5 class="card-title text-center mb-8 text-uppercase" style="margin-bottom: 32px">Sign Up</h5>
+                        <form [formGroup]="formGroup" enctype="multipart/form-data">
+                            <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.displayName.errors)? 'has-danger' : '']">
+                                <!-- <label class="control-label">Usuario</label> -->
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'user']"></fa-icon></span>
+                                    </div>
+                                    <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.displayName.errors)? 'is-invalid' : '']" type="text" placeholder="Nombres completos" formControlName="displayName" autocomplete="off">
+                                    <div *ngIf="formGroup.invalid === true && submit === true && f.displayName.errors" class="invalid-feedback">El campo nombre completo es requerido</div>
+                                </div>
+
+                            </div>
+                            <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.displayName.errors)? 'has-danger' : '']">
+                                <!-- <label class="control-label">Usuario</label> -->
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'at']"></fa-icon></span>
+                                    </div>
+                                    <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.email.errors)? 'is-invalid' : '']" type="text" placeholder="Correo electrónico" formControlName="email" autocomplete="off">
+                                    <div *ngIf="formGroup.invalid === true && submit === true && f.email.errors" class="invalid-feedback">El campo email es requerido</div>
+                                </div>
+
+                            </div>
+                            <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.password.errors)? 'has-danger' : '']">
+                                <!-- <label class="control-label">Password</label> -->
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'lock']"></fa-icon></span>
+                                        </div>
+                                        <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.password.errors)? 'is-invalid' : '']" type="password" placeholder="Contraseña" formControlName="password" autocomplete="off">
+                                        <div *ngIf="formGroup.invalid === true && submit === true && f.password.errors" class="invalid-feedback">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary btn-block" (click)="signUp()" [disabled]="formGroup.invalid == false && submit == true ">Registrarme</button>
+                            </div>
+                        </form>
+                        <div class="alert alert-dismissible alert-danger mt-4" *ngIf="message !== null">
+                            <button type="button" class="close" data-dismiss="alert" (click)="message = null">&times;</button>
+                            <strong>Error!</strong> {{ message }}
+                        </div>
+                        <div class="alert alert-dismissible alert-success mt-4" *ngIf="formGroup.invalid == false && submit == true ">
+                            <button type="button" class="close" data-dismiss="alert" (click)="message = null">&times;</button>
+                            <strong>Done!</strong> Registrando...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

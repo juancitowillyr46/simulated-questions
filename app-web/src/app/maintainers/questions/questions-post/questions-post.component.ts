@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionsService } from '../questions.service';
 import {
   FormControl,
@@ -10,32 +10,32 @@ import {
   FormBuilder,
   ValidatorFn,
   AbstractControl
-} from "@angular/forms";
+} from '@angular/forms';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faSave } from '@fortawesome/free-solid-svg-icons';
-import { Answer } from '../../core/models/answer.model';
-import { FormQuestion } from '../../core/models/formQuestion.model';
-import { Question } from '../../core/models/question.model';
-import { SubmitMessage } from '../../core/models/submitMessage.model';
+import { Answer } from '../../../core/models/answer.model';
+import { FormQuestion } from '../../../core/models/formQuestion.model';
+import { Question } from '../../../core/models/question.model';
+import { SubmitMessage } from '../../../core/models/submitMessage.model';
 // import { NotifierService } from 'angular-notifier';
 
 @Component({
-  selector: "app-questions-post",
-  templateUrl: "./questions-post.component.html",
-  styleUrls: ["./questions-post.component.css"]
+  selector: 'app-questions-post',
+  templateUrl: './questions-post.component.html',
+  styleUrls: ['./questions-post.component.css']
 })
 export class QuestionsPostComponent implements OnInit {
 
   public typeCategories = [
-    { "id": 1, "key": "PMI_ACP", "name": "Project Management Institute"},
-    { "id": 2, "key": "SCRUM_MASTER", "name": "Scrum Master"}
+    { 'id': 1, 'key': 'PMI_ACP', 'name': 'Project Management Institute'},
+    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'}
   ];
 
   public typeAnswer = [
-    { "id": 1, "key": "TRUE_OR_FALSE", "name": "Verdadero ó Falso", "input" : "radio" },
-    { "id": 2, "key": "ONE_ANSWER", "name": "Una respuesta", "input" : "radio" },
-    { "id": 2, "key": "MULTIPLE_ANSWER", "name": "Múltiples respuestas", "input" : "checkbox" },
+    { 'id': 1, 'key': 'TRUE_OR_FALSE', 'name': 'Verdadero ó Falso', 'input' : 'radio' },
+    { 'id': 2, 'key': 'ONE_ANSWER', 'name': 'Una respuesta', 'input' : 'radio' },
+    { 'id': 2, 'key': 'MULTIPLE_ANSWER', 'name': 'Múltiples respuestas', 'input' : 'checkbox' },
   ];
 
 
@@ -108,7 +108,7 @@ export class QuestionsPostComponent implements OnInit {
   public ir(event) {
     const that = this;
     event.preventDefault();
-    that.router.navigate(["/mantainers/questions/"]);
+    that.router.navigate(['/questions/list']);
   }
 
   public changeTypeAnswer(event) {

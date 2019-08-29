@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="mt-5">
+        <div class="d-flex justify-content-center">
+            <div class="col-lg-5">
+                <div style="text-align: center;
+                font-size: 64px; display: block; margin-bottom: 5%;">
+                    <img src="http://yapacode.com/projects/questions/assets/images/logo.png">
+                    <!-- <fa-icon [icon]="['fas', 'apple-alt']"></fa-icon> -->
+                </div>
+                <div class="card">
+
+                    <div class="card-body p-8">
+
+                        <h5 class="card-title text-center mb-8 text-uppercase" style="margin-bottom: 32px">Sign In</h5>
+                        <form [formGroup]="formGroup" enctype="multipart/form-data">
+                            <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.username.errors)? 'has-danger' : '']">
+                                <!-- <label class="control-label">Usuario</label> -->
+
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'user']"></fa-icon></span>
+                                    </div>
+                                    <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.username.errors)? 'is-invalid' : '']" type="text" placeholder="Usuario" formControlName="username" autocomplete="off">
+                                    <div *ngIf="formGroup.invalid === true && submit === true && f.username.errors" class="invalid-feedback">El campo usuario es requerido</div>
+                                </div>
+
+                            </div>
+                            <div [ngClass]="['form-group', (formGroup.invalid === true && submit === true && f.password.errors)? 'has-danger' : '']">
+                                <!-- <label class="control-label">Password</label> -->
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><fa-icon class="mr-1" [icon]="['fas', 'lock']"></fa-icon></span>
+                                        </div>
+                                        <input type="text" [ngClass]="['form-control', (formGroup.invalid === true && submit === true && f.password.errors)? 'is-invalid' : '']" type="password" placeholder="Contraseña" formControlName="password" autocomplete="off">
+                                        <div *ngIf="formGroup.invalid === true && submit === true && f.password.errors" class="invalid-feedback">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <label for="exampleInputEmail1">Usuario:</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Contraseña:</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div> -->
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary btn-block" (click)="login()">Iniciar sesión</button>
+                            </div>
+                        </form>
+                        <div class="alert alert-dismissible alert-danger mt-4" *ngIf="loginMessage !== null">
+                            <button type="button" class="close" data-dismiss="alert" (click)="loginMessage = null">&times;</button>
+                            <strong>Error!</strong> {{ loginMessage }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

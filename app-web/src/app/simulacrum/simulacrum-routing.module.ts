@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 import { ExamsAvailableComponent } from './exams-available/exams-available.component';
 import { ExamComponent } from './exam/exam.component';
 import { SuccessMessageComponent } from './success-message/success-message.component';
+import { AuthGuard } from '../auth.guard';
 import { SimulacrumComponent } from './simulacrum/simulacrum.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 const routes: Routes = [
  {
    path: 'simulacrum',
-   component: SimulacrumComponent,
+   component: DashboardComponent,
+   canActivate: [AuthGuard],
    children: [
-     {
-       path: 'login',
-       component: LoginComponent
-     },
      {
        path: 'examsavailable',
        component: ExamsAvailableComponent

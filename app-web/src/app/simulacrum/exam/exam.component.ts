@@ -4,6 +4,7 @@ import { ExamObservable } from './exam.observable';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Exam } from '../../core/models/exam.model';
+import { AuthService } from '../../auth.service';
 import {
   faPlay,
   faClock,
@@ -41,7 +42,8 @@ export class ExamComponent implements OnInit, OnDestroy {
 
   constructor(
     private examObservable: ExamObservable,
-    private router: Router
+    private router: Router,
+    // private authService: AuthService
   ) {
     library.add(
       faPlay,

@@ -30,7 +30,7 @@
             </ul>
         </div>
         <div class="card-footer">
-            <button type="button" class="btn btn-primary mr-2" routerLink="/simulacrum/examsavailable"><fa-icon class="mr-1" [icon]="['fas', 'power-off']"></fa-icon>Cancelar</button>
+            <button type="button" class="btn btn-primary mr-2" routerLink="/simulacrum/examsavailable"><fa-icon class="mr-1" [icon]="['fas', 'power-off']"></fa-icon>Retornar</button>
             <button type="button" class="btn btn-primary mr-2" (click)="last()" [disabled]="(questionNext === questionCurrent)"><fa-icon class="mr-1" [icon]="['fas', 'arrow-alt-circle-left']"></fa-icon>Anterior</button>
             <button type="button" class="btn btn-primary mr-2" (click)="next()" [disabled]="(questionLast === questionCurrent)"><fa-icon class="mr-1" [icon]="['fas', 'arrow-alt-circle-right']"></fa-icon>Siguiente</button>
             <button type="button" class="btn btn-primary" (click)="finishExam()"><fa-icon class="mr-1" [icon]="['fas', 'paper-plane']"></fa-icon>Finalizar</button>

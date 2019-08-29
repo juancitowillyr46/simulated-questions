@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SharedObservable } from './observables/shared.observable';
 import { Router } from '@angular/router';
-import { LoginService } from './simulacrum/login/login.service';
+import { LoginService } from './login/login.service';
 import { Subscription } from 'rxjs';
 
 @Component({

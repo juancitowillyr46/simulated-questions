@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faPlay, faClock, faListUl, faArrowCircleLeft, faSave, faSignOutAlt, faList } from '@fortawesome/free-solid-svg-icons';
-import { LogoutUser } from '../../commons/logoutUser';
-import { QuestionsService } from '../../maintainers/questions.service';
+import { QuestionsService } from '../../maintainers/questions/questions.service';
 import { ExamObservable } from '../exam/exam.observable';
 import { Router } from '@angular/router';
 import { Exam } from '../../core/models/exam.model';
+import { AuthService } from '../../auth.service';
+import { CategoriesService } from '../../maintainers/categories/categories.service';
+import { UsersService } from '../../maintainers/users/users.service';
+import { UserAuth } from '../../core/models/userAuth.model';
 
 @Component({
   selector: 'app-exams-available',
@@ -17,10 +20,11 @@ export class ExamsAvailableComponent implements OnInit {
   private questions: any[] = [];
   private questionsAvailable: any[] = [];
 
-  public categories: any[] = [
-    {name: 'PSM', clientKey: 'PSM', totalQuestions: 80, durationTimeMM: 60},
-    {name: 'PMI ACP', clientKey: 'PMI_ACP', totalQuestions: 120, durationTimeMM: 120}
-  ];
+  public categories: any[] = [];
+  // public categories: any[] = [
+  //   {name: 'PSM', clientKey: 'PSM', totalQuestions: 80, durationTimeMM: 60},
+  //   {name: 'PMI ACP', clientKey: 'PMI_ACP', totalQuestions: 120, durationTimeMM: 120}
+  // ];
 
   public typeAnswers = [
     { id: 1, key: 'TRUE_OR_FALSE', name: 'Verdadero ó Falso', input: 'radio', class: 'custom-radio'},
@@ -29,22 +33,30 @@ export class ExamsAvailableComponent implements OnInit {
   ];
 
   constructor(
-    private logoutUser: LogoutUser,
     private questionsService: QuestionsService,
     private examObservable: ExamObservable,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private categoriesService: CategoriesService,
+    private usersService: UsersService
   ) {
     library.add(faPlay, faClock, faListUl, faArrowCircleLeft, faSave, faSignOutAlt, faList);
   }
 
   ngOnInit() {
     const that = this;
-
+    const userAuth: UserAuth = JSON.parse(localStorage.getItem('user'));
+    that.authService.CurrentUserData(userAuth.uid).subscribe( res => {
+      that.categoriesService.read(res[0].data.assignedTests[0].key).subscribe(cat => {
+        console.log(cat);
+        that.categories.push(cat);
+      });
+    });
   }
 
   public logout() {
     const that = this;
-    that.logoutUser.clearSession();
+    that.authService.SignOut();
   }
 
   public startExam(category: any) {

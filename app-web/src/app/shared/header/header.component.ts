@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { SharedObservable } from '../../observables/shared.observable';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faList, faUsers, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { faList, faUsers, faSignOutAlt, faUser, faHome, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
-import { LoginService } from '../../simulacrum/login/login.service';
+import { AuthService } from '../../auth.service';
+import { UserAuth } from '../../core/models/userAuth.model';
+import { AuthObservable } from '../../auth.observable';
 
 @Component({
   selector: 'app-header',
@@ -15,35 +15,44 @@ export class HeaderComponent implements OnInit {
 
   public data = null;
   public subscription: Subscription = null;
+  public isLoggin: boolean;
+  public userAuthAttr: UserAuth = null;
 
   constructor(
-    private loginService: LoginService,
-    private sharedObservable: SharedObservable,
-    private router: Router
+    private authService: AuthService,
+    private authObservable: AuthObservable
   ) {
-    library.add(faList, faUsers, faSignOutAlt, faUser);
+    library.add(faList, faUsers, faSignOutAlt, faUser, faHome, faUsers, faEdit);
   }
 
   ngOnInit() {
     const that = this;
-    that.data = null;
-    that.subscription = that.sharedObservable.currentUser.subscribe( res => {
-      if (res) {
-        that.data = res.data;
-        console.log(that.data);
+    that.authService.StateAuth().subscribe( state => {
+      if (state) {
+        that.isLoggin = true;
+        that.authService.CurrentUserData(state.uid).subscribe(res => {
+          if (res && res[0] && res[0].data) {
+            const userNode: any = res[0].data;
+            that.userAuthAttr = {
+              uid: userNode.uid,
+              email: userNode.email,
+              displayName: userNode.displayName,
+              photoURL: userNode.photoURL,
+              emailVerified: userNode.emailVerified,
+              role: userNode.role
+            };
+          }
+        });
       } else {
-        that.data = null;
+        that.isLoggin = false;
       }
     });
   }
 
-  public logout(event) {
+  logout(event) {
     const that = this;
     event.preventDefault();
-    sessionStorage.removeItem('token');
-    that.sharedObservable.changeHeaderUser(null);
-    that.data = null;
-    this.router.navigate(['/simulacrum/login']);
+    that.authService.SignOut();
   }
 
 }

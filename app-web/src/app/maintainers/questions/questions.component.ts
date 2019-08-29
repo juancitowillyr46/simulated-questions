@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuestionsService } from '../questions.service';
+import { QuestionsService } from './questions.service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faTimes,

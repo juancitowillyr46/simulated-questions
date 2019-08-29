@@ -1,6 +1,6 @@
-<div class="card border-secondary">
+<div class="card border-secondary" *ngIf="categories">
     <div class="card-header">
-        <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon>Simulacros Disponibles ({{ categories.length }})
+        <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon>Examenes Disponibles ({{ categories.length }})
     </div>
     <div class="card-body">
         <!-- <h5 class="card-title text-uppercase">Simulacros Disponibles (2)</h5> -->
@@ -27,6 +27,6 @@
         </div> -->
     </div>
     <div class="card-footer">
-        <button type="button" class="btn btn-primary mr-2" (click)="logout()"><fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión</button>
+        <button type="button" class="btn btn-primary mr-2" (click)="logout()"><fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Salir</button>
     </div>
 </div>

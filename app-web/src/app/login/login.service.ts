@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
+// import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +29,18 @@ export class LoginService {
     }));
   }
 
-  public getUser() {
-    const that = this;
-    const token = sessionStorage.getItem('token');
-    return this.http.get(environment.firebase.databaseURL + '/users/' + token + '.json');
+  public GetNodeUser(uid: string) {
+    return this.db.list('/users', ref => ref.orderByChild('uid').equalTo(uid)).snapshotChanges()
+    .pipe(map(items => {
+      return items.map(a => {
+        const data = a.payload.val();
+        const key = a.payload.key;
+        return {key, data};           // or {key, ...data} in case data is Obj
+      });
+    }));
+    // const that = this;
+    // const token = sessionStorage.getItem('token');
+    // return this.http.get(environment.firebase.databaseURL + '/users/' + token + '.json');
   }
 
 }

@@ -4,6 +4,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheckCircle, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { SharedObservable } from '../../observables/shared.observable';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-success-message',
@@ -16,7 +17,7 @@ export class SuccessMessageComponent implements OnInit {
   private suscription: Subscription = null;
   constructor(
     private examObservable: ExamObservable,
-    private sharedObservable: SharedObservable
+    private authService: AuthService
   ) {
     library.add(faCheckCircle, faSignOutAlt, faTimes);
   }
@@ -47,7 +48,7 @@ export class SuccessMessageComponent implements OnInit {
           answer.userIsCorrect = null;
         });
       });
-      that.sharedObservable.changeHeaderUser(null);
+      that.authService.SignOut();
     }
   }
 

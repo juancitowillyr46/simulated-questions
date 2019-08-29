@@ -1,25 +1,50 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { QuestionsComponent } from './maintainers/questions/questions.component';
-import { QuestionsPostComponent } from './maintainers/questions-post/questions-post.component';
-// import { LoginComponent } from './simulacrum/login/login.component';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
+// import { QuestionsComponent } from './maintainers/questions/questions.component';
+// import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
+import { LoginComponent } from './login/login.component';
 // import { ExamsAvailableComponent } from './simulacrum/exams-available/exams-available.component';
 // import { ExamComponent } from './simulacrum/exam/exam.component';
 // import { SuccessMessageComponent } from './simulacrum/success-message/success-message.component';
 // import { SimulacrumRoutingModule } from './simulacrum/simulacrum-routing.module';
+import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './auth.guard';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
+  // {
+  //   path: 'mantainers/questions',
+  //   component: QuestionsComponent
+  // },
+  // {
+  //   path: 'mantainers/questions/form/:id',
+  //   component: QuestionsPostComponent
+  // },
   {
-    path: 'mantainers/questions',
-    component: QuestionsComponent
+    path: 'signin',
+    component: LoginComponent
   },
   {
-    path: 'mantainers/questions/form/:id',
-    component: QuestionsPostComponent
+    path: 'signup',
+    component: SignupComponent
   },
   {
-    path: '',
-    component: QuestionsComponent
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  // {
+  //   path: '',
+  //   component: QuestionsComponent
+  // },
+  // {
+  //   path: '**',
+  //   component: NotFoundComponent
+  // },
+  {
+    path: 'not-found',
+    component: NotFoundComponent
   },
   // {
   //   path: 'simulacrum/login',
