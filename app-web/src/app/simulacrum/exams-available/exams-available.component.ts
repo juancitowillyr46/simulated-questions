@@ -32,6 +32,8 @@ export class ExamsAvailableComponent implements OnInit {
     { id: 2, key: 'MULTIPLE_ANSWER', name: 'Múltiples respuestas', input: 'checkbox', class: 'custom-checkbox'},
   ];
 
+  public letter = ['','A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
   constructor(
     private questionsService: QuestionsService,
     private examObservable: ExamObservable,
@@ -87,8 +89,12 @@ export class ExamsAvailableComponent implements OnInit {
         question.idx = n += 1;
         question.input = that.typeAnswers.find(f => f.key === question.typeAnswer).input;
         question.class = that.typeAnswers.find(f => f.key === question.typeAnswer).class;
+        question.toggleAnswer = false;
+        let i = 0;
         question.answers.forEach(answer => {
           answer.userIsCorrect = null;
+          answer.idx = i += 1;
+          answer.letter = this.letter[answer.idx];
         });
       });
 

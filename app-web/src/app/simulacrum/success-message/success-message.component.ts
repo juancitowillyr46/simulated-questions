@@ -1,7 +1,7 @@
 import { ExamObservable } from './../exam/exam.observable';
 import { Component, OnInit } from '@angular/core';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCheckCircle, faSignOutAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faSignOutAlt, faTimes, faListAlt, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { Subscription } from 'rxjs';
 import { SharedObservable } from '../../observables/shared.observable';
 import { AuthService } from '../../auth.service';
@@ -19,7 +19,7 @@ export class SuccessMessageComponent implements OnInit {
     private examObservable: ExamObservable,
     private authService: AuthService
   ) {
-    library.add(faCheckCircle, faSignOutAlt, faTimes);
+    library.add(faCheckCircle, faSignOutAlt, faTimes, faListAlt, faSortDown, faSortUp);
   }
 
   ngOnInit() {
@@ -28,9 +28,19 @@ export class SuccessMessageComponent implements OnInit {
       if (res) {
         console.log(res);
         that.exam = res;
+        // localStorage.setItem('exam', JSON.stringify(that.exam));
+
+        // that.exam = JSON.parse(localStorage.getItem('exam'));
         that.exam.percentage = Math.floor(that.exam.percentage);
       }
     });
+    // that.exam = JSON.parse(localStorage.getItem('exam'));
+    // that.exam.questionsAvailable.forEach(question => {
+    //   question.toggleAnswer = false;
+    // });
+    // localStorage.setItem('exam', JSON.stringify(that.exam));
+    // that.exam = JSON.parse(localStorage.getItem('exam'));
+    // that.exam.percentage = Math.floor(that.exam.percentage);
   }
 
   public cerrar() {
@@ -44,11 +54,21 @@ export class SuccessMessageComponent implements OnInit {
         question.answersIncorrects = 0;
         question.answersNulls = 0;
         question.questionApproved = false;
+        // question.toggleAnswer = false;
         question.answers.forEach(answer => {
           answer.userIsCorrect = null;
         });
       });
       that.authService.SignOut();
+    }
+  }
+
+  public toggleAnswer(event, question) {
+    event.preventDefault();
+    if (question.toggleAnswer === false) {
+      question.toggleAnswer = true;
+    } else {
+      question.toggleAnswer = false;
     }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { CategoriesService } from '../categories.service';
+import { MessageObservable } from '../../../observables/message.observable';
 import {
   faTimes,
   faPlus,
@@ -20,11 +21,13 @@ import {
 export class CategoriesListComponent implements OnInit {
 
   public categories = [];
+  public message: any = null;
 
   constructor(
     private routeActive: ActivatedRoute,
     private router: Router,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private messageObservable: MessageObservable
   ) {
     library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft);
   }
@@ -58,6 +61,13 @@ export class CategoriesListComponent implements OnInit {
         that.categories.push(categories[key$]);
       };
     });
+
+    that.messageObservable.currentMessage.subscribe(res => {
+      if (res) {
+        console.log(res);
+        that.message = res;
+      }
+    });
   }
 
   // public form(id: number, event) {
@@ -66,7 +76,7 @@ export class CategoriesListComponent implements OnInit {
   // }
 
   public ir() {
-    this.router.navigate(['/questions/post/', '0']);
+    this.router.navigate(['/categories/post/', '0']);
   }
 
 }

@@ -1,40 +1,72 @@
 <div class="card p-5">
+    <div class="col-4" style="margin: auto;">
+        <div class="card">
+            <div class="card-body">
+                <!-- <h4 class="card-title">Porcentaje</h4> -->
+                <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+                <div class="card-text">
+                    <!-- <span style="font-size: 64px;" *ngIf="exam.percentage <= 79"><fa-icon style="color: red" class="mr-1" [icon]="['fas', 'times']"></fa-icon></span>
+                    <span style="font-size: 64px;" *ngIf="exam.percentage >= 80"><fa-icon style="color: green" class="mr-1" [icon]="['fas', 'check-circle']"></fa-icon></span> -->
+                    <p *ngIf="exam && exam.percentage >= 80" style="text-align: center">
+                        <span *ngIf="exam.percentage >= 80">¡Felicitaciones! aprobaste el examen satisfactoriamente con <br></span>
+                        <b> {{ exam.percentage }}%</b>
+                    </p>
+                    <p *ngIf="exam && exam.percentage <= 79" style="text-align: center">
+                        <span *ngIf="exam.percentage <= 79">No alcanzaste el porcentaje necesario para aprobar<br></span>
+                        <b> {{ exam.percentage }}%</b>
+                    </p>
+                </div>
+                <!-- <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a> -->
+            </div>
+        </div>
+    </div>
     <div class="text-center">
-        <span style="font-size: 64px;" *ngIf="exam.percentage <= 79"><fa-icon style="color: red" class="mr-1" [icon]="['fas', 'times']"></fa-icon></span>
-        <span style="font-size: 64px;" *ngIf="exam.percentage >= 80"><fa-icon style="color: green" class="mr-1" [icon]="['fas', 'check-circle']"></fa-icon></span>
-        <p *ngIf="exam ">
-            <span *ngIf="exam.percentage >= 80">¡Felicitaciones! aprobaste el examen satisfactoriamente con <br>Porcentaje:  <b> {{ exam.percentage }}%</b></span>
-        </p>
-        <p *ngIf="exam">
-            <span *ngIf="exam.percentage <= 79">No alcanzaste el porcentaje necesario para aprobar<br>Porcentaje:  <b> {{ exam.percentage }}%</b></span>
-        </p>
+
+
+
 
         <div class="text-left">
-            <p>Examen:</p>
-            <div *ngFor="let question of exam.questionsAvailable; let i = index;">
-                <p>{{ i + 1 }}. {{ question.question }}</p>
-                <div class="col-12 mb-4">
-                    <div class="row text-left" style="border-bottom: 1px dotted #212529;">
-                        <div class="col-8 mb-1">Respuesta</div>
-                        <div class="col-2 mb-1">
-                            Correcta
-                        </div>
-                        <div class="col-2 mb-1">
-                            Marcada
-                        </div>
+            <p>Preguntas:</p>
+            <ul class="list-group">
+                <li *ngFor="let question of exam.questionsAvailable; let i = index;" class="list-group-item">
+                    <!-- <fa-icon style="color: red" class="mr-2" [icon]="['fas', 'times']"></fa-icon> -->
+                    <fa-icon style="color: green" class="mr-2" [icon]="['fas', 'check-circle']" *ngIf="question.questionApproved === true"></fa-icon>
+                    <fa-icon style="color: red" class="mr-2" [icon]="['fas', 'times']" *ngIf="question.questionApproved === false"></fa-icon>
+                    <span class="pr-1">{{ question.idx }}.</span> <span>{{ question.question }}</span>
+                    <div class="text-right">
+                        <a href="#" (click)="toggleAnswer($event, question)">
+                            <fa-icon *ngIf="question.toggleAnswer === false" class="mr-1" style="vertical-align: text-bottom;" [icon]="['fas', 'sort-down']"></fa-icon>
+                            <fa-icon *ngIf="question.toggleAnswer === true" class="mr-1" style="vertical-align: sub;" [icon]="['fas', 'sort-up']"></fa-icon>
+                            Respuesta marcadas
+                        </a>
                     </div>
-                    <div class="row mb-1 text-left" style="border-bottom: 1px dotted #212529; " *ngFor="let answer of question.answers">
-                        <div class="col-8 mt-1">{{ answer.name }}</div>
-                        <div class="col-2 mt-1">
-                            <fa-icon *ngIf="answer.isCorrect === true" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
-                        </div>
-                        <div class="col-2 mt-1">
-                            <fa-icon *ngIf="answer.userIsCorrect === answer.isCorrect" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
-                            <fa-icon *ngIf="answer.userIsCorrect !== answer.isCorrect" class="mr-1" style="color: red" [icon]="['fas', 'times']"></fa-icon>
-                        </div>
+                    <div class="text-left" *ngIf="question.toggleAnswer === true">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr class="table-primary">
+                                    <th scope="col" style="width:80%">Opciones</th>
+                                    <th scope="col" style="width:10%" class="text-center">Marcaste</th>
+                                    <th scope="col" style="width:10%" class="text-center">Correcta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let answer of question.answers">
+                                    <th>{{answer.letter}}. {{ answer.name }}</th>
+                                    <td class="text-center">
+                                        <fa-icon *ngIf="answer.userIsCorrect === answer.isCorrect" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
+                                        <fa-icon *ngIf="answer.userIsCorrect !== answer.isCorrect" class="mr-1" style="color: red" [icon]="['fas', 'times']"></fa-icon>
+                                    </td>
+                                    <td class="text-center">
+                                        <fa-icon *ngIf="answer.isCorrect === true" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                </div>
-            </div>
+                </li>
+            </ul>
+
         </div>
 
 

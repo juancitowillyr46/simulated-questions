@@ -1,14 +1,19 @@
-<!-- <button type="button" class="btn btn-primary" (click)="ir($event)"><fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Registrar</button><br><br> -->
 <h5>Examenes Disponibles</h5>
+<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
+    <button type="button" class="close" data-dismiss="alert">&times;</button> {{ message.message }}
+    <!-- <a href="#" class="alert-link">this important alert message</a>. -->
+</div>
+<button type="button" class="btn btn-primary" (click)="ir($event)"><fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear</button><br><br>
+
 <div class="list-group">
 
-    <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let category of categories; let i = index;">
+    <a href="javascript:void(0)" [routerLink]="'/categories/post/' + category.key" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let category of categories; let i = index;">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1"></h5>
             <small>
-              <a href="#" >
-                <!-- <fa-icon [icon]="['fas', 'pen']"></fa-icon> -->
-              </a>
+             
+                <fa-icon [icon]="['fas', 'pen']"></fa-icon>
+              
             </small>
         </div>
         <p class="mb-1">{{ (i + 1) }}. {{ category.name }}</p>

@@ -40,5 +40,11 @@ export class CategoriesService {
     return this.http.get<any>(environment.firebase.databaseURL + '/categories/' + key + '.json');
   }
 
-
+  public update(key: string, data: any) {
+    const body = JSON.stringify(data);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put(environment.firebase.databaseURL + '/categories/' + key + '.json', body, {headers});
+  }
 }

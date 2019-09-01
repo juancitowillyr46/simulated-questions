@@ -62,7 +62,7 @@ export class UsersPostComponent implements OnInit {
       that.routeActive.snapshot.paramMap.get('id') === undefined &&
       that.routeActive.snapshot.paramMap.get('id') == null
     ) {
-      that.router.navigateByUrl('/mantainers/questions');
+      that.router.navigateByUrl('/users/list');
     } else {
       const key = that.routeActive.snapshot.paramMap.get('id');
       if (key !== '0') {

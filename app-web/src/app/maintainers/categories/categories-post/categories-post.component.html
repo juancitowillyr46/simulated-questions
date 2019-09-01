@@ -1,3 +1,30 @@
-<p>
-  categories-post works!
-</p>
+<form [formGroup]="formGroup" enctype="multipart/form-data">
+    <div class="card border-secondary">
+        <div class="card-header">
+            <fa-icon class="mr-1" [icon]="['fas', 'users']"></fa-icon> Categoria</div>
+        <div class="card-body">
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Nombre: </label>
+                <input type="text" class="form-control" id="disabledInput" formControlName="name" placeholder="Nombre de la categoria">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Número de preguntas: </label>
+                <input type="text" class="form-control" id="disabledInput" formControlName="totalQuestions" placeholder="Número de preguntas">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Tiempo de duración en minutos: </label>
+                <input type="text" class="form-control" id="disabledInput" formControlName="durationTimeMM" placeholder="Tiempo de duración en minutos">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="disabledInput">Código Externo: </label>
+                <input type="text" class="form-control" id="disabledInput" formControlName="clientKey" placeholder="Código externo">
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="button" class="btn btn-info mr-2" routerLink="/categories/list"><fa-icon class="mr-1" [icon]="['fas', 'arrow-circle-left']"></fa-icon>Retornar</button>
+            <button type="button" class="btn mr-2 btn btn-primary" (click)="done()" *ngIf="key !== '0'"><fa-icon class="mr-1" [icon]="['fas', 'pen']"></fa-icon>Actualizar</button>
+            <button type="button" class="btn mr-2 btn btn-primary" (click)="save()" *ngIf="key === '0'"><fa-icon class="mr-1" [icon]="['fas', 'save']"></fa-icon>Guardar</button>
+        </div>
+    </div>
+</form>

@@ -21,7 +21,7 @@
                                 <div [ngClass]="['custom-control', currentQuestion.class]">
                                     <input (change)="isCorrectEvent($event, answer, currentQuestion.idx)" [type]="currentQuestion.input" [id]="'customRadio' + index" [name]="'customRadio' + currentQuestion.key" [value]="answer.value" [checked]="answer.userIsCorrect" class="custom-control-input"
                                     />
-                                    <label class="custom-control-label" [for]="'customRadio' + index">{{ answer.name }}</label>
+                                    <label class="custom-control-label" [for]="'customRadio' + index">{{answer.letter}}. {{ answer.name }}</label>
                                 </div>
                             </div>
                         </div>
