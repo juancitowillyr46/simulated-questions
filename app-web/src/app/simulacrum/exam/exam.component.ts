@@ -108,11 +108,11 @@ export class ExamComponent implements OnInit, OnDestroy {
     that.currentQuestion = that.exam.questionsAvailable[that.questionCurrent];
   }
 
-  public isCorrectEvent(event, answer, idx) {
+  public isCorrectEvent(event, answer, idx, index) {
     const that = this;
 
     if (that.currentQuestion.input === 'radio') {
-      that.exam.questionsAvailable[idx].answers.forEach(aq => {
+      that.exam.questionsAvailable[index].answers.forEach(aq => {
         aq.userIsCorrect = null;
       });
       that.currentQuestion.answers.forEach(aw => {

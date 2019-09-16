@@ -61,7 +61,7 @@ export class CategoriesPostComponent implements OnInit {
 
   }
 
-  done() {
+  public done() {
     const that = this;
 
     if (that.formGroup.invalid === true) {
@@ -91,8 +91,7 @@ export class CategoriesPostComponent implements OnInit {
         durationTimeMM: '',
         clientKey: ''
       });
-
-
+      that.router.navigate(['categories/list']);
     });
 
   }

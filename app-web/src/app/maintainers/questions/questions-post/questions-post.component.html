@@ -111,11 +111,11 @@
                 <fa-icon class="mr-1" [icon]="['fas', 'arrow-circle-left']"></fa-icon>
                 Retornar
             </button>
-            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true)" *ngIf="formQuestion.key === '0'">
+            <button type="button" class="btn btn-primary" (click)="save()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true || formQuestion.submit === true)" *ngIf="formQuestion.key === '0'">
                 <fa-icon class="mr-1" [icon]="['fas', 'save']"></fa-icon>
                 Guardar
             </button>
-            <button type="button" class="btn btn-primary" (click)="update()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true)" *ngIf="formQuestion.key !== '0'">
+            <button type="button" class="btn btn-primary" (click)="update()" [disabled]="(buildAnswers.length === 0 || formGroup.invalid === true || formQuestion.submit === true)" *ngIf="formQuestion.key !== '0'">
                 <fa-icon class="mr-1" [icon]="['fas', 'pen']"></fa-icon>
                 Actualizar
             </button>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuestionsService } from './questions.service';
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { MessageObservable } from '../../observables/message.observable';
 import {
   faTimes,
   faPlus,
@@ -21,11 +22,13 @@ import {
 export class QuestionsComponent implements OnInit {
 
   public questions = [];
+  public message: any = null;
 
   constructor(
     private routeActive: ActivatedRoute,
     private router: Router,
-    private questionsService: QuestionsService
+    private questionsService: QuestionsService,
+    private messageObservable: MessageObservable,
   ) {
     library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft);
   }
@@ -47,6 +50,12 @@ export class QuestionsComponent implements OnInit {
         question.key = key$;
         that.questions.push(questions[key$]);
       };
+    });
+
+    that.messageObservable.currentMessage.subscribe(res => {
+      if (res) {
+        that.message = res;
+      }
     });
   }
 

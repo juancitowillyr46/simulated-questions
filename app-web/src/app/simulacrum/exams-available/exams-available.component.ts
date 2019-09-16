@@ -49,10 +49,14 @@ export class ExamsAvailableComponent implements OnInit {
     const that = this;
     const userAuth: UserAuth = JSON.parse(localStorage.getItem('user'));
     that.authService.CurrentUserData(userAuth.uid).subscribe( res => {
-      that.categoriesService.read(res[0].data.assignedTests[0].key).subscribe(cat => {
-        console.log(cat);
-        that.categories.push(cat);
-      });
+      const assignedTests: any[] = res[0].data.assignedTests;
+      if (assignedTests.length > 0) {
+        assignedTests.forEach(at => {
+          that.categoriesService.read(at.key).subscribe(cat => {
+            that.categories.push(cat);
+          });
+        });
+      }
     });
   }
 

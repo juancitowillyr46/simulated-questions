@@ -54,11 +54,11 @@
                                 <tr *ngFor="let answer of question.answers">
                                     <th>{{answer.letter}}. {{ answer.name }}</th>
                                     <td class="text-center">
-                                        <fa-icon *ngIf="answer.userIsCorrect === answer.isCorrect" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
-                                        <fa-icon *ngIf="answer.userIsCorrect !== answer.isCorrect" class="mr-1" style="color: red" [icon]="['fas', 'times']"></fa-icon>
+                                        <fa-icon *ngIf="answer.userIsCorrect === answer.isCorrect" style="color: green" class="mr-1" [icon]="['fas', 'check-circle']"></fa-icon>
+                                        <fa-icon *ngIf="answer.userIsCorrect !== answer.isCorrect && answer.userIsCorrect !== null" class="mr-1" style="color: red" [icon]="['fas', 'times']"></fa-icon>
                                     </td>
                                     <td class="text-center">
-                                        <fa-icon *ngIf="answer.isCorrect === true" class="mr-1" style="color: green" [icon]="['fas', 'check-circle']"></fa-icon>
+                                        <fa-icon *ngIf="answer.isCorrect === true" class="mr-1" [icon]="['fas', 'check-circle']"></fa-icon>
                                     </td>
                                 </tr>
                             </tbody>

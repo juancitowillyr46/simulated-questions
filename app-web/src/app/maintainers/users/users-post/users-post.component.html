@@ -20,16 +20,31 @@
                 <select class="custom-select" formControlName="role">
                     <option selected="">Rol</option>
                     <option value="USER_ADMIN">Administrador</option>
-                    <option value="USER_STUDENT" selected="selected">Studiante</option>
+                    <option value="USER_STUDENT" selected="selected">Estudiante</option>
                 </select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="control-label" for="disabledInput">Prueba Asignada: </label>
                 <select class="custom-select" formControlName="assignedTests">
                     <option disabled selected value="">Examen</option>
                     <option [value]="category.key" *ngFor="let category of categories; let i = index;">{{ category.name }}</option>
                 </select>
+            </div> -->
+            <!-- <label class="control-label" for="disabledInput">Prueba Asignada: </label>
+            <div class="form-group">
+                <div class="custom-control custom-checkbox" *ngFor="let category of categories; let i = index;">
+                    <input type="checkbox" formControlName="assignedTests" class="custom-control-input" [id]="'customCheck' + category.key">
+                    <label class="custom-control-label" [for]="'customCheck' + category.key">{{ category.name }}</label>
+                </div>
+            </div> -->
+
+            <div class="form-group">
+                <label for="exampleSelect2">Prueba Asignada: </label>
+                <select multiple="" class="form-control" id="exampleSelect2" formControlName="assignedTests">
+                    <option [value]="category.key" *ngFor="let category of categories; let i = index;">{{ category.name }}</option>
+                </select>
             </div>
+
         </div>
 
         <div class="card-footer">

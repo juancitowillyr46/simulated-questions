@@ -1,6 +1,10 @@
 <h5>Banco de Preguntas</h5>
 <button type="button" class="btn btn-primary" (click)="ir($event)"><fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear</button><br><br>
-
+<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Well done!</strong> {{ message.message }}
+    <!-- <a href="#" class="alert-link">this important alert message</a>. -->
+</div>
 <div class="list-group">
 
     <a href="#" (click)="form(question.key, $event)" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 // import { User } from '../../../core/models/user.model';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { GeneratePassword } from '../../../commons/generatePassword';
 import { AuthGuard } from '../../../auth.guard';
@@ -25,6 +25,7 @@ export class UsersPostComponent implements OnInit {
   public submit;
   public formUser: any = null;
   public responseData: UserAuth = null;
+  public userCategories: any[] = [];
 
   constructor(
     private routeActive: ActivatedRoute,
@@ -45,7 +46,7 @@ export class UsersPostComponent implements OnInit {
       password: ['', Validators.required],
       email: ['', Validators.required],
       role: ['USER_STUDENT', Validators.required],
-      assignedTests: ['', Validators.required]
+      assignedTests: [ [], Validators.required]
     });
 
     that.categoriesService.list().subscribe(res => {
@@ -54,6 +55,7 @@ export class UsersPostComponent implements OnInit {
       for (let key$ in categories) {
         const category: any = res[key$];
         category.key = key$;
+        category.selected = false;
         that.categories.push(categories[key$]);
       };
     });
@@ -68,12 +70,21 @@ export class UsersPostComponent implements OnInit {
       if (key !== '0') {
         that.usersService.read(key).subscribe(res => {
           that.responseData = res;
+          if (res.assignedTests) {
+            console.log(res.assignedTests);
+            const assignedTests: any[] = [];
+            res.assignedTests.forEach(assignedTest => {
+              that.userCategories.push(assignedTest.key);
+            });
+
+          }
+
           that.formGroup = null;
           that.formGroup = this.formBuilder.group({
             displayName: [res.displayName, [Validators.required]],
             email: [res.email, [Validators.required]],
             role: [res.role, [Validators.required]],
-            assignedTests: [(res.assignedTests)? res.assignedTests[0].key : '']
+            assignedTests: [ that.userCategories ]
           });
 
         });
@@ -91,7 +102,6 @@ export class UsersPostComponent implements OnInit {
     }
 
     console.log(that.formGroup.value);
-    
 
     const { displayName, email, role, assignedTests }: any = that.formGroup.value;
 
@@ -102,7 +112,11 @@ export class UsersPostComponent implements OnInit {
     that.responseData.role = role;
 
     const assignedTestsArr: any[] = [];
-    assignedTestsArr.push({ key: assignedTests, active: true });
+
+    assignedTests.forEach(at => {
+      assignedTestsArr.push({ key: at, active: true });
+    });
+
     that.responseData.assignedTests = assignedTestsArr;
 
     const key = that.routeActive.snapshot.paramMap.get('id');
@@ -113,6 +127,11 @@ export class UsersPostComponent implements OnInit {
       that.messageObservable.changeMessage({message: 'Usuario actualizado satisfactoriamente', state: 'success', hide: false});
     });
 
+  }
+
+  public findCategory(key: string) {
+    const that = this;
+    return (that.userCategories.find( uc => uc.key === key)) ? true : false;
   }
 
 }

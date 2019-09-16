@@ -14,6 +14,7 @@
             </small>
         </div>
         <p class="mb-1">{{ (i + 1) }}. {{ user.displayName }} - {{ user.email }}</p>
-        <small>{{ user.role }}</small>
+        <small>{{ user.role }}</small><br>
+        <small>Simulacros: {{ categoriesFind(user.assignedTests) }}</small>
     </a>
 </div>

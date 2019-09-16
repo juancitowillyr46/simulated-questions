@@ -19,6 +19,7 @@ import { FormQuestion } from '../../../core/models/formQuestion.model';
 import { Question } from '../../../core/models/question.model';
 import { SubmitMessage } from '../../../core/models/submitMessage.model';
 // import { NotifierService } from 'angular-notifier';
+import { MessageObservable } from '../../../observables/message.observable';
 
 @Component({
   selector: 'app-questions-post',
@@ -64,7 +65,8 @@ export class QuestionsPostComponent implements OnInit {
     private routeActive: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private questionsService: QuestionsService
+    private questionsService: QuestionsService,
+    private messageObservable: MessageObservable
   ) {
     library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faSave);
   }
@@ -107,6 +109,7 @@ export class QuestionsPostComponent implements OnInit {
 
   public ir(event) {
     const that = this;
+    that.messageObservable.changeMessage(null);
     event.preventDefault();
     that.router.navigate(['/questions/list']);
   }
@@ -193,11 +196,9 @@ export class QuestionsPostComponent implements OnInit {
   }
 
   public save(event) {
+
     const that = this;
-
-
     const questionForm: any = that.formGroup.value;
-
     const question: Question = {
       question: questionForm.question,
       typeAnswer: questionForm.typeAnswer,
@@ -207,15 +208,8 @@ export class QuestionsPostComponent implements OnInit {
       answers: that.buildAnswers
     };
 
-    that.submitMessage.message = 'Se registró satisfactoriamente';
-    // this.notifier.notify( 'success', that.submitMessage.message );
-
-
+    that.formQuestion.submit = true;
     that.questionsService.create(question).subscribe(res => {
-      that.formQuestion.submit = true;
-      // window.setTimeout(() => {
-      //   that.formQuestion.submit = false;
-      // }, 10000);
 
       that.formGroup.reset({
         question: '',
@@ -229,6 +223,8 @@ export class QuestionsPostComponent implements OnInit {
       that.answerObj = null;
       that.buildAnswers = [];
       that.buildDefault();
+      that.router.navigate(['questions/list']);
+      that.messageObservable.changeMessage({message: 'Pregunta creada satisfactoriamente', state: 'success', hide: false});
 
     });
 
@@ -237,9 +233,7 @@ export class QuestionsPostComponent implements OnInit {
   public update(event) {
 
     const that = this;
-
     const questionForm: any = that.formGroup.value;
-
     const question: Question = {
       question: questionForm.question,
       typeAnswer: questionForm.typeAnswer,
@@ -249,20 +243,10 @@ export class QuestionsPostComponent implements OnInit {
       answers: that.buildAnswers
     };
     that.formQuestion.key = that.routeActive.snapshot.paramMap.get('id');
-    that.submitMessage.message = 'Se actualizó satisfactoriamente';
-
-    console.log(that.formQuestion.key);
-
+    that.formQuestion.submit = true;
     that.questionsService.update(that.formQuestion.key, question).subscribe(res => {
-
-      console.log(res);
-      that.formQuestion.submit = true;
-
-      // window.setTimeout(() => {
-      //   that.formQuestion.submit = false;
-      // }, 10000);
-
-
+      that.router.navigate(['questions/list']);
+      that.messageObservable.changeMessage({message: 'Pregunta actualizada satisfactoriamente', state: 'success', hide: false});
     });
 
   }
