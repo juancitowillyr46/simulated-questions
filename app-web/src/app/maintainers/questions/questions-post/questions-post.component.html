@@ -1,13 +1,28 @@
 <form [formGroup]="formGroup" enctype="multipart/form-data">
     <div class="card border-secondary">
         <div class="card-header">
-            <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Preguntas
+            <fa-icon class="mr-1" [icon]="['fas', 'list']"></fa-icon> Detalle pregunta
         </div>
         <div class="card-body">
-            <div class="form-group">
-                <label class="control-label" for="disabledInput">Pregunta: </label>
-                <textarea class="form-control" id="disabledInput" formControlName="question" placeholder="Ingrese el nombre de la pregunta"></textarea>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="control-label" for="disabledInput">Pregunta en español (ES): </label>
+                        <textarea class="form-control" id="disabledInput" formControlName="question" rows="4" placeholder="Ingrese la pregunta en español"></textarea>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="control-label" for="disabledInput">Pregunta en inglés (EN): </label>
+                        <textarea class="form-control" id="disabledInput" formControlName="question" rows="4" placeholder="Ingrese la pregunta en inglés"></textarea>
+                    </div>
+                </div>
             </div>
+            
+
+
+
 
             <div class="form-group">
                 <label for="exampleSelect1">Tipo de respuesta: </label>
@@ -64,10 +79,22 @@
                         </div>
                         <div class="card-body">
                             <div class="card-text">
-                                <div class="form-group">
-                                    <label class="control-label" for="disabledInput">Respuesta: </label>
-                                    <textarea class="form-control" id="disabledInput" [(ngModel)]="answerModel.name" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese el nombre de la pregunta"></textarea>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="disabledInput">Respuesta en español (ES): </label>
+                                            <textarea class="form-control" id="disabledInput" rows="4" [(ngModel)]="answerModel.name" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese la respuesta en español"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="disabledInput">Respuesta en inglés (EN): </label>
+                                            <textarea class="form-control" id="disabledInput" rows="4" [(ngModel)]="answerModel.name" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese la respuesta en inglés"></textarea>
+                                        </div>        
+                                    </div>
                                 </div>
+                                
+                                
                                 <div class="text-right" *ngIf="answerModel.action === 'new'">
                                     <button type="button" class="btn btn-primary" [disabled]="(answerModel.name === '')" (click)="addAnswer(answerModel)">
                                     <fa-icon [icon]="['fas', 'check']" class="mr-1"></fa-icon>Agregar</button>
