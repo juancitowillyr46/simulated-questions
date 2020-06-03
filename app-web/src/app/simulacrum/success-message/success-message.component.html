@@ -38,7 +38,7 @@
                         <a href="#" (click)="toggleAnswer($event, question)">
                             <fa-icon *ngIf="question.toggleAnswer === false" class="mr-1" style="vertical-align: text-bottom;" [icon]="['fas', 'sort-down']"></fa-icon>
                             <fa-icon *ngIf="question.toggleAnswer === true" class="mr-1" style="vertical-align: sub;" [icon]="['fas', 'sort-up']"></fa-icon>
-                            Respuesta marcadas
+                            Respuestas marcadas
                         </a>
                     </div>
                     <div class="text-left" *ngIf="question.toggleAnswer === true">
@@ -63,14 +63,29 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div>
+                            Justificación de la pregunta: <br>
+                            {{ question.justification }}
+                        </div>
                     </div>
                 </li>
             </ul>
 
         </div>
+        <br>
 
-
-        <button type="button" (click)="cerrar()" class="btn btn-primary" routerLink="/simulacrum/login"><fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Salir</button>
+        <!-- <div>
+            <div >
+                <textarea class="form-control" placeholder="Ingrese aqui tu justificación" [value]=""></textarea>
+            </div>
+        </div> -->
+        <br>
+        <div class="row ml-0" style="display: flex;" >
+            <div><button type="button" class="btn btn-primary mr-2" routerLink="/simulacrum/login"><fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Guardar</button></div>
+            <div><button type="button" (click)="cerrar()" class="btn btn-primary mr-2" routerLink="/simulacrum/login"><fa-icon class="mr-1" [icon]="['fas', 'sign-out-alt']"></fa-icon>Salir</button></div>
+        </div>
+        
+        
     </div>
 
 </div>

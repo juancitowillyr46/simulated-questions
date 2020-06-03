@@ -1,4 +1,5 @@
 import { Answer } from './answer.model';
+
 export interface Question {
  question: string;
  typeAnswer: string;
@@ -6,4 +7,5 @@ export interface Question {
  withImage: string;
  image: string;
  answers: Answer[];
+ justification: string;
 }

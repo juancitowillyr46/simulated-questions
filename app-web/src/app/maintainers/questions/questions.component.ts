@@ -64,7 +64,7 @@ export class QuestionsComponent implements OnInit {
     this.router.navigate(['/mantainers/questions/form/', id]);
   }
 
-  public ir() {
+  public ir($event) {
     this.router.navigate(['/mantainers/questions/form/', '0']);
   }
 

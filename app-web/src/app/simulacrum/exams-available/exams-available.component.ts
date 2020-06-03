@@ -74,6 +74,8 @@ export class ExamsAvailableComponent implements OnInit {
       questionsAvailable: []
     };
 
+    
+
     exam.category = category;
 
     that.questions = [];
@@ -84,8 +86,15 @@ export class ExamsAvailableComponent implements OnInit {
       for(let key in questions) {
         const question: any = res[key];
         question.key = key;
-        that.questions.push(questions[key]);
+        // question['justification'] = '';
+        if(question.state !== false) {
+          that.questions.push(questions[key]);
+        }
+        
       }
+
+      exam.category.clientKey = (exam.category.clientKey === 'PSM')? 'SCRUM_MASTER' : exam.category.clientKey; 
+      that.questions = that.questions.filter(f => f.category === exam.category.clientKey);
 
       let n = 0;
       that.questionsAvailable = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, category.totalQuestions);

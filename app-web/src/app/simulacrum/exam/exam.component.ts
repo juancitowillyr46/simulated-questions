@@ -39,6 +39,7 @@ export class ExamComponent implements OnInit, OnDestroy {
   public questionNext = 0;
   public questionLast = 0;
   public questionCurrent = 0;
+  // public justification = '';
 
   constructor(
     private examObservable: ExamObservable,
@@ -98,14 +99,17 @@ export class ExamComponent implements OnInit, OnDestroy {
 
   public next() {
     const that = this;
+    // that.exam.questionsAvailable[that.questionCurrent]['justification'] = that.justification;
     that.questionCurrent = that.questionCurrent + 1;
     that.currentQuestion = that.exam.questionsAvailable[that.questionCurrent];
+    // that.justification = '';
   }
 
   public last() {
     const that = this;
     that.questionCurrent = that.questionCurrent - 1;
     that.currentQuestion = that.exam.questionsAvailable[that.questionCurrent];
+    // that.justification = '';
   }
 
   public isCorrectEvent(event, answer, idx, index) {

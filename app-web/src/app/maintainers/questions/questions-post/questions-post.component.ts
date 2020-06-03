@@ -30,7 +30,8 @@ export class QuestionsPostComponent implements OnInit {
 
   public typeCategories = [
     { 'id': 1, 'key': 'PMI_ACP', 'name': 'Project Management Institute'},
-    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'}
+    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'},
+    { 'id': 3, 'key': 'PSPO', 'name': 'PSPO I'}
   ];
 
   public typeAnswer = [
@@ -79,7 +80,8 @@ export class QuestionsPostComponent implements OnInit {
       typeAnswer: ['TRUE_OR_FALSE', [Validators.required]],
       category: ['PMI_ACP', [Validators.required]],
       withImage: [''],
-      image: ['']
+      image: [''],
+      justification: ['']
     });
 
     this.formQuestion = {
@@ -205,7 +207,8 @@ export class QuestionsPostComponent implements OnInit {
       category: questionForm.category,
       withImage: questionForm.withImage,
       image: that.formQuestion.image,
-      answers: that.buildAnswers
+      answers: that.buildAnswers,
+      justification: questionForm.justification
     };
 
     that.formQuestion.submit = true;
@@ -216,16 +219,21 @@ export class QuestionsPostComponent implements OnInit {
         typeAnswer: 'TRUE_OR_FALSE',
         category: 'PMI_ACP',
         withImage: '',
-        image: ''
+        image: '',
+        justification: ''
       });
 
       that.answerModel = null;
       that.answerObj = null;
       that.buildAnswers = [];
       that.buildDefault();
-      that.router.navigate(['questions/list']);
+
       that.messageObservable.changeMessage({message: 'Pregunta creada satisfactoriamente', state: 'success', hide: false});
 
+      setTimeout(() => {
+        that.router.navigate(['questions/list']);
+      }, 4000);
+      
     });
 
   }
@@ -240,8 +248,10 @@ export class QuestionsPostComponent implements OnInit {
       category: questionForm.category,
       withImage: questionForm.withImage,
       image: that.formQuestion.image,
-      answers: that.buildAnswers
+      answers: that.buildAnswers,
+      justification: questionForm.justification
     };
+
     that.formQuestion.key = that.routeActive.snapshot.paramMap.get('id');
     that.formQuestion.submit = true;
     that.questionsService.update(that.formQuestion.key, question).subscribe(res => {
@@ -254,14 +264,15 @@ export class QuestionsPostComponent implements OnInit {
   public questionRead(key: string) {
     const that = this;
     that.questionsService.read(key).subscribe(question => {
-      console.log(question);
+
       that.formGroup = null;
       that.formGroup = this.formBuilder.group({
         question: [question.question, [Validators.required]],
         typeAnswer: [question.typeAnswer, [Validators.required]],
         category: [question.category, [Validators.required]],
         withImage: [question.withImage],
-        image: ['']
+        image: [''],
+        justification: [question.justification, [Validators.required]]
       });
 
       that.formQuestion = {
@@ -293,4 +304,5 @@ export class QuestionsPostComponent implements OnInit {
     };
     myReader.readAsDataURL(file);
   }
+
 }

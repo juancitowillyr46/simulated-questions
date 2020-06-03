@@ -5,9 +5,10 @@ import { QuestionsPostComponent } from './questions-post/questions-post.componen
 import { QuestionsRoutingModule } from './questions-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { QuestionsComponent } from './questions.component';
 
 @NgModule({
-  declarations: [QuestionsListComponent, QuestionsPostComponent],
+  declarations: [QuestionsComponent, QuestionsListComponent, QuestionsPostComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

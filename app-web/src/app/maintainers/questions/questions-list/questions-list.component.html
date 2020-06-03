@@ -1,41 +1,51 @@
 <h5>Banco de Preguntas</h5>
-<button type="button" class="btn btn-primary" (click)="ir($event)"><fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear</button><br><br>
-<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
+
+<button type="button" class="btn btn-primary mr-2" (click)="ir($event)">
+    <fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear
+</button>
+
+<div class="dropdown mr-2" style="display: inline-block;">
+    <button class="btn btn-primary dropdown-toggle" [disabled]="!selectedItemForDeleteArr.length > 0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        ({{ selectedItemForDeleteArr.length }}) Seleccionadas
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <a class="dropdown-item" href="javascript:void(0)" (click)="deleteAll($event)"><fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon> Eliminar</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="inactiveAll($event)"><fa-icon class="mr-1" [icon]="['fas', 'ban']"></fa-icon> Deshabilitar</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="ActiveAll($event)"><fa-icon class="mr-1" [icon]="['fas', 'check']"></fa-icon> Habilitar</a>
+    </div>
+  </div>
+
+  <div class="dropdown" style="display: inline-block;">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <fa-icon class="mr-1" [icon]="['fas', 'filter']"></fa-icon> Filtrar Por
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="javascript:void(0)" (click)="filter('ALL')">Todas</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="filter('H')">Habilitadas</a>
+      <a class="dropdown-item" href="javascript:void(0)" (click)="filter('D')">Deshabilitadas</a>
+    </div>
+  </div>
+
+<br><br>
+<!--<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Well done!</strong> {{ message.message }}
-    <!-- <a href="#" class="alert-link">this important alert message</a>. -->
-</div>
-<div class="list-group">
+</div> -->
 
-    <a href="#" (click)="form(question.key, $event)" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">
-        <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"></h5>
-            <small>
-                    <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-               </small>
-        </div>
-        <p class="mb-1">{{ (i + 1) }}. {{ question.question }}</p>
-        <small>{{ question.typeAnswer }}</small>
-    </a>
+<div *ngIf="inProgress == true" class="text-center">
+    <fa-icon [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
 </div>
 
-<!-- <table class="table table-hover" style="width: 100%;">
-    <thead>
-        <tr>
-            <th scope="col">Questions</th>
-            <th scope="col">Tipo Respuesta</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="table-dark" *ngFor="let question of questions">
-            <th scope="row">{{ question.question }}</th>
-            <td>{{ question.typeAnswer }}</td>
-            <td>
-                <a href="#" (click)="form(question.key, $event)">
-                    <fa-icon [icon]="['fas', 'pen']"></fa-icon>
-                </a>
-            </td>
-        </tr>
-    </tbody>
-</table> -->
+<div class="list-group" *ngIf="inProgress == false">
+    <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">
+        <div>Habilitada: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
+        <div class="mb-2">Tipo: <span><b>{{ question.typeAnswer }}</b></span></div>
+
+        <p class="mb-1"><input type="checkbox" class="mr-2 checkboxDelete" name="checkbox" id="checkboxDelete" [value]="question.key" (change)="selectedItemForDelete($event)"> {{ (i + 1) }}. {{ question.question }}</p>
+        
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" (click)="form(question.key, $event)" class="btn btn-secondary"><fa-icon class="mr-0" [icon]="['fas', 'pen']"></fa-icon></button>
+          </div>
+    </div>
+</div>
+

@@ -75,7 +75,7 @@ export class CategoriesListComponent implements OnInit {
   //   this.router.navigate(['/questions/post/', id]);
   // }
 
-  public ir() {
+  public ir($event) {
     this.router.navigate(['/categories/post/', '0']);
   }
 

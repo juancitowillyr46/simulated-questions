@@ -33,4 +33,9 @@ export class QuestionsService {
     });
     return this.http.put(environment.firebase.databaseURL + '/questions/' + key + '.json', body, {headers});
   }
+
+  public delete(key: string) {
+    return this.http.delete<Question>(environment.firebase.databaseURL + '/questions/' + '/' + key + '.json');
+  }
+
 }
