@@ -46,6 +46,7 @@ export class QuestionsPostComponent implements OnInit {
 
   public answerModel: Answer = {
     name: '',
+    nameEn: '',
     value: this.buildAnswers.length,
     action: 'new',
     isCorrect: false
@@ -77,6 +78,7 @@ export class QuestionsPostComponent implements OnInit {
 
     that.formGroup = this.formBuilder.group({
       question: ['', [Validators.required]],
+      questionEn: ['', [Validators.required]],
       typeAnswer: ['TRUE_OR_FALSE', [Validators.required]],
       category: ['PMI_ACP', [Validators.required]],
       withImage: [''],
@@ -135,8 +137,8 @@ export class QuestionsPostComponent implements OnInit {
   public buildDefault() {
     const that = this;
     that.buildAnswers.push(
-      {name: 'Verdadero', value: true, action: 'edit', isCorrect: false},
-      {name: 'Falso', value: false, action: 'edit', isCorrect: false}
+      {name: 'Verdadero', nameEn: 'True', value: true, action: 'edit', isCorrect: false},
+      {name: 'Falso', nameEn: 'False', value: false, action: 'edit', isCorrect: false}
     );
   }
 
@@ -150,6 +152,7 @@ export class QuestionsPostComponent implements OnInit {
     answerModel = null;
     that.answerModel = {
       name: '',
+      nameEn: '',
       value: 0,
       action: 'new',
       isCorrect: false
@@ -176,6 +179,7 @@ export class QuestionsPostComponent implements OnInit {
     that.buildAnswers[(answerModel.value - 1)] = answerModel;
     that.answerModel = {
       name: '',
+      nameEn: '',
       value: 0,
       action: 'new',
       isCorrect: false
@@ -203,6 +207,7 @@ export class QuestionsPostComponent implements OnInit {
     const questionForm: any = that.formGroup.value;
     const question: Question = {
       question: questionForm.question,
+      questionEn: questionForm.questionEn,
       typeAnswer: questionForm.typeAnswer,
       category: questionForm.category,
       withImage: questionForm.withImage,
@@ -216,6 +221,7 @@ export class QuestionsPostComponent implements OnInit {
 
       that.formGroup.reset({
         question: '',
+        questionEn: '',
         typeAnswer: 'TRUE_OR_FALSE',
         category: 'PMI_ACP',
         withImage: '',
@@ -244,6 +250,7 @@ export class QuestionsPostComponent implements OnInit {
     const questionForm: any = that.formGroup.value;
     const question: Question = {
       question: questionForm.question,
+      questionEn: questionForm.questionEn,
       typeAnswer: questionForm.typeAnswer,
       category: questionForm.category,
       withImage: questionForm.withImage,
@@ -268,6 +275,7 @@ export class QuestionsPostComponent implements OnInit {
       that.formGroup = null;
       that.formGroup = this.formBuilder.group({
         question: [question.question, [Validators.required]],
+        questionEn:[question.questionEn, [Validators.required]],
         typeAnswer: [question.typeAnswer, [Validators.required]],
         category: [question.category, [Validators.required]],
         withImage: [question.withImage],

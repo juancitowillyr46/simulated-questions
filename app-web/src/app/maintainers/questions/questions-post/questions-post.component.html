@@ -15,14 +15,10 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label class="control-label" for="disabledInput">Pregunta en inglés (EN): </label>
-                        <textarea class="form-control" id="disabledInput" formControlName="question" rows="4" placeholder="Ingrese la pregunta en inglés"></textarea>
+                        <textarea class="form-control" id="disabledInput" formControlName="questionEn" rows="4" placeholder="Ingrese la pregunta en inglés"></textarea>
                     </div>
                 </div>
             </div>
-            
-
-
-
 
             <div class="form-group">
                 <label for="exampleSelect1">Tipo de respuesta: </label>
@@ -89,7 +85,7 @@
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label class="control-label" for="disabledInput">Respuesta en inglés (EN): </label>
-                                            <textarea class="form-control" id="disabledInput" rows="4" [(ngModel)]="answerModel.name" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese la respuesta en inglés"></textarea>
+                                            <textarea class="form-control" id="disabledInput" rows="4" [(ngModel)]="answerModel.nameEn" [ngModelOptions]="{standalone: true}" #ctrl="ngModel" placeholder="Ingrese la respuesta en inglés"></textarea>
                                         </div>        
                                     </div>
                                 </div>
@@ -111,7 +107,9 @@
                         <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let answer of buildAnswers; let i = index">
                             <div [ngClass]="['custom-control', (formQuestion.changeTypeInput.input === 'radio')? 'custom-radio' : 'custom-checkbox']">
                                 <input [type]="formQuestion.changeTypeInput.input" [id]="'customRadio' + i" name="customRadio" class="custom-control-input" [checked]="answer.isCorrect" (change)="isCorrectEvent($event, answer)">
-                                <label class="custom-control-label" [for]="'customRadio' + i">{{answer.name}}</label>
+                                <label class="custom-control-label" [for]="'customRadio' + i">
+                                    {{answer.name}} ({{answer.nameEn}})
+                                </label>
                             </div>
                             <div class="text-right">
                                 <a href="javascript: void(0)" class="mr-2" *ngIf="formQuestion.changeTypeInput.key !== 'TRUE_OR_FALSE'" (click)="getAnswer(answer)">
