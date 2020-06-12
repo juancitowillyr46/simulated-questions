@@ -9,7 +9,12 @@ import { map } from 'rxjs/operators';
 })
 export class CategoriesService {
 
-  constructor(private http: HttpClient, private db: AngularFireDatabase) {}
+  constructor(
+    private http: HttpClient, 
+    private db: AngularFireDatabase
+  ) {
+
+  }
 
   public list() {
     return this.http.get(
@@ -25,8 +30,18 @@ export class CategoriesService {
   }
 
   public listDB(query) {
-    console.log(query);
     return this.db.list('/categories', ref => ref.child(query)).snapshotChanges()
+    .pipe(map(items => {
+      return items.map(a => {
+        const data = a.payload.val();
+        const key = a.payload.key;
+        return {key, data};           // or {key, ...data} in case data is Obj
+      });
+    }));
+  }
+
+  public getAllcategories() {
+    return this.db.list('/categories').snapshotChanges()
     .pipe(map(items => {
       return items.map(a => {
         const data = a.payload.val();

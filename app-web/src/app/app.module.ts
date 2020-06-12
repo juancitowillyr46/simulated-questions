@@ -42,6 +42,7 @@ import { CategoriesModule } from './maintainers/categories/categories.module';
 import { SignupComponent } from './signup/signup.component';
 import { SignUpObservable } from './signup/signup.observable';
 import { MessageObservable } from './observables/message.observable';
+import { StudentsModule } from './students/students.module';
 
 /**
  * Custom angular notifier options
@@ -82,6 +83,10 @@ import { MessageObservable } from './observables/message.observable';
     QuestionsModule,
     SimulacrumModule,
     UsersModule,
+
+    // Modules
+    StudentsModule,
+    
   ],
   providers: [
     QuestionsService,

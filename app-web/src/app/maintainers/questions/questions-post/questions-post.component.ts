@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionsService } from '../questions.service';
+import { CategoriesService } from '../../categories/categories.service';
+
 import {
   FormControl,
   FormGroupDirective,
@@ -31,7 +33,8 @@ export class QuestionsPostComponent implements OnInit {
   public typeCategories = [
     { 'id': 1, 'key': 'PMI_ACP', 'name': 'Project Management Institute'},
     { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'},
-    { 'id': 3, 'key': 'PSPO', 'name': 'PSPO I'}
+    { 'id': 3, 'key': 'PSPO', 'name': 'PSPO I'},
+    { 'id': 4, 'key': 'PSKI', 'name': 'Scrum with Kanban Open'}
   ];
 
   public typeAnswer = [
@@ -68,13 +71,18 @@ export class QuestionsPostComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private questionsService: QuestionsService,
-    private messageObservable: MessageObservable
+    private messageObservable: MessageObservable,
+    private categoriesService: CategoriesService
   ) {
     library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faSave);
   }
 
   ngOnInit() {
     const that = this;
+
+    // that.categoriesService.getAllcategories().subscribe( res => {
+    //   console.log(res);
+    // });
 
     that.formGroup = this.formBuilder.group({
       question: ['', [Validators.required]],
