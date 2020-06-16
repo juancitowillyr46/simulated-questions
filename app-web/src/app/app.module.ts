@@ -44,6 +44,8 @@ import { SignUpObservable } from './signup/signup.observable';
 import { MessageObservable } from './observables/message.observable';
 import { StudentsModule } from './students/students.module';
 
+// import { CountdownModule } from 'ngx-countdown';
+
 /**
  * Custom angular notifier options
  */
@@ -85,6 +87,7 @@ import { StudentsModule } from './students/students.module';
     UsersModule,
 
     // Modules
+    // CountdownModule,
     StudentsModule,
     
   ],

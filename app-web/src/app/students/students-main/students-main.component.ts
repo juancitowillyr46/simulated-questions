@@ -20,7 +20,7 @@ export class StudentsMainComponent implements OnInit {
   }
 
   getExamen(id: string) {
-    this.routers.navigateByUrl('students/321323234234/exam/123123');
+    this.routers.navigateByUrl('/students/23423423/exams/23423423/questions/1');
   }
 
 }

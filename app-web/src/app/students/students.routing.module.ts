@@ -6,8 +6,8 @@ import { StudentsExamResultComponent } from './students-exam-result/students-exa
 
 const routes: Routes = [
   {
-      path: 'students/:id',
-      component: StudentsMainComponent
+    path: 'students/:id',
+    component: StudentsMainComponent
   },
   {
     path: 'students/:id/exams/:idExam/questions/:idQuestion',

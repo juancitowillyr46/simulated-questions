@@ -36,3 +36,15 @@
   .border-dark > p {
     line-height: 26px !important;
   }
+
+
+.btn-group-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  justify-content: flex-end;
+  grid-gap: .2em;
+}
+
+.btn-group-grid > div {
+  display: flex;
+}

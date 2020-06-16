@@ -36,6 +36,7 @@ import {
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
+// import { CountdownModule } from 'ngx-countdown';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawe
     NgbAccordionModule,
     // Specify ng-circle-progress as an import
     NgCircleProgressModule.forRoot(),
+    // CountdownModule
   ]
 })
 export class StudentsModule { 

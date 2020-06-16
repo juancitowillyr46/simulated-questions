@@ -33,6 +33,7 @@
         "firebase": "^6.4.2",
         "firebase-admin": "^8.4.0",
         "ng-circle-progress": "^1.5.1",
+        "ngx-countdown": "^9.0.1",
         "progressbar.js": "^1.1.0",
         "rxjs": "^6.3.3",
         "rxjs-compat": "^6.5.2",
