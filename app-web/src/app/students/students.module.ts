@@ -33,6 +33,7 @@ import {
   faUserEdit,
   faFileSignature,
   faLaptop,
+  faStopwatch
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
@@ -84,7 +85,8 @@ export class StudentsModule {
       faTimes,
       faUserEdit,
       faFileSignature,
-      faLaptop
+      faLaptop,
+      faStopwatch
     );
 
   }

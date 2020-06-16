@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { faFileAlt, faChevronRight, faListUl, faClock, faPlay, faHistory, faChevronLeft, faArrowCircleLeft, faArrowCircleRight, faSave, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faFileAlt, faChevronRight, faListUl, faClock, faPlay, faHistory, faChevronLeft, faArrowCircleLeft, faArrowCircleRight, faSave, faSpinner } from '@fortawesome/free-solid-svg-icons';
+// import { library } from '@fortawesome/fontawesome-svg-core';
 
 
 @Component({
@@ -19,20 +19,20 @@ export class StudentsExamComponent implements OnInit {
     private routers: Router,
     private route: ActivatedRoute
   ) { 
-    library.add(
-      faFileAlt, 
-      faChevronRight, 
-      faListUl, 
-      faClock, 
-      faPlay, 
-      faHistory, 
-      faChevronLeft, 
-      faChevronRight, 
-      faArrowCircleLeft, 
-      faArrowCircleRight,
-      faSave,
-      faSpinner
-    );
+    // library.add(
+    //   faFileAlt, 
+    //   faChevronRight, 
+    //   faListUl, 
+    //   faClock, 
+    //   faPlay, 
+    //   faHistory, 
+    //   faChevronLeft, 
+    //   faChevronRight, 
+    //   faArrowCircleLeft, 
+    //   faArrowCircleRight,
+    //   faSave,
+    //   faSpinner
+    // );
   }
 
   ngOnInit() {
@@ -48,15 +48,12 @@ export class StudentsExamComponent implements OnInit {
   }
 
   goQuestion(event: any) {
-    // console.log(event.target.value);
-    // let value = 
     this.page = event.target.value;
-    this.routers.navigateByUrl('/students/23423423/exams/23423423/questions/' + event.target.value);
+    this.routers.navigateByUrl('/exams/23423423/questions/' + event.target.value);
   }
 
   loadPage(event: any) {
-    // console.log(event);
-    this.routers.navigateByUrl('/students/23423423/exams/23423423/questions/' + event);
+    this.routers.navigateByUrl('/exams/23423423/questions/' + event);
   }
 
   saveQuestion(event: any) {
@@ -66,12 +63,17 @@ export class StudentsExamComponent implements OnInit {
     }, 5000);
   }
 
+  endExam(event: any) {
+    this.serviceProgress = true;
+    this.routers.navigateByUrl('/exams/1231231232/result');
+  }
+
   secondsToHms(d) {
     d = Number(d);
     var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
-    document.getElementById("demo").innerHTML =  ("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2); 
+    document.getElementById("timer").innerHTML =  ("0" + h).slice(-2) + " : " + ("0" + m).slice(-2) + " : " + ("0" + s).slice(-2); 
     console.log(("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2));
   }
 
@@ -79,7 +81,7 @@ export class StudentsExamComponent implements OnInit {
 
     const that = this;
 
-    let timeExam = 60;
+    let timeExam = 7200;
 
     var x = window.setInterval(function() { 
 
@@ -96,7 +98,8 @@ export class StudentsExamComponent implements OnInit {
 
       if (currentTime <= 0) { 
           window.clearInterval(x); 
-          document.getElementById("demo").innerHTML = "EXPIRED"; 
+          document.getElementById("timer").innerHTML = "EXPIRED";
+          that.routers.navigateByUrl('/exams/23423423/result');
       }
 
     }, 1000); 

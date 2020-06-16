@@ -6,15 +6,15 @@ import { StudentsExamResultComponent } from './students-exam-result/students-exa
 
 const routes: Routes = [
   {
-    path: 'students/:id',
+    path: 'exams',
     component: StudentsMainComponent
   },
   {
-    path: 'students/:id/exams/:idExam/questions/:idQuestion',
+    path: 'exams/:id/questions/:idQuestion',
     component: StudentsExamComponent
   },
   {
-    path: 'students/:id/exams/:idExam/result',
+    path: 'exams/:idExam/result',
     component: StudentsExamResultComponent
   }
 ];

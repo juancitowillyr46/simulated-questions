@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Router, ActivatedRoute } from '@angular/router';
 // import { library } from '@fortawesome/fontawesome-svg-core';
 // import { 
 //   faFileAlt, 
@@ -27,7 +28,10 @@ import { Chart } from 'chart.js';
 })
 export class StudentsExamResultComponent implements OnInit {
 
-  constructor() { 
+  constructor(
+    private routers: Router,
+    private route: ActivatedRoute
+  ) { 
     // library.add(
     //   faFileAlt, 
     //   faChevronRight, 
@@ -81,6 +85,10 @@ export class StudentsExamResultComponent implements OnInit {
        }
     });
 
+  }
+
+  irExamen() {
+    this.routers.navigateByUrl('/exams');
   }
 
 }
