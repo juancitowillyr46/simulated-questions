@@ -64,32 +64,18 @@ export class CategoriesService {
   }
 
 
-  public getCategories() {
+  public getCategories(arrKeyCategories) {
 
-    let querys = {asignados: ['PSM']};
-
+    let data = [];
     return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
     .pipe(map(items => {
-      
       items.forEach(element => {
         let value = element.payload.val()
-        if(querys.asignados.find(f => f === value['clientKey'])) {
-          console.log(element.payload.val());
+        if(arrKeyCategories.find(f => f.key === value['clientKey'])) {
+          data.push(value);
         }
       });
-
-      // querys.asignados.forEach(element => {
-        
-      // });
-      // if(items) {
-
-      // }
-
-      // return items.map(a => {
-      //   const data = a.payload.val();
-      //   const key = a.payload.key;
-      //   return {key, data};           // or {key, ...data} in case data is Obj
-      // });
+      return {data};
     }));
 
     // return this.db.database.ref('/categories').child('clientKey').setWi

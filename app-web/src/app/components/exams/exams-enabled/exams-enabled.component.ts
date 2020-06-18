@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
+import { UsersService } from 'src/app/maintainers/users/users.service';
 // import Swal from 'sweetalert2';
 
 @Component({
@@ -12,20 +13,38 @@ import { CategoriesService } from 'src/app/maintainers/categories/categories.ser
 export class ExamsEnabledComponent implements OnInit {
   closeResult = '';
   progressService = false;
+
+  private userCategories = [];
+  public categories = null;
+
   constructor(
     private routers: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
-    private categoriesService: CategoriesService
+    private categoriesService: CategoriesService,
+    private userService: UsersService
   ) { }
 
   ngOnInit() {
 
-    this.categoriesService.getCategories().subscribe( res => {
-      console.log(res);
-    });
+    // Login user
+    this.getUseCategoriesByKey('-LnFFh1I0l34rcV5nSrD');
+
 
   }
+
+
+  private async getUseCategoriesByKey(key: string) {
+
+    await this.userService.getUserByKey(key).then( res => {
+      this.userCategories = res.categories;
+    });
+
+    await this.categoriesService.getCategories(this.userCategories).subscribe( res => {
+      this.categories = res;
+      console.log(this.categories);
+    });
+  } 
 
 
   getExamen(event) {

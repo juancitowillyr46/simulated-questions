@@ -7,51 +7,21 @@
               <h1 class="h4">Examenes Disponibles</h1>
           </div>
           <div class="row">
-              <div class="col-md-4">
-                <div class="card mb-4 shadow-sm">
-                  <div class="card-body">
-                      <h5 class="card-title">Professional Scrum Product Owner</h5>
-                      <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>80 Preguntas</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" [disabled]="progressService" (click)="open(content)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
-                              <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
-                          </div>
-                          <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
-                      </div>
-                  </div>
+            <div class="col-md-4" *ngFor="let category of categories.data; let i = index;">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ category.name }}</h5>
+                    <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>{{ category.totalQuestions }} Preguntas</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" [disabled]="progressService" (click)="open(content)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
+                            <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
+                        </div>
+                        <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>{{ category.durationTimeMM }} Minutos</div>
+                    </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                  <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Professional Scrum Master</h5>
-                        <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>120 Preguntas</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button"  class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
-                                <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
-                            </div>
-                            <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="card mb-4 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Agile Certified Practitioner</h5>
-                        <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>80 Preguntas</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
-                                <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
-                            </div>
-                            <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
-                        </div>
-                    </div>
-                  </div>
-                </div>
+            </div>
           </div>
       </main>
   </div>
