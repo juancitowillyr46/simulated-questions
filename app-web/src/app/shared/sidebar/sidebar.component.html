@@ -1,0 +1,18 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+  <div class="text-left pt-4 pm-4">
+    <img src="./../../../assets/images/laptop-user.png" class="mr-1">
+    Juan Rodas
+  </div>
+  <hr>
+  <div class="sidebar-sticky pt-3">
+      <!-- <app-menu></app-menu> -->
+      <div class="text-info text-center h4 borderx border-infox p-2 rounded highlight">
+        <fa-icon class="d-block ml-2 ng-fa-icon h2 ng-fa-icon" [icon]="['fas', 'stopwatch']"></fa-icon>
+        <div id="timer" class="d-block text-center"></div>
+      </div>
+      <div class="pb-4">
+        <span class="text-info">En progreso</span>
+        <ngb-progressbar height="18px" type="info" textType="white" [value]="25" [striped]="true" [animated]="true" [showValue]="true"></ngb-progressbar>
+      </div>
+  </div>
+</nav>

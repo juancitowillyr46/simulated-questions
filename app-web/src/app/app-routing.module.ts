@@ -11,6 +11,9 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from './auth.guard';
 import { SignupComponent } from './signup/signup.component';
+import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-enabled.component';
+import { ExamsQuestionsComponent } from './components/exams/exams-questions/exams-questions.component';
+import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.component';
 
 const routes: Routes = [
   // {
@@ -34,34 +37,22 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard]
   },
-  // {
-  //   path: '',
-  //   component: QuestionsComponent
-  // },
-  // {
-  //   path: '**',
-  //   component: NotFoundComponent
-  // },
   {
     path: 'not-found',
     component: NotFoundComponent
   },
-  // {
-  //   path: 'simulacrum/login',
-  //   component: LoginComponent
-  // },
-  // {
-  //   path: 'simulacrum/examenavailable',
-  //   component: ExamsAvailableComponent
-  // },
-  // {
-  //   path: 'simulacrum/exam',
-  //   component: ExamComponent
-  // },
-  // {
-  //   path: 'simulacrum/success-message',
-  //   component: SuccessMessageComponent
-  // }
+  {
+    path: 'exams',
+    component: ExamsEnabledComponent,
+  },
+  {
+    path: 'exams/:id/questions/:idQuestion',
+    component: ExamsQuestionsComponent,
+  },
+  {
+    path: 'exams/:id/score',
+    component: ExamsScoreComponent,
+  }
 ];
 
 @NgModule({

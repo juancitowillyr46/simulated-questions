@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA,  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,8 +15,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionsService } from './maintainers/questions/questions.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { AnswersComponent } from './maintainers/answers/answers.component';
+
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SharedObservable } from './observables/shared.observable';
@@ -34,7 +33,6 @@ import { LoginObservable } from './login/login.observable';
 import { UsersGuard } from './maintainers/users/users.guard';
 import { AuthObservable } from './auth.observable';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardModule } from './dashboard/dashboard.module';
 import { MenuComponent } from './shared/menu/menu.component';
 import { QuestionsModule } from './maintainers/questions/questions.module';
 import { CategoriesComponent } from './maintainers/categories/categories.component';
@@ -42,28 +40,65 @@ import { CategoriesModule } from './maintainers/categories/categories.module';
 import { SignupComponent } from './signup/signup.component';
 import { SignUpObservable } from './signup/signup.observable';
 import { MessageObservable } from './observables/message.observable';
-import { StudentsModule } from './students/students.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { 
+  faFileAlt, 
+  faChevronRight, 
+  faListUl, 
+  faClock, 
+  faPlay, 
+  faHistory, 
+  faChevronLeft, 
+  faArrowCircleLeft, 
+  faArrowCircleRight, 
+  faSave, 
+  faSpinner, 
+  faCheck, 
+  faCheckCircle,
+  faPen, 
+  faCheckSquare, 
+  faSquare,
+  faTimes,
+  faUserEdit,
+  faFileSignature,
+  faLaptop,
+  faStopwatch
+ } from '@fortawesome/free-solid-svg-icons';
 
-// import { CountdownModule } from 'ngx-countdown';
+import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
 
-/**
- * Custom angular notifier options
- */
 
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+
+import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.component';
+import { ExamsQuestionsComponent } from './components/exams/exams-questions/exams-questions.component';
+import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-enabled.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 @NgModule({
   declarations: [
     AppComponent,
-    // QuestionsComponent,
-    // QuestionsPostComponent,
-    // AnswersComponent,
+
+    /* Shared */
+    SidebarComponent,
     HeaderComponent,
+    NavComponent,
     FooterComponent,
+    
     NotFoundComponent,
     DashboardComponent,
     MenuComponent,
     CategoriesComponent,
-    SignupComponent],
+    SignupComponent,
+
+    /* Exams */
+    ExamsEnabledComponent,
+    ExamsScoreComponent,
+    ExamsQuestionsComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -79,17 +114,18 @@ import { StudentsModule } from './students/students.module';
 
     HttpClientModule,
     FontAwesomeModule,
-
-    // DashboardModule,
+    NgbPaginationModule, 
+    NgbAlertModule,
+    NgbProgressbarModule,
+    NgbAccordionModule,
+    NgCircleProgressModule.forRoot(),
+    NgbModalModule,
+    
     CategoriesModule,
     QuestionsModule,
     SimulacrumModule,
     UsersModule,
 
-    // Modules
-    // CountdownModule,
-    StudentsModule,
-    
   ],
   providers: [
     QuestionsService,
@@ -108,6 +144,41 @@ import { StudentsModule } from './students/students.module';
     AuthGuard,
     UsersGuard
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor() { 
+    library.add(
+      faFileAlt, 
+      faChevronRight, 
+      faListUl, 
+      faClock, 
+      faPlay, 
+      faHistory, 
+      faChevronLeft, 
+      faChevronRight, 
+      faArrowCircleLeft, 
+      faArrowCircleRight,
+      faSave,
+      faSpinner,
+      faCheck,
+      faPen,
+      faCheckCircle,
+      faSquare,
+      faCheckSquare,
+      farSquare,
+      farCheckSquare,
+      faTimes,
+      faUserEdit,
+      faFileSignature,
+      faLaptop,
+      faStopwatch
+    );
+
+  }
+
+}

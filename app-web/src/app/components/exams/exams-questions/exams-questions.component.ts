@@ -1,15 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { faFileAlt, faChevronRight, faListUl, faClock, faPlay, faHistory, faChevronLeft, faArrowCircleLeft, faArrowCircleRight, faSave, faSpinner } from '@fortawesome/free-solid-svg-icons';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-
 
 @Component({
-  selector: 'app-students-exam',
-  templateUrl: './students-exam.component.html',
-  styleUrls: ['./students-exam.component.css']
+  selector: 'app-exams-questions',
+  templateUrl: './exams-questions.component.html',
+  styleUrls: ['./exams-questions.component.css']
 })
-export class StudentsExamComponent implements OnInit {
+export class ExamsQuestionsComponent implements OnInit {
 
   public idQuestion;
   public page = 1;
@@ -18,27 +15,12 @@ export class StudentsExamComponent implements OnInit {
   constructor(
     private routers: Router,
     private route: ActivatedRoute
-  ) { 
-    // library.add(
-    //   faFileAlt, 
-    //   faChevronRight, 
-    //   faListUl, 
-    //   faClock, 
-    //   faPlay, 
-    //   faHistory, 
-    //   faChevronLeft, 
-    //   faChevronRight, 
-    //   faArrowCircleLeft, 
-    //   faArrowCircleRight,
-    //   faSave,
-    //   faSpinner
-    // );
-  }
+  ) { }
 
   ngOnInit() {
 
-    // localStorage.clear();
-    this.timer();
+    localStorage.clear();
+    // this.timer();
     
     this.route.params.subscribe(res => {
       if(res){
@@ -74,7 +56,7 @@ export class StudentsExamComponent implements OnInit {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
     document.getElementById("timer").innerHTML =  ("0" + h).slice(-2) + " : " + ("0" + m).slice(-2) + " : " + ("0" + s).slice(-2); 
-    console.log(("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2));
+    // console.log(("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2));
   }
 
   timer() {

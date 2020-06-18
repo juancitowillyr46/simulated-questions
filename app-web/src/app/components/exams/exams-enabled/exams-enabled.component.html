@@ -1,0 +1,75 @@
+<app-nav></app-nav>
+<div class="container-fluid">
+  <div class="row">
+      <app-sidebar></app-sidebar>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h4">Examenes Disponibles</h1>
+          </div>
+          <div class="row">
+              <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                  <div class="card-body">
+                      <h5 class="card-title">Professional Scrum Product Owner</h5>
+                      <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>80 Preguntas</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                              <button type="button" [disabled]="progressService" (click)="open(content)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
+                              <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
+                          </div>
+                          <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Professional Scrum Master</h5>
+                        <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>120 Preguntas</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button"  class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
+                                <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
+                            </div>
+                            <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Agile Certified Practitioner</h5>
+                        <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>80 Preguntas</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
+                                <!-- <button type="button" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'history']"></fa-icon>Historial</button> -->
+                            </div>
+                            <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>60 Minutos</div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </main>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Importante</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam minima, nihil optio eum dolorum nulla nam itaque expedita ut aspernatur totam at harum a. Temporibus est accusamus quasi nesciunt at.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="getExamen('dsdasd');modal.close('Save click');">Empezar</button>
+  </div>
+</ng-template>

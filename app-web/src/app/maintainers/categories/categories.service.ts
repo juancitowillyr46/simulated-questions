@@ -62,4 +62,46 @@ export class CategoriesService {
     });
     return this.http.put(environment.firebase.databaseURL + '/categories/' + key + '.json', body, {headers});
   }
+
+
+  public getCategories() {
+
+    let querys = {asignados: ['PSM']};
+
+    return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
+    .pipe(map(items => {
+      
+      items.forEach(element => {
+        let value = element.payload.val()
+        if(querys.asignados.find(f => f === value['clientKey'])) {
+          console.log(element.payload.val());
+        }
+      });
+
+      // querys.asignados.forEach(element => {
+        
+      // });
+      // if(items) {
+
+      // }
+
+      // return items.map(a => {
+      //   const data = a.payload.val();
+      //   const key = a.payload.key;
+      //   return {key, data};           // or {key, ...data} in case data is Obj
+      // });
+    }));
+
+    // return this.db.database.ref('/categories').child('clientKey').setWi
+    
+    // ).snapshotChanges()
+    // .pipe(map(items => {
+    //   return items.map(a => {
+    //     const data = a.payload.val();
+    //     const key = a.payload.key;
+    //     return {key, data};           // or {key, ...data} in case data is Obj
+    //   });
+    // }));
+  }
+
 }
