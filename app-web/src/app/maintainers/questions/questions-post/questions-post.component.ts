@@ -32,7 +32,7 @@ export class QuestionsPostComponent implements OnInit {
 
   public typeCategories = [
     { 'id': 1, 'key': 'PMI_ACP', 'name': 'Project Management Institute'},
-    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'},
+    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'}, // PSM
     { 'id': 3, 'key': 'PSPO', 'name': 'PSPO I'},
     { 'id': 4, 'key': 'PSKI', 'name': 'Scrum with Kanban Open'}
   ];

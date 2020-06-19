@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
 
 @Component({
   selector: 'app-exams-questions',
@@ -11,15 +12,20 @@ export class ExamsQuestionsComponent implements OnInit {
   public idQuestion;
   public page = 1;
   public serviceProgress = false;
+  // public questions = [];
+  // public questionsRandom = [];
 
   constructor(
     private routers: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private questionsService: QuestionsService
   ) { }
 
   ngOnInit() {
 
-    localStorage.clear();
+    // this.getQuestionsByKeyCategory('SCRUM_MASTER');
+
+    // localStorage.clear();
     // this.timer();
     
     this.route.params.subscribe(res => {
@@ -28,6 +34,18 @@ export class ExamsQuestionsComponent implements OnInit {
       }
     });
   }
+
+  // private async getQuestionsByKeyCategory(category: string) {
+  //   const that = this;
+  //   await that.questionsService.getQuestionsByKeyCategory(category).subscribe( res => {
+  //     if(res) {
+  //       that.questions = res;
+  //       that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, 80);
+  //       console.log(this.questionsRandom);
+  //     }
+  //   });
+  // }
+
 
   goQuestion(event: any) {
     this.page = event.target.value;

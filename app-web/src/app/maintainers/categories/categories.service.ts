@@ -65,7 +65,6 @@ export class CategoriesService {
 
 
   public getCategories(arrKeyCategories) {
-
     let data = [];
     return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
     .pipe(map(items => {
@@ -77,17 +76,6 @@ export class CategoriesService {
       });
       return {data};
     }));
-
-    // return this.db.database.ref('/categories').child('clientKey').setWi
-    
-    // ).snapshotChanges()
-    // .pipe(map(items => {
-    //   return items.map(a => {
-    //     const data = a.payload.val();
-    //     const key = a.payload.key;
-    //     return {key, data};           // or {key, ...data} in case data is Obj
-    //   });
-    // }));
   }
 
 }
