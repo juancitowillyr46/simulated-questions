@@ -1,92 +1,111 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, HostListener } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
+import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
 
 @Component({
   selector: 'app-exams-questions',
   templateUrl: './exams-questions.component.html',
   styleUrls: ['./exams-questions.component.css']
 })
-export class ExamsQuestionsComponent implements OnInit {
+export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
 
   public orderQuestion = 0;
   public page = 1;
-  public serviceProgress = false;
+  public progressService = false;
   public questions = [];
   public question = null;
-
-  // public questions = [];
-  // public questionsRandom = [];
+  public typeAnswer = null;
+  public dismissible = false;
+  public keyExam = null;
+  public category = null;
+  public saveOption = false;
+  public changes = false;
 
   constructor(
     private routers: Router,
     private route: ActivatedRoute,
-    private questionsService: QuestionsService
-  ) { }
+    private categoryService: CategoriesService
+  ) { 
+    const that = this;
+    // var changes = false;        
+  
+    
 
+  }
+  @HostListener('window:beforeunload', ['$event'])
+  unloadHandler(event: Event) {
+    const that = this;
+    if (that.changes)
+      {
+        var message = "¿Estás seguro de que deseas abandonar el exámen?";
+        if (confirm(message)) return true;
+        else return false;
+      }
+  }
   ngOnInit() {
 
     const that = this;
+    // window.addEventListener("beforeunload", function (e) {
+    //   if (that.changes)
+    //   {
+    //     var r = confirm("¿Estás seguro de que deseas abandonar el exámen?");
+    //     return false;
+    //       // if (confirm(message)) return true;
+    //       // else return false;
+    //   }
+    // });
+  //   window.onbeforeunload = function() {
 
-    this.route.params.subscribe(res => {
-      if(res){
-        this.orderQuestion = (Number(res.idQuestion) - 1);
-        this.page = res.idQuestion;
-        if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
-          that.questions = JSON.parse(localStorage.getItem("questions"));
-          console.log(that.questions[that.orderQuestion]);
-          that.question = that.questions[that.orderQuestion]['data'];
-        } else {
-          // localStorage.setItem("seconds", timeExam.toString());
-        }
-
-      }
-    });
-
-    
-
-
-    // this.questions.length
-
-    // this.getQuestionsByKeyCategory('SCRUM_MASTER');
+  // }
 
     // localStorage.clear();
     // this.timer();
-    
+
+    this.route.params.subscribe(res => {
+      if(res){
+        that.keyExam = res.keyExam;
+        that.getCategory(that.keyExam);
+        that.saveOption = false;
+        that.dismissible = false;
+        that.orderQuestion = (Number(res.idQuestion) - 1);
+        that.page = res.idQuestion;
+        if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
+          that.questions = JSON.parse(localStorage.getItem("questions"));
+          that.question = that.questions[that.orderQuestion]['data'];
+          that.question.answers.forEach(answer => {
+            if(answer['checked'] === null){
+              answer['checked'] = null;
+            }
+          });
+        } else {
+          that.routers.navigateByUrl('/exams');
+        }
+      }
+    });
 
   }
 
-  // private async getQuestionsByKeyCategory(category: string) {
-  //   const that = this;
-  //   await that.questionsService.getQuestionsByKeyCategory(category).subscribe( res => {
-  //     if(res) {
-  //       that.questions = res;
-  //       that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, 80);
-  //       console.log(this.questionsRandom);
-  //     }
-  //   });
-  // }
+  async getCategory(keyExam: string) {
+    const that = this;
+    that.progressService = true;
+    await that.categoryService.getCategory(keyExam).then( res => {
+      that.progressService = false;
+      that.category = res;
+    });
+  }
 
 
   goQuestion(event: any) {
+    const that = this;
     this.page = event.target.value;
-    this.routers.navigateByUrl('/exams/23423423/questions/' + event.target.value);
+    this.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + event.target.value);
   }
 
   loadPage(event: any) {
-    this.routers.navigateByUrl('/exams/23423423/questions/' + event);
-  }
-
-  saveQuestion(event: any) {
-    this.serviceProgress = true;
-    setTimeout(() => {
-      this.serviceProgress = false;
-    }, 5000);
-  }
-
-  endExam(event: any) {
-    this.serviceProgress = true;
-    this.routers.navigateByUrl('/exams/1231231232/result');
+    const that = this;
+    this.page = event;
+    that.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + event);
   }
 
   secondsToHms(d) {
@@ -95,36 +114,73 @@ export class ExamsQuestionsComponent implements OnInit {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
     document.getElementById("timer").innerHTML =  ("0" + h).slice(-2) + " : " + ("0" + m).slice(-2) + " : " + ("0" + s).slice(-2); 
-    // console.log(("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2));
   }
 
   timer() {
-
     const that = this;
+    let timeExam = 7200; // Default
 
-    let timeExam = 7200;
+    window.clearInterval();
+    if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
+      let intervalId = Number(localStorage.getItem("intervalId"));
+      window.clearInterval(intervalId);
+    }
 
-    var x = window.setInterval(function() { 
+    let x = window.setInterval(function() { 
+
+      localStorage.setItem("intervalId", x.toString());
 
       if(typeof localStorage.getItem("seconds") !== 'undefined' && localStorage.getItem("seconds") != null){
         timeExam = Number(localStorage.getItem('seconds'));
       } else {
         localStorage.setItem("seconds", timeExam.toString());
       }
-
       var currentTime = (timeExam - 1);
       localStorage.setItem("seconds", currentTime.toString());
-
       that.secondsToHms(currentTime);
-
       if (currentTime <= 0) { 
           window.clearInterval(x); 
           document.getElementById("timer").innerHTML = "EXPIRED";
-          that.routers.navigateByUrl('/exams/23423423/result');
+          that.routers.navigateByUrl('/exams/'+ that.keyExam +'/result');
+      } else {
+        console.log(x);
       }
-
     }, 1000); 
 
   }
 
+  getTypeAnswer(type: string) {
+    let typeInput = null;
+    if(type === 'ONE_ANSWER'){
+      typeInput = 'radio';
+    } else if(type === 'TRUE_OR_FALSE'){
+      typeInput = 'radio';
+    } else if(type === 'MULTIPLE_ANSWER'){
+      typeInput = 'checkbox';
+    }
+    return typeInput;
+  }
+
+  selectedValue(event: any, answers: any, question: any, order: any, position: number) {
+    const that = this;
+    that.saveOption = true;
+    
+    setTimeout( () => {
+      that.saveOption = false;
+      that.questions[order]['data']['answers'][position]['checked'] = event.target.checked;
+      that.changes = true;
+      localStorage.setItem("questions", JSON.stringify(that.questions));
+      this.dismissible = true;
+      setTimeout(() => this.dismissible = false, 3000);
+    }, 2000 );
+
+  }
+
+  ngOnDestroy() {
+
+  }
+
+  ngOnChanges() {
+    // console.log('cambios');
+  }
 }

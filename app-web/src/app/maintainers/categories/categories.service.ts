@@ -63,6 +63,14 @@ export class CategoriesService {
     return this.http.put(environment.firebase.databaseURL + '/categories/' + key + '.json', body, {headers});
   }
 
+  public async getCategory(key: string) {
+    return await this.db.database.ref('categories').orderByChild('clientKey').equalTo(key).once('value').then( res => {
+      const key = Object.keys(res.val());
+      let data = res.val();
+      return data[key[0]];
+    });
+  }
+
 
   public getCategories(arrKeyCategories) {
     let data = [];

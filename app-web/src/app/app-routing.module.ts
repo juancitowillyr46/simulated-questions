@@ -46,11 +46,11 @@ const routes: Routes = [
     component: ExamsEnabledComponent,
   },
   {
-    path: 'exams/:id/questions/:idQuestion',
+    path: 'exams/:keyExam/questions/:idQuestion',
     component: ExamsQuestionsComponent,
   },
   {
-    path: 'exams/:id/score',
+    path: 'exams/:keyExam/score',
     component: ExamsScoreComponent,
   }
 ];

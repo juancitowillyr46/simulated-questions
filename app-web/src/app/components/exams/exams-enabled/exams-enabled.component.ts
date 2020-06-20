@@ -12,13 +12,12 @@ import { QuestionsService } from 'src/app/maintainers/questions/questions.servic
   styleUrls: ['./exams-enabled.component.css']
 })
 export class ExamsEnabledComponent implements OnInit {
-  closeResult = '';
+  
   modalReference: NgbModalRef;
 
   progressService = false;
 
   disabledButton = false;
-  // progressCategory = ;
 
   private userCategories = [];
   public categories = [];
@@ -37,12 +36,24 @@ export class ExamsEnabledComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    localStorage.removeItem("questions");
-
+    const that = this;
+    // if(typeof localStorage.getItem("seconds") !== 'undefined' && localStorage.getItem("seconds") != null){
+    //   var r = confirm("¿Estás seguro de que deseas abandonar el exámen?");
+    //   if (r == true) {
+    //     // localStorage.removeItem("questions");
+    //     // localStorage.removeItem("seconds");
+    //     // window.clearInterval();
+    //     // if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
+    //     //   let intervalId = Number(localStorage.getItem("intervalId"));
+    //     //   window.clearInterval(intervalId);
+    //     // }
+    //   } else {
+    //     let keyExam = localStorage.getItem("keyExam");
+    //     location.href = '/exams/'+ keyExam +'/questions/1';
+    //   }
+    // }
     // Login user
     this.getUseCategoriesByKey('-LnFFh1I0l34rcV5nSrD');
-
   }
 
 
@@ -60,20 +71,22 @@ export class ExamsEnabledComponent implements OnInit {
     });
   } 
 
-  private getQuestionsByKeyCategory(category: string) {
+  private getQuestionsByKeyCategory(category: any) {
     const that = this;
     that.disabledButton = true;
     localStorage.removeItem('questions');
-    that.questionsService.getQuestionsByKeyCategory(category).subscribe( res => {
+    that.questionsService.getQuestionsByKeyCategory(category.clientKey).subscribe( res => {
       if(res) {
         that.questions = res;
-        that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, 80);
+        that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, category.totalQuestions);
         localStorage.setItem('questions', JSON.stringify(that.questionsRandom));
-        setTimeout( () => {
+        localStorage.setItem('seconds', category.timerSeconds);
+        localStorage.setItem('keyExam', category.clientKey);
+        setTimeout(() => {
           that.disabledButton = false;
           that.modalReference.close();
-          that.routers.navigateByUrl('/exams/23423423/questions/1');
-        }, 5000);
+          that.routers.navigateByUrl('/exams/'+ category.clientKey +'/questions/1');
+        }, 3000);
       }
     });
   }
@@ -81,34 +94,18 @@ export class ExamsEnabledComponent implements OnInit {
 
   getExamen() {
     const that = this;
-    
     that.getQuestionsByKeyCategory(that.category);
   }
 
-  open(content, category: string) {
+  open(content, category: any) {
     const that = this;
-    // that.progressService = true;
     that.category = category;
     that.modalReference = that.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
     that.modalReference.result.then((result) => {
-      that.closeResult = `Closed with: ${result}`;
-      // that.progressService = false;
       that.category = null;
     }, (reason) => {
-      that.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      // that.progressService = false;
       that.category = null;
     });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
   }
 
 }

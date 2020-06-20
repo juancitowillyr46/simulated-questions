@@ -4,20 +4,19 @@
       <app-sidebar></app-sidebar>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h5 text-info">Exámen Professional Scrum Product Owner</h1>
-            <!-- <div class="text-info h5 border border-info p-3 rounded highlight">
-              <div id="timer" class="d-inline-block"></div>
-              <fa-icon class="d-inline-block ml-2 ng-fa-icon h41" [icon]="['fas', 'stopwatch']"></fa-icon>
-            </div> -->
+            <h1 class="h5 text-info"><span class="mr-2"  *ngIf="category">{{ category.name }}</span> <fa-icon *ngIf="progressService" class="mr-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+            </h1>
           </div>
-          <!-- <div class="pb-4">
-            <span class="text-info">En progreso</span>
-            <ngb-progressbar height="18px" type="info" textType="white" [value]="25" [striped]="true" [animated]="true" [showValue]="true"></ngb-progressbar>
-          </div> -->
-          <div class="row">
+          <ngb-alert [type]="'success'" *ngIf="dismissible"><fa-icon [icon]="['fas', 'check']" class="mr-2"></fa-icon>Opción guardada correctamente</ngb-alert>
+          <div *ngIf="progressService">
+            <fa-icon class="mr-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+          </div>
+          <div class="row" *ngIf="!progressService">
             <div class="col-6">
-              <div class="mb-2">
-                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }} ({{ (orderQuestion + 1) }} De {{ questions.length }}):</h6> 
+              <div class="mb-2 text-info">
+                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }} ( De {{ questions.length }} ):</h6> 
+
+                
               </div>
               <div class="border border-dark p-3 rounded">
                 <p class="mb-0">
@@ -39,17 +38,10 @@
                 <div class="float-left w-50 d-flex">
                   <label for="inputEmail3" class="col-sm-5 col-form-label text-right text-info">Ir a la pregunta:</label>
                   <div class="col-sm-7 p-0">
-                    <select class="form-control" (change)="goQuestion($event)" >
-                      
-                      <option [value]="(i + 1)" *ngFor="let question of questions; let i = index;">
-                        {{ question.data.question }}
+                    <select class="form-control" [ngModel]="page" (change)="goQuestion($event)" >
+                      <option [value]="(i + 1)" [selected]="2" *ngFor="let question of questions; let i = index;">
+                        {{ (i + 1) }}
                       </option>
-                      <!-- <option [value]="2">
-                        Pregunta 2
-                      </option>
-                      <option [value]="3">
-                        Pregunta 3
-                      </option> -->
                     </select>
                   </div>
                 </div>
@@ -57,103 +49,32 @@
             </div>
             <div class="col-6">
               <div class="mb-2">
-                <h6 class="text-info">Opciones</h6>
+                <h6 class="text-info d-inline-block">Opciones</h6>
+                <div class="d-inline-block text-info">
+                  <fa-icon *ngIf="saveOption" class="ml-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+                </div>
               </div>
-              <div class="pt-0 pb-1 pl-1 pr-1">
+              <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="question.answers && question.answers.length">
                 <form>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
+                  <div class="form-check mb-3" *ngFor="let answer of question.answers; let i = index;">
+                    <input [disabled]="saveOption" class="form-check-input" [checked]="(answer.checked == true)? answer.checked : false" (change)="selectedValue($event, question.answers, question, orderQuestion, i)" [type]="getTypeAnswer(question.typeAnswer)" [name]="'option_' + orderQuestion" [id]="'option_' + orderQuestion + '_' + i">
+                    <label class="form-check-label w-100" [for]="'option_' + orderQuestion + '_' + i">
+                      <div class=""> 
+                        {{ answer.name }}
                       </div>
-                      <div class="text-muted border border-dark p-3 rounded highlight">
+                      <div class="text-muted border border-dark p-3 rounded highlight" *ngIf="answer.nameEn">
                         <div class="text-info d-block pr-1">En inglés: </div>
                         <p class="d-block mb-0">
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          Add the item to the current Sprint without any adjustments.
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0 ">
-                          Add the item to the current Sprint without any adjustments.
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3 ">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          Add the item to the current Sprint without any adjustments.
+                          {{ answer.nameEn }}
                         </p>
                       </div>
                     </label>
                   </div>
                 </form>
               </div>
-
-              <div class="pt-0 pb-1 pl-1 pr-1">
-                  <div class="btn-group-grid">
-                    <div class="item">
-                      <button type="button" 
-                      [disabled]="serviceProgress" 
-                      (click)="saveQuestion($event)" class="btn btn-info mr-0">
-                      <fa-icon *ngIf="!serviceProgress" class="mr-1" [icon]="['fas', 'save']"></fa-icon>
-                      <fa-icon *ngIf="serviceProgress" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
-                      Guardar</button>
-                    </div>
-                    <!-- <div class="item">
-                      <button type="button" 
-                      [disabled]="serviceProgress" 
-                      (click)="endExam($event)" class="btn btn-success mr-0">
-                      <fa-icon *ngIf="!serviceProgress" class="mr-1" [icon]="['fas', 'check']"></fa-icon>
-                      <fa-icon *ngIf="serviceProgress" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
-                      Terminar</button>
-                    </div> -->
-                    <div class="item">
-                      <button type="button" 
-                      [disabled]="serviceProgress" 
-                      (click)="saveQuestion($event)" class="btn btn-danger mr-0">
-                      <fa-icon *ngIf="!serviceProgress" class="mr-1" [icon]="['fas', 'times']"></fa-icon>
-                      <fa-icon *ngIf="serviceProgress" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
-                      Cancelar</button>
-                    </div>  
-                  </div>
-              </div>
             </div>
           </div>
-          <hr>
+          <hr *ngIf="!progressService">
       </main>
   </div>
 </div>

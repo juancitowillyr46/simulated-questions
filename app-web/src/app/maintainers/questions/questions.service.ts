@@ -49,7 +49,7 @@ export class QuestionsService {
       return items.map(a => {
         const data = a.payload.val();
         const key = a.payload.key;
-        return {key, data};           // or {key, ...data} in case data is Obj
+        return {key, data};
       });
     }));
 
