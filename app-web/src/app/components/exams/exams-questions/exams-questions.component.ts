@@ -9,9 +9,12 @@ import { QuestionsService } from 'src/app/maintainers/questions/questions.servic
 })
 export class ExamsQuestionsComponent implements OnInit {
 
-  public idQuestion;
+  public orderQuestion = 0;
   public page = 1;
   public serviceProgress = false;
+  public questions = [];
+  public question = null;
+
   // public questions = [];
   // public questionsRandom = [];
 
@@ -23,16 +26,34 @@ export class ExamsQuestionsComponent implements OnInit {
 
   ngOnInit() {
 
+    const that = this;
+
+    this.route.params.subscribe(res => {
+      if(res){
+        this.orderQuestion = (Number(res.idQuestion) - 1);
+        this.page = res.idQuestion;
+        if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
+          that.questions = JSON.parse(localStorage.getItem("questions"));
+          console.log(that.questions[that.orderQuestion]);
+          that.question = that.questions[that.orderQuestion]['data'];
+        } else {
+          // localStorage.setItem("seconds", timeExam.toString());
+        }
+
+      }
+    });
+
+    
+
+
+    // this.questions.length
+
     // this.getQuestionsByKeyCategory('SCRUM_MASTER');
 
     // localStorage.clear();
     // this.timer();
     
-    this.route.params.subscribe(res => {
-      if(res){
-        this.idQuestion = Number(res.idQuestion);
-      }
-    });
+
   }
 
   // private async getQuestionsByKeyCategory(category: string) {

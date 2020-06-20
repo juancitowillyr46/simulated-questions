@@ -17,39 +17,39 @@
           <div class="row">
             <div class="col-6">
               <div class="mb-2">
-                <h6 class="text-info">Pregunta 1 (De 3):</h6> 
+                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }} ({{ (orderQuestion + 1) }} De {{ questions.length }}):</h6> 
               </div>
               <div class="border border-dark p-3 rounded">
                 <p class="mb-0">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
+                  {{ question.question }}
                 </p>
               </div>
-              <div class="border border-dark p-3 rounded highlight">
+              <div class="border border-dark p-3 rounded highlight" *ngIf="question.questionEn">
                 <div class="text-info pb-1">
                   En inglés:
                 </div>
                 <p class="text-muted mb-0">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
+                  {{ question.questionEn }}
                 </p>
               </div>
               <div class="w-100 pt-4">
                 <div class="float-left w-50 d-flex">
-                  <ngb-pagination class="text-info" (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="3" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
+                  <ngb-pagination class="text-info" (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="(questions.length)" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
                 </div>
                 <div class="float-left w-50 d-flex">
                   <label for="inputEmail3" class="col-sm-5 col-form-label text-right text-info">Ir a la pregunta:</label>
                   <div class="col-sm-7 p-0">
-                    <select class="form-control" (change)="goQuestion($event)">
+                    <select class="form-control" (change)="goQuestion($event)" >
                       
-                      <option [value]="1">
-                        Pregunta 1
+                      <option [value]="(i + 1)" *ngFor="let question of questions; let i = index;">
+                        {{ question.data.question }}
                       </option>
-                      <option [value]="2">
+                      <!-- <option [value]="2">
                         Pregunta 2
                       </option>
                       <option [value]="3">
                         Pregunta 3
-                      </option>
+                      </option> -->
                     </select>
                   </div>
                 </div>
@@ -59,7 +59,7 @@
               <div class="mb-2">
                 <h6 class="text-info">Opciones</h6>
               </div>
-              <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="idQuestion==1">
+              <div class="pt-0 pb-1 pl-1 pr-1">
                 <form>
                   <div class="form-check mb-3">
                     <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
@@ -122,104 +122,7 @@
                   </div>
                 </form>
               </div>
-               <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="idQuestion==2">
-                <form>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Blanditiis perspiciatis quisquam nesciunt inventore, at sint, recusandae voluptate sit iusto laudantium amet non suscipit accusantium ipsa voluptates fugit voluptas itaque temporibus!
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          Add the item to the current Sprint without any adjustments.
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0 ">
-                          Add the item to the current Sprint without any adjustments.
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3 ">
-                    <input class="form-check-input" type="checkbox" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Agrega el elemento al Sprint actual sin ningún ajuste.
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          Add the item to the current Sprint without any adjustments.
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                </form>
-              </div>
-              <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="idQuestion==3">
-                <form>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Verdadero
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          True
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                  <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1">
-                    <label class="form-check-label w-100" for="exampleRadios1">
-                      <div class="border border-dark p-3 rounded">
-                        Falso
-                      </div>
-                      
-                      <div class="text-muted border border-dark p-3 rounded highlight">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          False
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                </form>
-              </div>
+
               <div class="pt-0 pb-1 pl-1 pr-1">
                   <div class="btn-group-grid">
                     <div class="item">

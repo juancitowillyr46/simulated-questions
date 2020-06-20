@@ -7,9 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  isMenu = true;
+
   constructor() { }
 
   ngOnInit() {
+
+    const that = this;
+    if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
+      this.isMenu = false;
+    } else {
+      this.isMenu = true;
+    }
+
   }
+
+
 
 }

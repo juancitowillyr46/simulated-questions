@@ -38,6 +38,8 @@ export class ExamsEnabledComponent implements OnInit {
 
   ngOnInit() {
 
+    localStorage.removeItem("questions");
+
     // Login user
     this.getUseCategoriesByKey('-LnFFh1I0l34rcV5nSrD');
 
