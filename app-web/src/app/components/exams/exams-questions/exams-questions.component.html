@@ -14,9 +14,7 @@
           <div class="row" *ngIf="!progressService">
             <div class="col-6">
               <div class="mb-2 text-info">
-                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }} ( De {{ questions.length }} ):</h6> 
-
-                
+                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }}</h6> 
               </div>
               <div class="border border-dark p-3 rounded">
                 <p class="mb-0">
@@ -33,12 +31,12 @@
               </div>
               <div class="w-100 pt-4">
                 <div class="float-left w-50 d-flex">
-                  <ngb-pagination class="text-info" (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="(questions.length)" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
+                  <ngb-pagination class="text-info" [disabled]='saveOption' (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="(questions.length)" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
                 </div>
                 <div class="float-left w-50 d-flex">
                   <label for="inputEmail3" class="col-sm-5 col-form-label text-right text-info">Ir a la pregunta:</label>
                   <div class="col-sm-7 p-0">
-                    <select class="form-control" [ngModel]="page" (change)="goQuestion($event)" >
+                    <select class="form-control" [ngModel]="page" (change)="goQuestion($event)" [disabled]="saveOption" >
                       <option [value]="(i + 1)" [selected]="2" *ngFor="let question of questions; let i = index;">
                         {{ (i + 1) }}
                       </option>
@@ -57,7 +55,7 @@
               <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="question.answers && question.answers.length">
                 <form>
                   <div class="form-check mb-3" *ngFor="let answer of question.answers; let i = index;">
-                    <input [disabled]="saveOption" class="form-check-input" [checked]="(answer.checked == true)? answer.checked : false" (change)="selectedValue($event, question.answers, question, orderQuestion, i)" [type]="getTypeAnswer(question.typeAnswer)" [name]="'option_' + orderQuestion" [id]="'option_' + orderQuestion + '_' + i">
+                    <input [disabled]="saveOption" class="form-check-input" [checked]="(answer.checked == true)? answer.checked : false" (change)="checkedOption($event, question.answers, question, orderQuestion, i)" [type]="getTypeAnswer(question.typeAnswer)" [name]="'option_' + orderQuestion" [id]="'option_' + orderQuestion + '_' + i">
                     <label class="form-check-label w-100" [for]="'option_' + orderQuestion + '_' + i">
                       <div class=""> 
                         {{ answer.name }}

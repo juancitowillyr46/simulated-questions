@@ -32,6 +32,9 @@ export class AppComponent implements OnInit, OnDestroy {
         // this.router.navigate(['/simulacrum/login']);
       }
     });
+
+
+
   }
 
   ngOnDestroy(): void {

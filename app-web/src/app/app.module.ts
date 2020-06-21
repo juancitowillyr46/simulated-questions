@@ -77,6 +77,7 @@ import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-en
 import { NavComponent } from './shared/nav/nav.component';
 import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.observable';
 
 @NgModule({
   declarations: [
@@ -139,6 +140,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     AuthObservable,
     SignUpObservable,
     MessageObservable,
+    ExamProgressBarObservable,
 
     AuthService,
     AuthGuard,

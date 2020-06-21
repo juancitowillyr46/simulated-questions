@@ -1,18 +1,43 @@
 <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-  <div class="text-left text-info mt-2 mb-0">
+  <div class="text-center text-info mt-2 mb-0">
     <div class="d-inline-block"><img style="vertical-align: bottom;" src="./../../../assets/images/laptop-user.png" class="mr-1"></div>
     <div class="d-inline-block">Juan Rodas</div>
   </div>
   <hr class="mb-0">
   <div class="sidebar-sticky pt-3">
-      <app-menu *ngIf="isMenu == true"></app-menu>
-      <div *ngIf="isMenu == false" class="text-info text-center h4 borderx border-infox p-2 rounded highlight">
-        <fa-icon class="d-block ml-2 ng-fa-icon h2 ng-fa-icon" [icon]="['fas', 'stopwatch']"></fa-icon>
-        <div id="timer" class="d-block text-center"></div>
+    <app-menu *ngIf="isProgressBar == false"></app-menu>
+    <div *ngIf="isProgressBar == true">
+      <div class="text-center text-info">
+        <fa-icon class="d-inline-block mr-2 ng-fa-icon h5 ng-fa-icon" [icon]="['fas', 'clock']"></fa-icon> 
+        <div class="d-inline-block">Tiempo transcurrido</div>
       </div>
-      <div *ngIf="isMenu == false" class="pb-4">
-        <span class="text-info">En progreso</span>
-        <ngb-progressbar height="18px" type="info" textType="white" [value]="25" [striped]="true" [animated]="true" [showValue]="true"></ngb-progressbar>
+      <div *ngIf="isProgressBar == true" class="text-info text-center h4 borderx border-infox p-1 mb-2 rounded highlight">
+        <div id="timer" class="d-block text-center text-info"></div>
       </div>
+      <hr>
+      <div class="d-block text-info mt-4">
+        <div class="d-block text-center">{{ totalPorcertange }}% de avance</div>
+        <div class="d-block">
+          <!-- <ngb-progressbar height="18px" type="info" textType="white" [value]="totalPorcertange" [striped]="true" [animated]="true" [showValue]="true"></ngb-progressbar> -->
+          <ngb-progressbar height="18px" type="success" [value]="totalPorcertange" [max]="100" [striped]="true" [animated]="true" [showValue]="false"></ngb-progressbar>
+        </div>
+      </div>
+      <hr>
+      <div *ngIf="isProgressBar == true" class="border border-info p-2 border-success rounded">
+        <div class="d-block text-info ">
+          <div class="d-inline-block w-75 text-left">Preguntas: </div> 
+          <div class="d-inline-block w-25 text-right">{{ totalQuestions }}</div>
+        </div>
+        <div class="d-block text-info">
+          <div class="d-inline-block w-75 text-left">Respondidas: </div> 
+          <div class="d-inline-block w-25 text-right">{{ totalAnswersChecked }}</div>
+        </div>
+        <div class="d-block text-info">
+          <div class="d-inline-block w-75 text-left">Quedan: </div> 
+          <div class="d-inline-block w-25 text-right">{{ totalNoAnswersChecked }}</div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </nav>

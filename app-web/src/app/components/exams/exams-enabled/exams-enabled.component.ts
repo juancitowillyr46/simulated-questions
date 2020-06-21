@@ -37,23 +37,34 @@ export class ExamsEnabledComponent implements OnInit {
 
   ngOnInit() {
     const that = this;
-    // if(typeof localStorage.getItem("seconds") !== 'undefined' && localStorage.getItem("seconds") != null){
-    //   var r = confirm("¿Estás seguro de que deseas abandonar el exámen?");
-    //   if (r == true) {
-    //     // localStorage.removeItem("questions");
-    //     // localStorage.removeItem("seconds");
-    //     // window.clearInterval();
-    //     // if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
-    //     //   let intervalId = Number(localStorage.getItem("intervalId"));
-    //     //   window.clearInterval(intervalId);
-    //     // }
-    //   } else {
-    //     let keyExam = localStorage.getItem("keyExam");
-    //     location.href = '/exams/'+ keyExam +'/questions/1';
-    //   }
-    // }
-    // Login user
+
+    // window.localStorage.clear();
+
     this.getUseCategoriesByKey('-LnFFh1I0l34rcV5nSrD');
+
+    if(
+      typeof localStorage.getItem("seconds") !== 'undefined' && 
+      localStorage.getItem("seconds") != null
+    ){
+
+      let timeExam = Number(localStorage.getItem('seconds'));
+      if(timeExam > 0){
+        if(typeof localStorage.getItem("keyExam") !== 'undefined' && localStorage.getItem("keyExam") != null){
+          let keyExam = localStorage.getItem("keyExam");
+          if(keyExam){
+            that.routers.navigateByUrl('/exams/'+ keyExam +'/questions/1');
+          }
+        }
+      } else {
+        return true;
+      }
+
+
+      
+    } else{ 
+      return true;
+    }
+
   }
 
 

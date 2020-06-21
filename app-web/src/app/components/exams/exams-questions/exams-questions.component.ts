@@ -2,13 +2,14 @@ import { Component, OnInit, OnDestroy, OnChanges, HostListener } from '@angular/
 import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
 import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
+import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progress-bar.observable';
 
 @Component({
   selector: 'app-exams-questions',
   templateUrl: './exams-questions.component.html',
   styleUrls: ['./exams-questions.component.css']
 })
-export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
+export class ExamsQuestionsComponent implements OnInit {
 
   public orderQuestion = 0;
   public page = 1;
@@ -20,47 +21,34 @@ export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
   public keyExam = null;
   public category = null;
   public saveOption = false;
-  public changes = false;
 
   constructor(
     private routers: Router,
     private route: ActivatedRoute,
-    private categoryService: CategoriesService
+    private categoryService: CategoriesService,
+    private examProgressBarObservable: ExamProgressBarObservable
   ) { 
     const that = this;
-    // var changes = false;        
-  
-    
+  }
 
-  }
-  @HostListener('window:beforeunload', ['$event'])
-  unloadHandler(event: Event) {
-    const that = this;
-    if (that.changes)
-      {
-        var message = "¿Estás seguro de que deseas abandonar el exámen?";
-        if (confirm(message)) return true;
-        else return false;
-      }
-  }
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadHandler(event: Event) {
+  //   const that = this;
+  //   if (that.changes)
+  //     {
+  //       var message = "¿Estás seguro de que deseas abandonar el exámen?";
+  //       if (confirm(message)) return true;
+  //       else return false;
+  //     }
+  // }
+
   ngOnInit() {
 
     const that = this;
-    // window.addEventListener("beforeunload", function (e) {
-    //   if (that.changes)
-    //   {
-    //     var r = confirm("¿Estás seguro de que deseas abandonar el exámen?");
-    //     return false;
-    //       // if (confirm(message)) return true;
-    //       // else return false;
-    //   }
-    // });
-  //   window.onbeforeunload = function() {
-
-  // }
+    that.cleanTimer();
 
     // localStorage.clear();
-    // this.timer();
+    this.timer();
 
     this.route.params.subscribe(res => {
       if(res){
@@ -119,17 +107,11 @@ export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
   timer() {
     const that = this;
     let timeExam = 7200; // Default
+    let idsIntervals = [];
 
-    window.clearInterval();
-    if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
-      let intervalId = Number(localStorage.getItem("intervalId"));
-      window.clearInterval(intervalId);
-    }
+    that.cleanTimer();
 
     let x = window.setInterval(function() { 
-
-      localStorage.setItem("intervalId", x.toString());
-
       if(typeof localStorage.getItem("seconds") !== 'undefined' && localStorage.getItem("seconds") != null){
         timeExam = Number(localStorage.getItem('seconds'));
       } else {
@@ -139,14 +121,18 @@ export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
       localStorage.setItem("seconds", currentTime.toString());
       that.secondsToHms(currentTime);
       if (currentTime <= 0) { 
+          localStorage.removeItem("seconds");
           window.clearInterval(x); 
-          document.getElementById("timer").innerHTML = "EXPIRED";
-          that.routers.navigateByUrl('/exams/'+ that.keyExam +'/result');
+          document.getElementById("timer").innerHTML = "Tiempo cumplido";
+          that.cleanTimer();
+          that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score');
       } else {
-        console.log(x);
+        // console.log(x);
       }
     }, 1000); 
 
+    idsIntervals.push(x.toString());
+    localStorage.setItem("intervalId", JSON.stringify(idsIntervals));
   }
 
   getTypeAnswer(type: string) {
@@ -161,26 +147,29 @@ export class ExamsQuestionsComponent implements OnInit, OnDestroy, OnChanges {
     return typeInput;
   }
 
-  selectedValue(event: any, answers: any, question: any, order: any, position: number) {
+  checkedOption(event: any, answers: any, question: any, order: any, position: number) {
     const that = this;
     that.saveOption = true;
-    
     setTimeout( () => {
       that.saveOption = false;
       that.questions[order]['data']['answers'][position]['checked'] = event.target.checked;
-      that.changes = true;
       localStorage.setItem("questions", JSON.stringify(that.questions));
-      this.dismissible = true;
-      setTimeout(() => this.dismissible = false, 3000);
+      that.dismissible = true;
+      that.examProgressBarObservable.changeMessage(true);
+      setTimeout(() => this.dismissible = false, 2000);
     }, 2000 );
 
   }
 
-  ngOnDestroy() {
-
+  cleanTimer() :void {
+    window.clearInterval();
+    if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
+      let getIntervalId: any[] = JSON.parse(localStorage.getItem("intervalId"));
+      if(getIntervalId.length > 0)
+        getIntervalId.forEach(id => {
+          window.clearInterval(id);
+        });
+    }
   }
 
-  ngOnChanges() {
-    // console.log('cambios');
-  }
 }
