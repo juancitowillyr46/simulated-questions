@@ -1,11 +1,78 @@
-<h5>Banco de Preguntas</h5>
+<div class="d-block">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-info"><fa-icon class="mr-1" [icon]="['fas', 'plus-circle']"></fa-icon>Nueva pregunta</button>
+        <!-- <button type="button" class="btn btn-danger"> <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon>Eliminar</button> -->
+      </div>
+    </div>
+    <!-- <div class="col-2">
+      
+    </div> -->
+    
 
-<button type="button" class="btn btn-primary mr-2" (click)="ir($event)">
-    <fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear
-</button>
+    <!-- <div class="col-2">
+      <button type="button" class="btn btn-primary mr-2" (click)="ir($event)">
+        <fa-icon class="mr-1" [icon]="['fas', 'plus']"></fa-icon>Crear
+      </button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-primary mr-2" (click)="ir($event)">
+        <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon>Eliminar
+      </button>
+    </div> -->
+  </div>
+  <div class="row mb-4">
+    <div class="col-3">
+      <div>
+        <label>Por Categoria</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option value="-1">Todos</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <label>Justificación</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option value="-1">Todos</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <label>Traducido</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option value="-1">Todos</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <label>Tipo</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option value="-1">Todos</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="dropdown mr-2" style="display: inline-block;">
-    <button class="btn btn-primary dropdown-toggle" [disabled]="!selectedItemForDeleteArr.length > 0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+
+<!-- <div class="dropdown mr-2" style="display: inline-block;">
+    <button class="btn btn-primary dropdown-toggle" [disabled]="selectedItemForDeleteArr.length > 0" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         ({{ selectedItemForDeleteArr.length }}) Seleccionadas
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -24,9 +91,9 @@
       <a class="dropdown-item" href="javascript:void(0)" (click)="filter('H')">Habilitadas</a>
       <a class="dropdown-item" href="javascript:void(0)" (click)="filter('D')">Deshabilitadas</a>
     </div>
-  </div>
+  </div> -->
 
-<br><br>
+<!-- <br><br> -->
 <!--<div class="alert alert-dismissible alert-success" *ngIf="message && message.hide === false" (click)="message.hide = true">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Well done!</strong> {{ message.message }}
@@ -37,15 +104,31 @@
 </div>
 
 <div class="list-group" *ngIf="inProgress == false">
-    <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">
-        <div>Habilitada: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
-        <div class="mb-2">Tipo: <span><b>{{ question.typeAnswer }}</b></span></div>
+  <li class="list-group-item active bg-info text-white">N° Tota de Preguntas: {{ questions.length }} </li>
 
-        <p class="mb-1"><input type="checkbox" class="mr-2 checkboxDelete" name="checkbox" id="checkboxDelete" [value]="question.key" (change)="selectedItemForDelete($event)"> {{ (i + 1) }}. {{ question.question }}</p>
-        
-        <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" (click)="form(question.key, $event)" class="btn btn-secondary"><fa-icon class="mr-0" [icon]="['fas', 'pen']"></fa-icon></button>
-          </div>
+  <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">
+    <div class="d-block">
+      <div class="d-inline-block mr-2" style="
+      vertical-align: top;
+  ">
+        <!-- <input type="checkbox" class="mr-2 checkboxDelete" name="checkbox" id="checkboxDelete" [value]="question.key" (change)="selectedItemForDelete($event)"> -->
+        {{ (i + 1) }}. 
+      </div>
+      <div class="d-inline-block">
+        <p>{{ question.question }}</p>
+      </div>
+      
     </div>
+    <div class="d-inline-block w-50 text-left">
+      <div>Habilitada: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
+      <div class="mb-2">Tipo: <span><b>{{ question.typeAnswer }}</b></span></div>
+    </div>
+    <div class="d-inline-block w-50 text-right">
+      <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" (click)="form(question.key, $event)" class="btn btn-info"><fa-icon class="mr-0" [icon]="['fas', 'pen']"></fa-icon></button>
+        <button type="button" class="btn btn-danger"> <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon></button>
+      </div>
+    </div>
+  </div>
 </div>
 

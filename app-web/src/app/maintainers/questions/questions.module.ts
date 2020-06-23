@@ -6,9 +6,10 @@ import { QuestionsRoutingModule } from './questions-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QuestionsComponent } from './questions.component';
+import { QuestionsIndexComponent } from './questions-index/questions-index.component';
 
 @NgModule({
-  declarations: [QuestionsComponent, QuestionsListComponent, QuestionsPostComponent],
+  declarations: [QuestionsComponent, QuestionsListComponent, QuestionsPostComponent, QuestionsIndexComponent],
   imports: [
     FormsModule,
     ReactiveFormsModule,

@@ -63,7 +63,14 @@ import {
   faUserEdit,
   faFileSignature,
   faLaptop,
-  faStopwatch
+  faStopwatch,
+  faPlus,
+  faInfoCircle,
+  faTrash,
+  faBan,
+  faFilter,
+  faSync,
+  faPlusCircle
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
@@ -78,6 +85,10 @@ import { NavComponent } from './shared/nav/nav.component';
 import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.observable';
+import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
+import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
+import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -98,7 +109,11 @@ import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.
     /* Exams */
     ExamsEnabledComponent,
     ExamsScoreComponent,
-    ExamsQuestionsComponent
+    ExamsQuestionsComponent,
+
+    QuestionsIndexComponent,
+    QuestionsListComponent,
+    QuestionsPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +121,8 @@ import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.
 
     FormsModule,
     ReactiveFormsModule,
-
+    CommonModule,
+    
     AngularFireModule.initializeApp(environment.firebase), // imports firebase/app needed for everything
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
@@ -123,7 +139,7 @@ import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.
     NgbModalModule,
     
     CategoriesModule,
-    QuestionsModule,
+    // QuestionsModule,
     SimulacrumModule,
     UsersModule,
 
@@ -178,7 +194,20 @@ export class AppModule {
       faUserEdit,
       faFileSignature,
       faLaptop,
-      faStopwatch
+      faStopwatch,
+      faTimes, 
+      faPlus, 
+      faInfoCircle, 
+      faCheckCircle, 
+      faCheck, 
+      faPen, 
+      faTrash, 
+      faArrowCircleLeft, 
+      faBan, 
+      faFilter, 
+      faSync, 
+      faSpinner,
+      faPlusCircle
     );
 
   }

@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { library } from '@fortawesome/fontawesome-svg-core';
+// import { library } from '@fortawesome/fontawesome-svg-core';
 import { QuestionsService } from '../questions.service';
 import { MessageObservable } from '../../../observables/message.observable';
-
-import {
-  faTimes,
-  faPlus,
-  faInfoCircle,
-  faCheckCircle,
-  faCheck,
-  faPen,
-  faTrash,
-  faArrowCircleLeft,
-  faBan,
-  faFilter,
-  faSync,
-  faSpinner
-} from '@fortawesome/free-solid-svg-icons';
+// import {
+//   faTimes,
+//   faPlus,
+//   faInfoCircle,
+//   faCheckCircle,
+//   faCheck,
+//   faPen,
+//   faTrash,
+//   faArrowCircleLeft,
+//   faBan,
+//   faFilter,
+//   faSync,
+//   faSpinner
+// } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-questions-list',
   templateUrl: './questions-list.component.html',
@@ -37,7 +36,7 @@ export class QuestionsListComponent implements OnInit {
     private questionsService: QuestionsService,
     private messageObservable: MessageObservable
   ) {
-    library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faBan, faFilter, faSync, faSpinner);
+    // library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faBan, faFilter, faSync, faSpinner);
   }
 
   ngOnInit() {

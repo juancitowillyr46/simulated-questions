@@ -14,6 +14,9 @@ import { SignupComponent } from './signup/signup.component';
 import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-enabled.component';
 import { ExamsQuestionsComponent } from './components/exams/exams-questions/exams-questions.component';
 import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.component';
+import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
+import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
+import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
 
 const routes: Routes = [
   // {
@@ -41,6 +44,8 @@ const routes: Routes = [
     path: 'not-found',
     component: NotFoundComponent
   },
+  
+  /* Cliente  */
   {
     path: 'exams',
     component: ExamsEnabledComponent,
@@ -52,7 +57,26 @@ const routes: Routes = [
   {
     path: 'exams/:keyExam/score',
     component: ExamsScoreComponent,
+  },
+
+
+  /* Manager Questions */
+  {
+    path: 'manager/questions',
+    component: QuestionsIndexComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: QuestionsListComponent
+      },
+      {
+        path: ':id',
+        component: QuestionsPostComponent
+      }
+    ]
   }
+
 ];
 
 @NgModule({

@@ -10,18 +10,18 @@ import { DashboardComponent } from '../../dashboard/dashboard.component';
 
 const routes: Routes = [
  {
-   path: 'questions',
-   component: DashboardComponent,
+  //  path: 'questions',
+  //  component: DashboardComponent,
    // canActivate: [UsersGuard],
    children: [
-     {
-       path: 'post/:id',
-       component: QuestionsPostComponent
-     },
-     {
-      path: 'list',
-      component: QuestionsListComponent
-     },
+    //  {
+    //    path: 'post/:id',
+    //    component: QuestionsPostComponent
+    //  },
+    //  {
+    //   path: 'list',
+    //   component: QuestionsListComponent
+    //  },
     //  {
     //   path: 'mantainers/questions/form/:id',
     //   component: QuestionsPostComponent
