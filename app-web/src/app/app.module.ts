@@ -70,7 +70,8 @@ import {
   faBan,
   faFilter,
   faSync,
-  faPlusCircle
+  faPlusCircle,
+  faSignOutAlt
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
@@ -89,6 +90,8 @@ import { QuestionsIndexComponent } from './maintainers/questions/questions-index
 import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
 import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
 import { CommonModule } from '@angular/common';
+import { QuestionsTypesComponent } from './maintainers/questions-types/questions-types.component';
+import { QuestionsTypesService } from './maintainers/questions-types/questions-types.service';
 
 @NgModule({
   declarations: [
@@ -114,6 +117,7 @@ import { CommonModule } from '@angular/common';
     QuestionsIndexComponent,
     QuestionsListComponent,
     QuestionsPostComponent,
+    QuestionsTypesComponent,
   ],
   imports: [
     BrowserModule,
@@ -146,6 +150,7 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [
     QuestionsService,
+    QuestionsTypesService,
     SharedObservable,
     GeneratePassword,
     LoginService,
@@ -207,7 +212,8 @@ export class AppModule {
       faFilter, 
       faSync, 
       faSpinner,
-      faPlusCircle
+      faPlusCircle,
+      faSignOutAlt
     );
 
   }

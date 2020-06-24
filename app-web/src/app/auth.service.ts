@@ -31,16 +31,16 @@ export class AuthService {
     public userService: UsersService,
   ) {
     const that = this;
-    that.afAuth.authState.subscribe(user => {
-      if (user) {
-        that.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-      } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
-    });
+    // that.afAuth.authState.subscribe(user => {
+    //   if (user) {
+    //     that.userData = user;
+    //     localStorage.setItem('user', JSON.stringify(this.userData));
+    //     JSON.parse(localStorage.getItem('user'));
+    //   } else {
+    //     localStorage.setItem('user', null);
+    //     JSON.parse(localStorage.getItem('user'));
+    //   }
+    // });
   }
 
   SignIn(email, password) {
@@ -61,8 +61,15 @@ export class AuthService {
 
   SetUserData(user) {
     const that = this;
-    that.ngZone.run(() => {
-      that.router.navigate(['dashboard']);
+    that.userService.getUserByUid(user.uid).then( res => {
+      let fKey = Object.keys(res);
+      let userData = res[fKey[0]];
+      localStorage.setItem('user', JSON.stringify(userData));
+      if(userData.role === 'USER_ADMIN'){
+        that.router.navigate(['/manager/questions']);
+      } else {
+        that.router.navigate(['/exams']);
+      }
     });
   }
 

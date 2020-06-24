@@ -45,6 +45,11 @@ export class UsersService {
     });
   }
 
+  public async getUserByUid(uid: string) {
+    return await this.db.database.ref('users').orderByChild('uid').equalTo(uid).once('value').then( res => {
+      return res.val();
+    });
+  }
   
 
 }

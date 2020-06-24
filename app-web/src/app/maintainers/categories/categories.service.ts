@@ -71,6 +71,18 @@ export class CategoriesService {
     });
   }
 
+  public getCategoriesActive() {
+    let data = [];
+    return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
+    .pipe(map(items => {
+      data = [];
+      items.forEach(element => {
+        let value = element.payload.val()
+        data.push(value);
+      });
+      return {data};
+    }));
+  }
 
   public getCategories(arrKeyCategories) {
     let data = [];

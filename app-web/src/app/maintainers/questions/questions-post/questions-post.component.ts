@@ -74,7 +74,7 @@ export class QuestionsPostComponent implements OnInit {
     private messageObservable: MessageObservable,
     private categoriesService: CategoriesService
   ) {
-    library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faSave);
+    // library.add(faTimes, faPlus, faInfoCircle, faCheckCircle, faCheck, faPen, faTrash, faArrowCircleLeft, faSave);
   }
 
   ngOnInit() {
@@ -123,7 +123,7 @@ export class QuestionsPostComponent implements OnInit {
     const that = this;
     that.messageObservable.changeMessage(null);
     event.preventDefault();
-    that.router.navigate(['/questions/list']);
+    that.router.navigate(['manager/questions']);
   }
 
   public changeTypeAnswer(event) {
@@ -245,7 +245,7 @@ export class QuestionsPostComponent implements OnInit {
       that.messageObservable.changeMessage({message: 'Pregunta creada satisfactoriamente', state: 'success', hide: false});
 
       setTimeout(() => {
-        that.router.navigate(['questions/list']);
+        that.router.navigate(['manager/questions']);
       }, 4000);
       
     });
@@ -270,7 +270,7 @@ export class QuestionsPostComponent implements OnInit {
     that.formQuestion.key = that.routeActive.snapshot.paramMap.get('id');
     that.formQuestion.submit = true;
     that.questionsService.update(that.formQuestion.key, question).subscribe(res => {
-      that.router.navigate(['questions/list']);
+      that.router.navigate(['manager/questions']);
       that.messageObservable.changeMessage({message: 'Pregunta actualizada satisfactoriamente', state: 'success', hide: false});
     });
 

@@ -2,7 +2,7 @@
   <div class="row mb-4">
     <div class="col-12">
       <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-info"><fa-icon class="mr-1" [icon]="['fas', 'plus-circle']"></fa-icon>Nueva pregunta</button>
+        <button type="button" (click)="ir($event)" class="btn btn-info"><fa-icon class="mr-1" [icon]="['fas', 'plus-circle']"></fa-icon>Nueva pregunta</button>
         <!-- <button type="button" class="btn btn-danger"> <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon>Eliminar</button> -->
       </div>
     </div>
@@ -26,41 +26,36 @@
     <div class="col-3">
       <div>
         <label>Por Categoria</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option value="-1">Todos</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-3">
-      <div>
-        <label>Justificación</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option value="-1">Todos</option>
-          <option value="1">Si</option>
-          <option value="0">No</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-3">
-      <div>
-        <label>Traducido</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option value="-1">Todos</option>
-          <option value="1">Si</option>
-          <option value="0">No</option>
+        <select [disabled]="inProgressSelect" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="filters.category" (change)="filter($event, 'category')">
+          <option value="">Todos</option>
+          <option [value]="category.clientKey" *ngFor="let category of categories; let i = index;">{{ category.name }}</option>
         </select>
       </div>
     </div>
     <div class="col-3">
       <div>
         <label>Tipo</label>
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option value="-1">Todos</option>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="filters.typeAnswerKey" (change)="filter($event, 'type')">
+          <option value="">Todos</option>
+          <option [value]="typeQuestion.key" *ngFor="let typeQuestion of typesQuestions; let i = index;">{{ typeQuestion.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <label>Traducido</label>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="filters.isTranslate" (change)="filter($event, 'translate')">
+          <option value="">Todos</option>
+          <option value="1">Si</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-3">
+      <div>
+        <label>Justificación</label>
+        <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="filters.isJustification" (change)="filter($event, 'justification')">
+          <option value="">Todos</option>
           <option value="1">Si</option>
           <option value="0">No</option>
         </select>
@@ -104,9 +99,9 @@
 </div>
 
 <div class="list-group" *ngIf="inProgress == false">
-  <li class="list-group-item active bg-info text-white">N° Tota de Preguntas: {{ questions.length }} </li>
+  <li class="list-group-item active bg-info text-white">N° Total de Preguntas: {{ resultFilter.length }} </li>
 
-  <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of questions; let i = index;">
+  <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let question of resultFilter; let i = index;">
     <div class="d-block">
       <div class="d-inline-block mr-2" style="
       vertical-align: top;
@@ -120,13 +115,16 @@
       
     </div>
     <div class="d-inline-block w-50 text-left">
-      <div>Habilitada: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
-      <div class="mb-2">Tipo: <span><b>{{ question.typeAnswer }}</b></span></div>
+      <div>Tipo: <span><b>{{ question.typeAnswer }}</b></span></div>
+      <div>Disponible: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
+      <div>Traducido: <span><b>{{ (question.isTranslate == '1')? 'Si' : 'No'  }}</b></span></div>
+      <div>Con justificación: <span><b>{{ (question.isJustification == '1')? 'Si' : 'No'  }}</b></span></div>
+      <div>Key: <span><b>{{ question.key }}</b></span></div>
     </div>
     <div class="d-inline-block w-50 text-right">
       <div class="btn-group" role="group" aria-label="Basic example">
         <button type="button" (click)="form(question.key, $event)" class="btn btn-info"><fa-icon class="mr-0" [icon]="['fas', 'pen']"></fa-icon></button>
-        <button type="button" class="btn btn-danger"> <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon></button>
+        <!-- <button type="button" class="btn btn-danger"> <fa-icon class="mr-1" [icon]="['fas', 'trash']"></fa-icon></button> -->
       </div>
     </div>
   </div>

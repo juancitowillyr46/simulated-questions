@@ -8,6 +8,8 @@ import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progres
 })
 export class SidebarComponent implements OnInit {
 
+  public userData = null;
+
   isProgressBar = true;
 
   totalQuestions = 0;
@@ -34,7 +36,12 @@ export class SidebarComponent implements OnInit {
     });
 
 
-
+    if(
+      typeof localStorage.getItem("user") !== 'undefined' && 
+      localStorage.getItem("user") != null
+    ){
+      that.userData = JSON.parse(localStorage.getItem('user'));
+    }
   }
 
 
