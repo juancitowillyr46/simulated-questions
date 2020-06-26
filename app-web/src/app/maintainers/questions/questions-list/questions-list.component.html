@@ -107,7 +107,7 @@
       vertical-align: top;
   ">
         <!-- <input type="checkbox" class="mr-2 checkboxDelete" name="checkbox" id="checkboxDelete" [value]="question.key" (change)="selectedItemForDelete($event)"> -->
-        {{ (i + 1) }}. 
+        <!-- {{ (i + 1) }}.  -->
       </div>
       <div class="d-inline-block">
         <p>{{ question.question }}</p>
@@ -119,7 +119,7 @@
       <div>Disponible: <span *ngIf="question.state == false"><b>No</b></span><span *ngIf="question.state !== false"><b>Si</b></span></div>
       <div>Traducido: <span><b>{{ (question.isTranslate == '1')? 'Si' : 'No'  }}</b></span></div>
       <div>Con justificación: <span><b>{{ (question.isJustification == '1')? 'Si' : 'No'  }}</b></span></div>
-      <div>Key: <span><b>{{ question.key }}</b></span></div>
+      <div>Id: <span><b>{{ question.key }}</b></span></div>
     </div>
     <div class="d-inline-block w-50 text-right">
       <div class="btn-group" role="group" aria-label="Basic example">

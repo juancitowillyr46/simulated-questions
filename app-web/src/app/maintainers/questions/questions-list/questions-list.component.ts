@@ -89,13 +89,13 @@ export class QuestionsListComponent implements OnInit {
           question.typeAnswerKey ='MULTIPLE_ANSWER';
         }
 
-        if(question.questionEn !== undefined){ 
+        if(question.questionEn !== undefined && question.questionEn != ''){ 
           question.isTranslate = '1';
         } else {
           question.isTranslate = '0';
         }
 
-        if(question.justification !== undefined){ 
+        if(question.justification !== undefined && question.justification != ''){ 
           question.isJustification = '1';
         } else {
           question.isJustification = '0';
