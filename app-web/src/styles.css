@@ -53,3 +53,14 @@
 .btn-group-grid > div {
   display: flex;
 }
+
+
+button:focus {outline:0 !important;}
+
+.btn:focus  {
+    outline: 0 !important;
+}
+
+html {
+    scroll-behavior: smooth !important;
+}

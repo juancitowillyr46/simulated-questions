@@ -55,7 +55,7 @@ const routes: Routes = [
     component: ExamsQuestionsComponent,
   },
   {
-    path: 'exams/:keyExam/score',
+    path: 'exams/:keyExam/score/:hash',
     component: ExamsScoreComponent,
   },
 

@@ -71,10 +71,25 @@ import {
   faFilter,
   faSync,
   faPlusCircle,
-  faSignOutAlt
+  faSignOutAlt,
+  faPenAlt,
+  faEdit,
+  faRobot,
+  faList,
+  faQuestionCircle,
+  faSortDown,
+  faSortUp,
+  faCaretLeft,
+  faCaretRight,
+  faCaretDown,
+  faMinus,
+  faChevronDown,
+  faCircle,
+  faUser,
+  faExclamation
  } from '@fortawesome/free-solid-svg-icons';
 
-import { faSquare as farSquare, faCheckSquare as farCheckSquare } from '@fortawesome/free-regular-svg-icons';
+import { faSquare as farSquare, faCheckSquare as farCheckSquare, faQuestionCircle as farQuestionCircle, faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
 
 
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -178,12 +193,12 @@ export class AppModule {
     library.add(
       faFileAlt, 
       faChevronRight, 
+      faChevronDown, 
       faListUl, 
       faClock, 
       faPlay, 
       faHistory, 
       faChevronLeft, 
-      faChevronRight, 
       faArrowCircleLeft, 
       faArrowCircleRight,
       faSave,
@@ -213,7 +228,24 @@ export class AppModule {
       faSync, 
       faSpinner,
       faPlusCircle,
-      faSignOutAlt
+      faSignOutAlt,
+      faPenAlt,
+      faEdit,
+      faRobot,
+      faList,
+      faQuestionCircle,
+      farQuestionCircle,
+      faSortDown,
+      faSortUp,
+      faCaretRight,
+      faCaretLeft,
+      faCaretDown,
+      faMinus,
+      faPlus,
+      faCircle,
+      farCircle,
+      faUser,
+      faExclamation
     );
 
   }
