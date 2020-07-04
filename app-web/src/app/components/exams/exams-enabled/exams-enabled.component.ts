@@ -89,15 +89,24 @@ export class ExamsEnabledComponent implements OnInit {
     that.questionsService.getQuestionsByKeyCategory(category.clientKey).subscribe( res => {
       if(res) {
         that.questions = res;
+        
+        that.questions.forEach(question => {
+          question.data.answers.forEach(answer => {
+            if(answer['isCorrect'] == false) {
+              answer['isCorrect'] = null;
+            }
+          });
+        });
+
         that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, category.totalQuestions);
         localStorage.setItem('questions', JSON.stringify(that.questionsRandom));
-        localStorage.setItem('seconds', category.timerSeconds);
+        localStorage.setItem('seconds', category.timerSeconds); //category.timerSeconds
         localStorage.setItem('keyExam', category.clientKey);
         setTimeout(() => {
           that.disabledButton = false;
           that.modalReference.close();
           that.routers.navigateByUrl('/exams/'+ category.clientKey +'/questions/1');
-        }, 3000);
+        }, 1000);
       }
     });
   }

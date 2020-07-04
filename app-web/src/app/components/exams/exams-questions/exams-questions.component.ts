@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
 import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
 import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progress-bar.observable';
+import { ExamClearTimerObservable } from 'src/app/core/observables/exam-clear-timer.observable';
 
 @Component({
   selector: 'app-exams-questions',
@@ -26,7 +27,8 @@ export class ExamsQuestionsComponent implements OnInit {
     private routers: Router,
     private route: ActivatedRoute,
     private categoryService: CategoriesService,
-    private examProgressBarObservable: ExamProgressBarObservable
+    private examProgressBarObservable: ExamProgressBarObservable,
+    private examClearTimerObservable: ExamClearTimerObservable
   ) { 
     const that = this;
   }
@@ -106,7 +108,7 @@ export class ExamsQuestionsComponent implements OnInit {
 
   timer() {
     const that = this;
-    let timeExam = 7200; // Default
+    let timeExam = 60; // Default
     let idsIntervals = [];
 
     that.cleanTimer();
@@ -125,7 +127,11 @@ export class ExamsQuestionsComponent implements OnInit {
           window.clearInterval(x); 
           document.getElementById("timer").innerHTML = "Tiempo cumplido";
           that.cleanTimer();
-          that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score');
+          that.examClearTimerObservable.changeMessage(true);
+
+          localStorage.setItem("questions", JSON.stringify(that.questions));
+          
+          that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score/ngb-panel-0-header');
       } else {
         // console.log(x);
       }
@@ -154,10 +160,10 @@ export class ExamsQuestionsComponent implements OnInit {
       that.saveOption = false;
       that.questions[order]['data']['answers'][position]['checked'] = event.target.checked;
       localStorage.setItem("questions", JSON.stringify(that.questions));
-      that.dismissible = true;
+      // that.dismissible = true;
       that.examProgressBarObservable.changeMessage(true);
-      setTimeout(() => this.dismissible = false, 2000);
-    }, 2000 );
+      // setTimeout(() => this.dismissible = false, 1000);
+    }, 500);
 
   }
 

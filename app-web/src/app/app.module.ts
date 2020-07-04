@@ -107,6 +107,7 @@ import { QuestionsListComponent } from './maintainers/questions/questions-list/q
 import { CommonModule } from '@angular/common';
 import { QuestionsTypesComponent } from './maintainers/questions-types/questions-types.component';
 import { QuestionsTypesService } from './maintainers/questions-types/questions-types.service';
+import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.observable';
 
 @NgModule({
   declarations: [
@@ -177,6 +178,7 @@ import { QuestionsTypesService } from './maintainers/questions-types/questions-t
     SignUpObservable,
     MessageObservable,
     ExamProgressBarObservable,
+    ExamClearTimerObservable,
 
     AuthService,
     AuthGuard,

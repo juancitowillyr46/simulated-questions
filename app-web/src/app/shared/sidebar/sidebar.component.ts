@@ -27,41 +27,6 @@ export class SidebarComponent implements OnInit {
 
     const that = this;
 
-  //   var myPieChart = new Chart(document.getElementById('realtime'), {
-  //     type: 'pie',
-  //     data: {
-  //       labels: ['Correctas', 'Incorrectas'],
-  //       datasets: [{
-  //         data: [12, 19],
-  //         backgroundColor: [
-  //           'rgba(54, 162, 235, 1)',
-  //           'rgba(255, 99, 132, 1)'
-  //         ],
-  //         borderColor: [
-  //           'rgba(54, 162, 235, 1)',
-  //           'rgba(255,99,132,1)'
-  //         ],
-  //         borderWidth: 1
-  //       }]
-  //     },
-  //     options: {
-  //       title: {
-  //         display: false,
-  //         text: 'Resultado'
-  //       },
-  //       responsive: true,
-  //       layout: {
-  //         padding: {
-  //             left: 0,
-  //             right: 0,
-  //             top: 0,
-  //             bottom: 0
-  //         }
-  //     }
-  //       // cutoutPercentage: 50 
-  //    }
-  // });
-
     that.examProgressBarObservable.currentMessage.subscribe( res => {
       if(res) {
        
@@ -101,7 +66,7 @@ export class SidebarComponent implements OnInit {
           }
         });
 
-        console.log((that.totalAnswersChecked / 100) * 100);
+        // console.log((that.totalAnswersChecked / 100) * 100);
 
         that.totalPorcertange = Math.round((that.totalAnswersChecked / 100) * 100);
         that.totalNoAnswersChecked = (that.totalQuestions - that.totalAnswersChecked);
