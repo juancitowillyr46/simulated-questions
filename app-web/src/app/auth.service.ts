@@ -64,6 +64,7 @@ export class AuthService {
     that.userService.getUserByUid(user.uid).then( res => {
       let fKey = Object.keys(res);
       let userData = res[fKey[0]];
+      localStorage.setItem('userId', fKey.toString());
       localStorage.setItem('user', JSON.stringify(userData));
       if(userData.role === 'USER_ADMIN'){
         that.router.navigate(['/manager/questions']);

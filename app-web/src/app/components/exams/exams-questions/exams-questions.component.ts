@@ -23,6 +23,8 @@ export class ExamsQuestionsComponent implements OnInit {
   public category = null;
   public saveOption = false;
 
+  public isCollapsed = true;
+
   constructor(
     private routers: Router,
     private route: ActivatedRoute,
@@ -63,11 +65,6 @@ export class ExamsQuestionsComponent implements OnInit {
         if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
           that.questions = JSON.parse(localStorage.getItem("questions"));
           that.question = that.questions[that.orderQuestion]['data'];
-          that.question.answers.forEach(answer => {
-            if(answer['checked'] === null){
-              answer['checked'] = null;
-            }
-          });
         } else {
           that.routers.navigateByUrl('/exams');
         }
@@ -79,10 +76,16 @@ export class ExamsQuestionsComponent implements OnInit {
   async getCategory(keyExam: string) {
     const that = this;
     that.progressService = true;
-    await that.categoryService.getCategory(keyExam).then( res => {
+    if(typeof localStorage.getItem("category") !== 'undefined' && localStorage.getItem("category") != null){
       that.progressService = false;
-      that.category = res;
-    });
+      that.category = JSON.parse(localStorage.getItem("category"));
+    } else {
+      that.routers.navigateByUrl('/exams');
+    }
+    // await that.categoryService.getCategory(keyExam).then( res => {
+    //   that.progressService = false;
+    //   that.category = res;
+    // });
   }
 
 
@@ -128,9 +131,9 @@ export class ExamsQuestionsComponent implements OnInit {
           document.getElementById("timer").innerHTML = "Tiempo cumplido";
           that.cleanTimer();
           that.examClearTimerObservable.changeMessage(true);
-
+          localStorage.setItem('endExam', 'true');
           localStorage.setItem("questions", JSON.stringify(that.questions));
-          
+
           that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score/ngb-panel-0-header');
       } else {
         // console.log(x);
@@ -177,5 +180,54 @@ export class ExamsQuestionsComponent implements OnInit {
         });
     }
   }
+
+  endExam() {
+    const that = this;
+    
+    let txt;
+    let r = confirm("¿Estás seguro que deseas terminar la evaluación?");
+    if (r == true) {
+      that.progressService = true;
+      setTimeout(() => {
+        that.progressService = false;
+        localStorage.removeItem("seconds");
+        document.getElementById("timer").innerHTML = "Tiempo cumplido";
+        that.cleanTimer();
+        that.examClearTimerObservable.changeMessage(true);
+        localStorage.setItem('endExam', 'true');
+        localStorage.setItem("questions", JSON.stringify(that.questions));
+        that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score/ngb-panel-0-header');
+      }, 2000);
+
+    } else {
+      txt = "You pressed Cancel!";
+    }
+
+  }
+
+  public validateCheckedUser(answer, typeAnswer) {
+    if(typeAnswer === 'MULTIPLE_ANSWER') {
+      
+      if(answer.checked !== undefined){
+
+        return ['far','square'];
+
+      }
+
+    } else if(typeAnswer === 'ONE_ANSWER') {
+
+      return ['far','circle'];
+
+    } else if(typeAnswer === 'TRUE_OR_FALSE') {
+
+      return ['far','circle'];
+
+    }
+  }
+  // validateEndExam(questions: any) {
+  //   const that = this;
+  //   that.category.totalQuestions == ;
+  //   that.questions.length
+  // }
 
 }

@@ -14,7 +14,7 @@
                 <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>{{ category.totalQuestions }} Preguntas</p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" [disabled]="progressService" (click)="open(content, category)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Iniciar</button>
+                      <button type="button" [disabled]="progressService" (click)="open(content, category)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Comenzar</button>
                     </div>
                     <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>{{ category.durationTimeMM }} Minutos</div>
                 </div>
@@ -28,17 +28,25 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Importante</h4>
+    <h4 class="modal-title" id="modal-basic-title">Instrucciones</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam minima, nihil optio eum dolorum nulla nam itaque expedita ut aspernatur totam at harum a. Temporibus est accusamus quasi nesciunt at.
+    <ul>
+      <li>Límite de tiempo: <b>{{category.durationTimeMM}} min.</b></li>
+      <li>Número de preguntas: <b>{{ category.totalQuestions }}</b></li>
+      <li>No puedes guardar y terminar más tardes, por lo que se recomienda terminar lo mas pronto posible.</li>
+      <li>Lás pregunta se muestran por páginas</li>
+      <li>Le permitirá regresar y cambiar sus respuestas.</li>
+      <li>Tiene una puntuación de aprobación del <b>80%</b> </li>
+    </ul>
+    <p class="text-center">
+      <b>Exitos en tu evaluación</b>
     </p>
   </div>
   <div class="modal-footer">
-    <button type="button" [disabled]="disabledButton" class="btn btn-outline-dark" (click)="getExamen();"><fa-icon *ngIf="disabledButton" class="mr-2" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>Empezar</button>
+    <button type="button" [disabled]="disabledButton" class="btn btn-outline-dark" (click)="getExamen();"><fa-icon *ngIf="disabledButton" class="mr-2" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>Continuar</button>
   </div>
 </ng-template>

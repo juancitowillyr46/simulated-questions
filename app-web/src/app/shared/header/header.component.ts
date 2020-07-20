@@ -30,19 +30,19 @@ export class HeaderComponent implements OnInit {
     that.authService.StateAuth().subscribe( state => {
       if (state) {
         that.isLoggin = true;
-        that.authService.CurrentUserData(state.uid).subscribe(res => {
-          if (res && res[0] && res[0].data) {
-            const userNode: any = res[0].data;
-            that.userAuthAttr = {
-              uid: userNode.uid,
-              email: userNode.email,
-              displayName: userNode.displayName,
-              photoURL: userNode.photoURL,
-              emailVerified: userNode.emailVerified,
-              role: userNode.role
-            };
-          }
-        });
+        // that.authService.CurrentUserData(state.uid).subscribe(res => {
+        //   if (res && res[0] && res[0].data) {
+        //     const userNode: any = res[0].data;
+        //     that.userAuthAttr = {
+        //       uid: userNode.uid,
+        //       email: userNode.email,
+        //       displayName: userNode.displayName,
+        //       photoURL: userNode.photoURL,
+        //       emailVerified: userNode.emailVerified,
+        //       role: userNode.role
+        //     };
+        //   }
+        // });
       } else {
         that.isLoggin = false;
       }

@@ -39,8 +39,16 @@ export class ExamsEnabledComponent implements OnInit {
     const that = this;
 
     // window.localStorage.clear();
+    that.cleanTimer();
 
-    this.getUseCategoriesByKey('-LnFFh1I0l34rcV5nSrD');
+    if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
+      let userId = localStorage.getItem("userId");
+      this.getUseCategoriesByKey(userId);
+    } else {
+      that.routers.navigateByUrl('/exams');
+    }
+
+    
 
     if(
       typeof localStorage.getItem("seconds") !== 'undefined' && 
@@ -95,13 +103,19 @@ export class ExamsEnabledComponent implements OnInit {
             if(answer['isCorrect'] == false) {
               answer['isCorrect'] = null;
             }
+            if(answer['checked'] === undefined){
+              answer['checked'] = null;
+            }
           });
         });
 
         that.questionsRandom = that.questions.sort((a, b) => 0.5 - Math.random()).slice(0, category.totalQuestions);
+        
         localStorage.setItem('questions', JSON.stringify(that.questionsRandom));
         localStorage.setItem('seconds', category.timerSeconds); //category.timerSeconds
         localStorage.setItem('keyExam', category.clientKey);
+        localStorage.setItem("category", JSON.stringify(that.category));
+
         setTimeout(() => {
           that.disabledButton = false;
           that.modalReference.close();
@@ -126,6 +140,23 @@ export class ExamsEnabledComponent implements OnInit {
     }, (reason) => {
       that.category = null;
     });
+  }
+
+  cleanTimer() :void {
+    window.clearInterval();
+    if(typeof localStorage.getItem("intervalId") !== 'undefined' && localStorage.getItem("intervalId") != null){
+      let getIntervalId: any[] = JSON.parse(localStorage.getItem("intervalId"));
+      if(getIntervalId.length > 0)
+        getIntervalId.forEach(id => {
+          window.clearInterval(id);
+        });
+        
+    }
+    localStorage.removeItem("endExam");
+    localStorage.removeItem("questions");
+    localStorage.removeItem("category");
+    localStorage.removeItem("keyExam");
+    localStorage.removeItem("intervalId");
   }
 
 }

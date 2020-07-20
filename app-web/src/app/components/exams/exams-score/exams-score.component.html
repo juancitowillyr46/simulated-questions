@@ -30,10 +30,15 @@
                   </div>
                 </div>
               </div>
-              <div class="row" >
+              <div class="row">
                 <div class="col-12">
                   <div style="width: 20%; margin: 0 auto;" class="mb-4">
                     <canvas id="realtime"></canvas>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="text-center mb-4">
+                    <button type="button" class="btn btn-outline-secondary" (click)="irExamenes()">Ir a examenes disponibles</button>
                   </div>
                 </div>
               </div>
@@ -45,7 +50,8 @@
                     <button ngbPanelToggle class="btn btn-link container-fluid text-left pl-0">
                       <div class="d-inline-block text-left text-dark" style="width: 100%;">
                         <fa-icon [icon]="['fas', (opened)? 'chevron-right' : 'chevron-down']" class="mr-1"></fa-icon>
-                        Pregunta {{ (i + 1) }} <fa-icon *ngIf="(question.data.checkedIcon === 'exclamation')" [icon]="['fas', question.data.checkedIcon]" [class]="(question.data.checkedIcon === 'exclamation')? 'mr-1 text-warning'  : 'mr-1 text-success' "></fa-icon>
+                        Pregunta {{ (i + 1) }} 
+                        <!-- <fa-icon *ngIf="(question.data.checkedIcon === 'exclamation')" [icon]="['fas', question.data.checkedIcon]" [class]="(question.data.checkedIcon === 'exclamation')? 'mr-1 text-warning'  : 'mr-1 text-success' "></fa-icon> -->
                       </div>
                     </button>
                   </ng-template>

@@ -3,8 +3,10 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA,  } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { QuestionsComponent } from './maintainers/questions/questions.component';
-// import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
+import { QuestionsComponent } from './maintainers/questions/questions.component';
+import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
+import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
+import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -98,12 +100,10 @@ import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.
 import { ExamsQuestionsComponent } from './components/exams/exams-questions/exams-questions.component';
 import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-enabled.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.observable';
-import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
-import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
-import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
+
 import { CommonModule } from '@angular/common';
 import { QuestionsTypesComponent } from './maintainers/questions-types/questions-types.component';
 import { QuestionsTypesService } from './maintainers/questions-types/questions-types.service';
@@ -157,6 +157,7 @@ import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.ob
     NgbAccordionModule,
     NgCircleProgressModule.forRoot(),
     NgbModalModule,
+    NgbCollapseModule,
     
     CategoriesModule,
     // QuestionsModule,

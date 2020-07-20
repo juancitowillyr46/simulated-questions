@@ -12,67 +12,104 @@
             <fa-icon class="mr-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
           </div>
           <div class="row" *ngIf="!progressService">
-            <div class="col-6">
-              <div class="mb-2 text-info">
-                <h6 class="text-info">Pregunta {{ (orderQuestion + 1) }}</h6> 
-              </div>
-              <div class="border border-dark p-3 rounded">
-                <p class="mb-0">
-                  {{ question.question }}
-                </p>
-              </div>
-              <div class="border border-dark p-3 rounded highlight" *ngIf="question.questionEn">
-                <div class="text-info pb-1">
-                  En inglés:
-                </div>
-                <p class="text-muted mb-0">
-                  {{ question.questionEn }}
-                </p>
-              </div>
-              <div class="w-100 pt-4">
-                <div class="float-left w-50 d-flex">
-                  <ngb-pagination class="text-info" [disabled]='saveOption' (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="(questions.length)" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
-                </div>
-                <div class="float-left w-50 d-flex">
-                  <label for="inputEmail3" class="col-sm-5 col-form-label text-right text-info">Ir a la pregunta:</label>
-                  <div class="col-sm-7 p-0">
-                    <select class="form-control" [ngModel]="page" (change)="goQuestion($event)" [disabled]="saveOption" >
-                      <option [value]="(i + 1)" [selected]="2" *ngFor="let question of questions; let i = index;">
-                        {{ (i + 1) }}
-                      </option>
-                    </select>
+            <div class="col-12">
+              <div class="row mb-4">
+                <div class="col-12">
+                  <div class="mb-2 text-info">
+                    <div class="col-12 p-0">
+                      <div class="form-inline">
+                        <div class="form-group mb-2 pr-2">
+                          <label for="staticEmail2">Pregunta</label>
+                        </div>
+                        <div class="form-group mb-2">
+                          <select class="form-control" [ngModel]="page" (change)="goQuestion($event)" [disabled]="saveOption" >
+                            <option [value]="(i + 1)" [selected]="2" *ngFor="let question of questions; let i = index;">
+                              {{ (i + 1) }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="form-group mb-2 pr-2">
+                          <fa-icon *ngIf="saveOption" class="ml-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border border-dark p-3 highlight">
+                    <p class="mb-0">
+                      {{ question.questionEn }}
+                    </p>
+                  </div>
+                  <div *ngIf="question.answers && question.answers.length">
+                    <div class="mb-2 mt-3">
+                      <span *ngIf="question.typeAnswer == 'MULTIPLE_ANSWER'">(Elija varias opciones)</span>
+                      <span *ngIf="question.typeAnswer != 'MULTIPLE_ANSWER'">(Elija solo una opción)</span>
+                    </div>
+                    <div class="border border-dark p-3">
+                      <div class="form-check mb-3" *ngFor="let answer of question.answers; let i = index;">
+                        <input [disabled]="saveOption" class="form-check-input" [checked]="(answer.checked == true)? answer.checked : null" (change)="checkedOption($event, question.answers, question, orderQuestion, i)" [type]="getTypeAnswer(question.typeAnswer)" [name]="'option_' + orderQuestion" [id]="'option_' + orderQuestion + '_' + i">
+                        <label class="form-check-label w-100" [for]="'option_' + orderQuestion + '_' + i">
+                          <div *ngIf="question.typeAnswer == 'TRUE_OR_FALSE' && answer.value == true "> 
+                            True
+                          </div>
+                          <div *ngIf="question.typeAnswer == 'TRUE_OR_FALSE' && answer.value == false "> 
+                            False
+                          </div>
+                          <div *ngIf="question.typeAnswer != 'TRUE_OR_FALSE'"> 
+                            {{ answer.nameEn }}
+                          </div>
+                        </label>
+                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+            </div>
+
+
+            <div class="col-12">
+              <a href="javascript:void()" class="" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Ver la traducción <fa-icon class="mr-2 h6" [icon]="['fas', 'caret-down']"></fa-icon></a>
+              <div class="mt-3" id="collapseExample" [ngbCollapse]="isCollapsed">
+
+                <div class="border border-dark p-3 highlight" *ngIf="question.questionEn">
+                  <p class="text-muted mb-0">
+                    {{ question.question }}
+                  </p>
+                </div>
+
+                <!-- class="pt-0 pb-1 pl-1 pr-1"  -->
+                <div *ngIf="question.answers && question.answers.length">
+                  <div class="mb-2 mt-3">
+                    <span *ngIf="question.typeAnswer == 'MULTIPLE_ANSWER'">(Elija varias opciones)</span>
+                    <span *ngIf="question.typeAnswer != 'MULTIPLE_ANSWER'">(Elija solo una opción)</span>
+                  </div>
+                  <div class="border border-dark p-3">
+                    <div class="form-check pl-0 mb-3" *ngFor="let answer of question.answers; let i = index;">
+                    
+                      <label class="form-check-label w-100 ">
+                        <!-- <fa-icon [icon]="validateCheckedUser(answer, question.typeAnswer)" class="mr-2 text-info"></fa-icon> -->
+                        <div class="d-inline-block"> 
+                          {{ answer.name }}
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
-            <div class="col-6">
-              <div class="mb-2">
-                <h6 class="text-info d-inline-block">Opciones</h6>
-                <div class="d-inline-block text-info">
-                  <fa-icon *ngIf="saveOption" class="ml-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
-                </div>
+
+            <div class="col-12" *ngIf="(orderQuestion + 1) === questions.length">
+              <div class="w-100 mt-2">
+                <button type="button" class="btn btn-warning" (click)="endExam(questions)">Terminar evaluación</button>
               </div>
-              <div class="pt-0 pb-1 pl-1 pr-1" *ngIf="question.answers && question.answers.length">
-                <form>
-                  <div class="form-check mb-3" *ngFor="let answer of question.answers; let i = index;">
-                    <input [disabled]="saveOption" class="form-check-input" [checked]="(answer.checked == true)? answer.checked : false" (change)="checkedOption($event, question.answers, question, orderQuestion, i)" [type]="getTypeAnswer(question.typeAnswer)" [name]="'option_' + orderQuestion" [id]="'option_' + orderQuestion + '_' + i">
-                    <label class="form-check-label w-100" [for]="'option_' + orderQuestion + '_' + i">
-                      <div class=""> 
-                        {{ answer.name }}
-                      </div>
-                      <div class="text-muted border border-dark p-3 rounded highlight" *ngIf="answer.nameEn">
-                        <div class="text-info d-block pr-1">En inglés: </div>
-                        <p class="d-block mb-0">
-                          {{ answer.nameEn }}
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-                </form>
-              </div>
+            </div>
+
+            <div class="col-12 mt-4">
+              <ngb-pagination class="text-info " [disabled]='saveOption' (pageChange)="loadPage($event)" [(page)]="page" [collectionSize]="(questions.length)" pageSize="1" [maxSize]="3" aria-label="Default pagination"></ngb-pagination>
             </div>
           </div>
-          <hr *ngIf="!progressService">
+          <!-- <hr *ngIf="!progressService"> -->
       </main>
   </div>
 </div>
