@@ -14,17 +14,30 @@ import {
   faTrash,
   faArrowCircleLeft
 } from '@fortawesome/free-solid-svg-icons';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { VerificatePlanService } from 'src/app/core/services/verificate-plan.service';
 
 @Component({
   selector: 'app-users-list',
   templateUrl: './users-list.component.html',
   styleUrls: ['./users-list.component.css']
 })
+
 export class UsersListComponent implements OnInit {
 
   public users = [];
   public message: any = null;
   public categories: any[] = [];
+  public modalReference: NgbModalRef;
+
+  public enabledSpinnerUpPlan = false;
+  public enabledSpinnerUpPlanExp = false;
+
+  public userInfo: userInfo = {
+    planDateExpiration: "2020-07-30T23:59:59",
+    planAssigned: 1,
+    emailVerified: true
+  };
 
   constructor(
     private routeActive: ActivatedRoute,
@@ -32,6 +45,8 @@ export class UsersListComponent implements OnInit {
     private usersService: UsersService,
     private messageObservable: MessageObservable,
     private categoriesService: CategoriesService,
+    private modalService: NgbModal,
+    private verificatePlanService: VerificatePlanService
   ) {
 
     const that = this;
@@ -85,4 +100,43 @@ export class UsersListComponent implements OnInit {
 
   }
 
+  open(content, category: any) {
+    const that = this;
+    // that.category = category;
+    that.modalReference = that.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    that.modalReference.result.then((result) => {
+      // that.category = null;
+    }, (reason) => {
+      // that.category = null;
+    });
+  }
+
+  updatePlan() {
+
+    const that = this;
+    that.enabledSpinnerUpPlanExp = true;
+    setInterval(() => {
+      that.enabledSpinnerUpPlanExp = false;
+      let diasDelPlan = 2;
+      let fechaRegistro = '2020-07-27T00:00:00';
+      this.userInfo.planDateExpiration = this.verificatePlanService.formatUpdate(this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan));
+    }, 500);
+    
+  }
+
+  saveData() {
+    const that = this;
+    console.log(that.userInfo);
+    that.enabledSpinnerUpPlan = true;
+    setInterval(() => {
+      that.enabledSpinnerUpPlan = false;
+    }, 500);
+  }
+
+}
+
+export interface userInfo {
+  planDateExpiration: string;
+  planAssigned: number;
+  emailVerified: boolean;
 }

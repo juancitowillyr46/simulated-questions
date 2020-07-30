@@ -5,6 +5,7 @@ import { CategoriesService } from 'src/app/maintainers/categories/categories.ser
 import { UsersService } from 'src/app/maintainers/users/users.service';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
 import { VerificatePlanService } from 'src/app/core/services/verificate-plan.service';
+import { environment } from 'src/environments/environment';
 // import Swal from 'sweetalert2';
 
 @Component({
@@ -42,9 +43,11 @@ export class ExamsEnabledComponent implements OnInit {
 
     const that = this;
 
+    let findPlan = environment.plans.find(f => f.id === JSON.parse(localStorage.getItem("user")).planAssigned);
+
     // Registrando la fecha
-    let diasDelPlan = 0;
-    let fechaRegistro  = '2020-07-27T00:00:00';
+    let diasDelPlan = findPlan.days; // 0;
+    let fechaRegistro = JSON.parse(localStorage.getItem("user")).planDateExpiration;// '2020-07-27T00:00:00';
     let fechaExpiracion = this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan);
 
     that.checkPlanActive = this.verificatePlanService.verificarPlanPorFecha(fechaExpiracion);

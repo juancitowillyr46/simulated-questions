@@ -18,6 +18,8 @@ import { QuestionsIndexComponent } from './maintainers/questions/questions-index
 import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
 import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
 import { VericatePlanGuard } from './core/guards/verificate-plan.guard';
+import { UsersListComponent } from './maintainers/users/users-list/users-list.component';
+import { UsersIndexComponent } from './maintainers/users/users-index/users-index.component';
 
 const routes: Routes = [
   {
@@ -69,8 +71,30 @@ const routes: Routes = [
         component: QuestionsPostComponent
       }
     ]
-  }
+  },
 
+  /* Manager Users */
+  {
+    path: 'manager/users',
+    component: UsersIndexComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: UsersListComponent
+      },
+      {
+        path: ':id',
+        component: UsersListComponent
+      }
+    ]
+  },
+
+  {
+    path:'',
+    redirectTo: 'signin',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

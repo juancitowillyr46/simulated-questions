@@ -22,7 +22,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SharedObservable } from './observables/shared.observable';
 import { SimulacrumModule } from './simulacrum/simulacrum.module';
-import { UsersModule } from './maintainers/users/users.module';
+// import { UsersModule } from './maintainers/users/users.module';
 import { GeneratePassword } from './commons/generatePassword';
 import { LoginService } from './login/login.service';
 import { LogoutUser } from './commons/logoutUser';
@@ -88,7 +88,7 @@ import {
   faChevronDown,
   faCircle,
   faUser,
-  faExclamation
+  faExclamation, faUsers
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare, faQuestionCircle as farQuestionCircle, faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
@@ -108,7 +108,8 @@ import { CommonModule } from '@angular/common';
 import { QuestionsTypesComponent } from './maintainers/questions-types/questions-types.component';
 import { QuestionsTypesService } from './maintainers/questions-types/questions-types.service';
 import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.observable';
-import { VerificatePlanService } from './core/services/verificate-plan.service';
+import { UsersListComponent } from './maintainers/users/users-list/users-list.component';
+import { UsersIndexComponent } from './maintainers/users/users-index/users-index.component';
 
 @NgModule({
   declarations: [
@@ -131,10 +132,15 @@ import { VerificatePlanService } from './core/services/verificate-plan.service';
     ExamsScoreComponent,
     ExamsQuestionsComponent,
 
+    /* Questions */
     QuestionsIndexComponent,
     QuestionsListComponent,
     QuestionsPostComponent,
     QuestionsTypesComponent,
+
+    /* Users */
+    UsersIndexComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -163,7 +169,7 @@ import { VerificatePlanService } from './core/services/verificate-plan.service';
     CategoriesModule,
     // QuestionsModule,
     SimulacrumModule,
-    UsersModule,
+    // UsersModule,
 
   ],
   providers: [
@@ -184,9 +190,7 @@ import { VerificatePlanService } from './core/services/verificate-plan.service';
 
     AuthService,
     AuthGuard,
-    UsersGuard,
-
-    VerificatePlanService
+    UsersGuard
   ],
   bootstrap: [AppComponent],
   schemas: [
@@ -251,7 +255,8 @@ export class AppModule {
       faCircle,
       farCircle,
       faUser,
-      faExclamation
+      faExclamation,
+      faUsers
     );
 
   }

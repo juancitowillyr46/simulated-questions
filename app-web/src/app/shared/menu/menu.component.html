@@ -21,6 +21,14 @@
     </a>
   </li>
 
+  <li class="nav-item" *ngIf="userData.role == 'USER_ADMIN'">
+    <a class="nav-link active pl-2 pr-2 text-info" href="#" [routerLink]="'/manager/users'">
+      <fa-icon class="mr-2" [icon]="['fas', 'users']"></fa-icon>
+      <span class="d-inline-block w-75" >Usuarios</span>
+      <span class="d-inline-block"><fa-icon class="mr-1" [icon]="['fas', 'chevron-right']"></fa-icon></span>
+    </a>
+  </li>
+
   <li class="nav-item">
     <a class="nav-link active pl-2 pr-2 text-info" href="javascript:void(0)" (click)="logout()" >
       <fa-icon class="mr-2" [icon]="['fas', 'sign-out-alt']"></fa-icon>

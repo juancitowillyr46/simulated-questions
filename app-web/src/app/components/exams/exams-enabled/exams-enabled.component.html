@@ -19,14 +19,18 @@
         <div class="col-md-4" *ngFor="let category of categories; let i = index;">
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
-                <h5 class="card-title">{{ category.name }}</h5>
-                <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>{{ category.totalQuestions }} Preguntas</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" *ngIf="(checkPlanActive==true)" [disabled]="progressService" (click)="open(content, category)" class="btn btn-sm btn-outline-secondary"><fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Comenzar</button>
-                    </div>
-                    <div><fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>{{ category.durationTimeMM }} Minutos</div>
+              <h5 class="card-title">{{ category.name }}</h5>
+              <p class="card-text"><fa-icon class="mr-2" [icon]="['fas', 'list-ul']"></fa-icon>{{ category.totalQuestions }} Preguntas</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" *ngIf="(checkPlanActive==true)" [disabled]="progressService" (click)="open(content, category)" class="btn btn-sm btn-outline-secondary">
+                    <fa-icon class="mr-2" [icon]="['fas', 'play']"></fa-icon>Comenzar
+                  </button>
                 </div>
+                <div>
+                  <fa-icon class="mr-2" [icon]="['fas', 'clock']"></fa-icon>{{ category.durationTimeMM }} Minutos
+                </div>
+              </div>
             </div>
           </div>
         </div>
