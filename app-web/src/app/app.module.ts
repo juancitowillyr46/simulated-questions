@@ -108,6 +108,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionsTypesComponent } from './maintainers/questions-types/questions-types.component';
 import { QuestionsTypesService } from './maintainers/questions-types/questions-types.service';
 import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.observable';
+import { VerificatePlanService } from './core/services/verificate-plan.service';
 
 @NgModule({
   declarations: [
@@ -183,7 +184,9 @@ import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.ob
 
     AuthService,
     AuthGuard,
-    UsersGuard
+    UsersGuard,
+
+    VerificatePlanService
   ],
   bootstrap: [AppComponent],
   schemas: [

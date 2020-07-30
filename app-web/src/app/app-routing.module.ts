@@ -17,16 +17,9 @@ import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.
 import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
 import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
 import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
+import { VericatePlanGuard } from './core/guards/verificate-plan.guard';
 
 const routes: Routes = [
-  // {
-  //   path: 'mantainers/questions',
-  //   component: QuestionsComponent
-  // },
-  // {
-  //   path: 'mantainers/questions/form/:id',
-  //   component: QuestionsPostComponent
-  // },
   {
     path: 'signin',
     component: LoginComponent
@@ -49,6 +42,7 @@ const routes: Routes = [
   {
     path: 'exams',
     component: ExamsEnabledComponent,
+    canActivate: [VericatePlanGuard]
   },
   {
     path: 'exams/:keyExam/questions/:idQuestion',

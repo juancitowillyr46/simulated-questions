@@ -4,6 +4,7 @@ import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
 import { UsersService } from 'src/app/maintainers/users/users.service';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
+import { VerificatePlanService } from 'src/app/core/services/verificate-plan.service';
 // import Swal from 'sweetalert2';
 
 @Component({
@@ -25,6 +26,7 @@ export class ExamsEnabledComponent implements OnInit {
   public category = null;
   public questions = [];
   public questionsRandom = [];
+  public checkPlanActive = false;
 
   constructor(
     private routers: Router,
@@ -32,18 +34,28 @@ export class ExamsEnabledComponent implements OnInit {
     private modalService: NgbModal,
     private categoriesService: CategoriesService,
     private userService: UsersService,
-    private questionsService: QuestionsService
+    private questionsService: QuestionsService,
+    private verificatePlanService: VerificatePlanService
   ) { }
 
   ngOnInit() {
+
     const that = this;
 
-    // window.localStorage.clear();
+    // Registrando la fecha
+    let diasDelPlan = 0;
+    let fechaRegistro  = '2020-07-27T00:00:00';
+    let fechaExpiracion = this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan);
+
+    that.checkPlanActive = this.verificatePlanService.verificarPlanPorFecha(fechaExpiracion);
+
     that.cleanTimer();
 
     if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
-      let userId = localStorage.getItem("userId");
-      this.getUseCategoriesByKey(userId);
+      if(that.checkPlanActive !== false) {
+        let userId = localStorage.getItem("userId");
+        this.getUseCategoriesByKey(userId);
+      }
     } else {
       that.routers.navigateByUrl('/exams');
     }
@@ -74,6 +86,7 @@ export class ExamsEnabledComponent implements OnInit {
     }
 
   }
+
 
 
   private async getUseCategoriesByKey(key: string) {
