@@ -11,6 +11,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PlansService } from '../../plans/plans.service';
 import { Plan } from '../../plans/plan';
+import { faTheaterMasks } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-users-list',
@@ -49,12 +50,14 @@ export class UsersListComponent implements OnInit {
     that.currentUser.subscribe( res => {
       if(res) {
         that.user = JSON.parse(res);
+        that.setChecked();
       }
     });
     that.getCategories();
     that.getPlans();
     that.getUsers();
   }
+
 
   async getPlans() {
     const that = this;
@@ -69,7 +72,7 @@ export class UsersListComponent implements OnInit {
       lst.forEach(res => {
         that.plans.push(res);
       });
-      console.log(that.plans);
+      // console.log(that.plans);
     });
   }
 
@@ -117,7 +120,23 @@ export class UsersListComponent implements OnInit {
 
     });
   }
-  
+
+  setChecked() {
+    const that = this;
+    setTimeout(() => {
+      let userCategories = that.getUserCategories();
+      if(userCategories.length > 0){
+        let textinputs = document.querySelectorAll('input[type=checkbox]');
+        textinputs.forEach(element => {
+          if(userCategories.find(f => f.key == element['value'])){
+            element['checked'] = true;
+          }
+        });
+
+        that.checkProductsByUser();
+      }
+    }, 1000);
+  }
 
   findCategoryLabel(uuid: string) {
     const that = this;
@@ -136,10 +155,23 @@ export class UsersListComponent implements OnInit {
     }
   }
   
+  getUserCategories() {
+    const that = this;
+    if(that.user.categories){
+      let find = [];
+      that.user.categories.forEach(element => {
+        if(that.categories.find(f => f.clientKey == element.key)){
+          find.push(element);
+        }
+      });
+      return find;
+    } else {
+      return [];
+    }
+  }
 
   open(content, index: number) {
     const that = this;
-    console.log(that.users[index]);
     that.obsUser.next(JSON.stringify(that.users[index]));
     that.modalReference = that.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
@@ -179,6 +211,8 @@ export class UsersListComponent implements OnInit {
         that.getUsers();
         that.modalReference.close();
       });
+
+      that.updateProducts();
     });
   }
 
@@ -188,4 +222,57 @@ export class UsersListComponent implements OnInit {
     that.updatePlan();
   }
 
+  updateProducts() {
+    const that = this;
+    const textinputs = document.querySelectorAll('input[type=checkbox]'); 
+    const noEmpty = [].filter.call(textinputs, function( el ) {
+      return el.checked
+    });
+
+    let addProducts = [];
+    noEmpty.forEach(element => {
+      console.log(element.value);
+      addProducts.push({
+        key: element.value
+      });
+    });
+    that.usersService.updateProducts(addProducts, that.user).subscribe( res => {
+      console.log(res);
+    });
+  }
+
+  checkProductsByUser() {
+
+    const that = this;
+    const numProduct = that.plans.find(f => f.uuid == that.user.planAssigned).numProducts;
+
+    const textinputs = document.querySelectorAll('input[type=checkbox]'); 
+
+    let empty = [].filter.call(textinputs, function( el ) {
+      return !el.checked
+    });
+
+    let noempty = [].filter.call(textinputs, function( el ) {
+      return el.checked
+    });
+
+    if(numProduct == noempty.length) {
+      empty.forEach(element => {
+        element.disabled = true;
+      });
+    } else {
+      empty.forEach(element => {
+        element.disabled = false;
+      });
+    }
+
+  }
+
+  selectPlan() {
+    const textinputs = document.querySelectorAll('input[type=checkbox]'); 
+    textinputs.forEach(element => {
+      element['disabled'] = false;
+    });
+
+  }
 }

@@ -84,4 +84,12 @@ export class UsersService {
     return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/emailVerified.json', body, {headers});
   }
 
+  public updateProducts(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/categories.json', body, {headers});
+  }
+
 }

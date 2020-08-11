@@ -8,4 +8,5 @@ export interface User {
     emailVerified: boolean;
     createdAt: string;
     role: string;
+    categories: {key: string}[];
 }
