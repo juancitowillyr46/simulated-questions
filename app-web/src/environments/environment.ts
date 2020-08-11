@@ -11,7 +11,7 @@ export const environment = {
     // storageBucket: 'vwise-2ed94.appspot.com',
     // messagingSenderId: '698934152542'
   },
-  plans: [{id: 0, name: 'PLAN A', days: 1}, {id: 1, name: 'PLAN B', days: 2}, {id: 2, name: 'PLAN C', days: 3}] // Lista de planes
+  // plans: [{id: 0, name: 'PLAN A', days: 1}, {id: 1, name: 'PLAN B', days: 2}, {id: 2, name: 'PLAN C', days: 3}] // Lista de planes
 };
 
 /*

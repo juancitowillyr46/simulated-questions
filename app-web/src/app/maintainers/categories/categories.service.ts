@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +97,10 @@ export class CategoriesService {
       });
       return {data};
     }));
+  }
+
+  public all(): Observable<any[]> {
+    return this.http.get<any[]>(environment.firebase.databaseURL + '/categories.json');
   }
 
 }

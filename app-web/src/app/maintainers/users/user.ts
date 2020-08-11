@@ -2,9 +2,10 @@ export interface User {
     id: number;
     key: string;
     displayName: string,
-    planAssigned: number;
+    planAssigned: string;
     planDateExpiration: string;
     email: string;
     emailVerified: boolean;
     createdAt: string;
+    role: string;
 }

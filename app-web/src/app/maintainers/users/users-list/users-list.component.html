@@ -1,11 +1,16 @@
 <div class="row">
   <div class="col-12">
+    <div class="pt-2 pb-4">
+      Estudiantes: {{ (users.length) }}
+    </div>
+  </div>
+  <div class="col-12">
     <table class="table">
       <thead>
       <tr class="text-center">
         <th scope="col">#</th>
         <th scope="col">Id</th>
-        <th scope="col">Nombre y apellidos</th>
+        <th scope="col">Nombre completos</th>
         <th scope="col">Correo</th>
         <th scope="col">Fecha Reg.</th>
         <th scope="col">Aprobada</th>
@@ -22,10 +27,10 @@
           {{user.displayName}}
         </td>
         <td>{{user.email}}</td>
-        <td>{{user.createdAt}}</td>
-        <td>{{user.emailVerified}}</td>
-        <td>{{user.planAssigned}}</td>
-        <td>{{user.planDateExpiration}}</td>
+        <td>{{user.createdAt.split("T")[0]}}</td>
+        <td>{{(user.emailVerified)? 'SI' : 'NO'}}</td>
+        <td>{{findCategoryLabel(user.planAssigned)}}</td>
+        <td>{{formatDate(user.planDateExpiration)}}</td>
         <td>
           <button type="button" (click)="open(content, i)" class="btn btn-info">
             <fa-icon class="mr-0" [icon]="['fas', 'pen']"></fa-icon>
@@ -39,7 +44,7 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <div class="text-center w-100" id="modal-basic-title">{{user.email}}</div>
+    <div class="text-center w-100" id="modal-basic-title">{{user.displayName}} ({{user.email}})</div>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -49,7 +54,7 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Cuenta aprobada</label>
         <select class="form-control" [(ngModel)]="user.emailVerified" [ngModelOptions]="{standalone: true}">
-          <option value="0">-- Seleccione --</option>
+          <!-- <option value="0">-- Seleccione --</option> -->
           <option value="true">Si</option>
           <option value="false">No</option>
         </select>
@@ -57,13 +62,25 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Plan</label>
         <select class="form-control" [(ngModel)]="user.planAssigned" [ngModelOptions]="{standalone: true}"> 
-          <option value="0">-- Seleccione --</option>
-          <option value="1">Plan A</option>
-          <option value="2">Plan B</option>
-          <option value="3">Plan C</option>
+          <!-- <option value="0">-- Seleccione --</option> -->
+          <option [value]="plan.uuid" *ngFor="let plan of plans; let i = index;">{{plan.name}}</option>
         </select>
       </div>
       <div class="form-group">
+        <label for="exampleInputPassword1">Fecha de expiración</label>
+        <input class="form-control" disabled type="text" [(ngModel)]="user.planDateExpiration" [ngModelOptions]="{standalone: true}">
+        <!-- <button type="button" [disabled]="(!user.planAssigned)" class="btn btn-warning mt-2" (click)="updatePlan()">
+          <fa-icon *ngIf="enabledSpinnerUpPlanExp" class="mr-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
+          Actualizar plan
+        </button> -->
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Productos seleccinados</label>
+        <select multiple class="form-control"  id="exampleFormControlSelect2">
+          <option *ngFor="let category of categories; let i = index;" [value]="category.clientKey">{{ (i + 1) }}. {{category.name.toUpperCase()}}</option>
+        </select>
+      </div>
+      <!-- <div class="form-group">
         <label for="exampleInputPassword1">Fecha de expiración</label>
         <input class="form-control" disabled type="text" [(ngModel)]="user.planDateExpiration" [ngModelOptions]="{standalone: true}">
         <button type="button" *ngIf="user.planDateExpiration != '' && user.planAssigned > 0" [disabled]="enabledSpinnerUpPlanExp" class="btn btn-warning mt-2" (click)="updatePlan()">
@@ -74,7 +91,7 @@
           <fa-icon *ngIf="enabledSpinnerUpPlanExp" class="mr-2 h6" [icon]="['fas', 'spinner']" [pulse]="true"></fa-icon>
           Activar Plan
         </button>
-      </div>
+      </div> -->
     </form>
   </div>
   <div class="modal-footer">

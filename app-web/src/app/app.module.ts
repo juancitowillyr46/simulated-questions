@@ -110,6 +110,7 @@ import { QuestionsTypesService } from './maintainers/questions-types/questions-t
 import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.observable';
 import { UsersListComponent } from './maintainers/users/users-list/users-list.component';
 import { UsersIndexComponent } from './maintainers/users/users-index/users-index.component';
+import { UsersPostComponent } from './maintainers/users/users-post/users-post.component';
 
 @NgModule({
   declarations: [
@@ -140,7 +141,8 @@ import { UsersIndexComponent } from './maintainers/users/users-index/users-index
 
     /* Users */
     UsersIndexComponent,
-    UsersListComponent
+    UsersListComponent,
+    UsersPostComponent
   ],
   imports: [
     BrowserModule,

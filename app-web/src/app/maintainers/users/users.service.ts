@@ -55,40 +55,33 @@ export class UsersService {
     });
   }
 
+  public all(): Observable<User[]> {
+    return this.http.get<User[]>(environment.firebase.databaseURL + '/users.json');
+  }
 
-  public usersAll(): Observable<User[]> {
-    let userList: User[] = [];
-    userList.push({
-      id: 1,
-      email: 'jrodas@analytics.pe1',
-      key: '2121212',
-      planAssigned: 0,
-      planDateExpiration: '',
-      emailVerified: false,
-      displayName: 'Juan Rodas',
-      createdAt: '2019-08-07T06:12:42.694Z'
+
+  public updatePlanDateExp(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    userList.push({
-      id: 2,
-      email: 'jrodas@analytics.pe2',
-      key: '2121212',
-      planAssigned: 1,
-      planDateExpiration: '2020-07-30T23:59:59',
-      emailVerified: true,
-      displayName: 'Juan Rodas',
-      createdAt: '2019-08-07T06:12:42.694Z'
+    return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/planDateExpiration.json', body, {headers});
+  }
+
+  public updatePlanAssigned(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    userList.push({
-      id: 3,
-      email: 'jrodas@analytics.pe3',
-      key: '2121212',
-      planAssigned: 2,
-      planDateExpiration: '2020-07-26T23:59:59',
-      emailVerified: true,
-      displayName: 'Juan Rodas',
-      createdAt: '2019-08-07T06:12:42.694Z'
+    return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/planAssigned.json', body, {headers});
+  }
+
+  public updateEmailVerified(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
-    return new BehaviorSubject<User[]>(userList);
+    return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/emailVerified.json', body, {headers});
   }
 
 }

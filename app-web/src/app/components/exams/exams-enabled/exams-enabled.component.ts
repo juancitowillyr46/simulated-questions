@@ -6,6 +6,8 @@ import { UsersService } from 'src/app/maintainers/users/users.service';
 import { QuestionsService } from 'src/app/maintainers/questions/questions.service';
 import { VerificatePlanService } from 'src/app/core/services/verificate-plan.service';
 import { environment } from 'src/environments/environment';
+import { PlansService } from 'src/app/maintainers/plans/plans.service';
+import { BehaviorSubject } from 'rxjs';
 // import Swal from 'sweetalert2';
 
 @Component({
@@ -28,8 +30,14 @@ export class ExamsEnabledComponent implements OnInit {
   public questions = [];
   public questionsRandom = [];
   public checkPlanActive = false;
+  plans: any[] = [];
+  findPlan: any;
 
+  private obsPlan = new BehaviorSubject(null);
+  public currentPlan = this.obsPlan.asObservable();
+  
   constructor(
+    private plansService: PlansService,
     private routers: Router,
     private route: ActivatedRoute,
     private modalService: NgbModal,
@@ -43,25 +51,44 @@ export class ExamsEnabledComponent implements OnInit {
 
     const that = this;
 
-    let findPlan = environment.plans.find(f => f.id === JSON.parse(localStorage.getItem("user")).planAssigned);
-
-    // Registrando la fecha
-    let diasDelPlan = findPlan.days; // 0;
-    let fechaRegistro = JSON.parse(localStorage.getItem("user")).planDateExpiration;// '2020-07-27T00:00:00';
-    let fechaExpiracion = this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan);
-
-    that.checkPlanActive = this.verificatePlanService.verificarPlanPorFecha(fechaExpiracion);
-
     that.cleanTimer();
 
-    if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
-      if(that.checkPlanActive !== false) {
-        let userId = localStorage.getItem("userId");
-        this.getUseCategoriesByKey(userId);
+    that.getPlans();
+
+    that.currentPlan.subscribe( res => {
+      if(res){
+        console.log(res);
+        
+        // Registrando la fecha
+        let diasDelPlan = res.validDays; // 0;
+        let fechaRegistro = JSON.parse(localStorage.getItem("user")).planDateExpiration;// '2020-07-27T00:00:00';
+        let fechaExpiracion = this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan);
+        that.checkPlanActive = this.verificatePlanService.verificarPlanPorFecha(fechaExpiracion);
       }
-    } else {
-      that.routers.navigateByUrl('/exams');
-    }
+
+      
+      if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
+        if(that.checkPlanActive !== false) {
+          let userId = localStorage.getItem("userId");
+          this.getUseCategoriesByKey(userId);
+        }
+      } else {
+        that.routers.navigateByUrl('/exams');
+      }
+
+    });
+
+    
+    
+
+    // if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
+    //   if(that.checkPlanActive !== false) {
+    //     let userId = localStorage.getItem("userId");
+    //     this.getUseCategoriesByKey(userId);
+    //   }
+    // } else {
+    //   that.routers.navigateByUrl('/exams');
+    // }
 
     
 
@@ -91,6 +118,24 @@ export class ExamsEnabledComponent implements OnInit {
   }
 
 
+  async getPlans() {
+    const that = this;
+    let plans = [];
+    await that.plansService.all().subscribe(all => {
+      let lst = [];
+      let keys = Object.keys(all);
+      keys.forEach((res, key) => {
+        all[res]['key'] = keys[key];
+        lst.push(all[res]);
+      });
+      lst.forEach(res => {
+        that.plans.push(res);
+      });
+      that.findPlan = that.plans.find(f => f.uuid === JSON.parse(localStorage.getItem("user")).planAssigned);
+      that.obsPlan.next(that.findPlan);
+      console.log(that.plans);
+    });
+  }
 
   private async getUseCategoriesByKey(key: string) {
 
@@ -166,7 +211,6 @@ export class ExamsEnabledComponent implements OnInit {
         getIntervalId.forEach(id => {
           window.clearInterval(id);
         });
-        
     }
     localStorage.removeItem("endExam");
     localStorage.removeItem("questions");
