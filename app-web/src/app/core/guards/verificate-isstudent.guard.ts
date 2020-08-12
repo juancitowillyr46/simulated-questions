@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { LoginService } from 'src/app/login/login.service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class VericateIsStudent implements CanActivate {
   constructor(
-    public authService: AuthService,
+    private loginService: LoginService,
     public router: Router
   ) {
 
@@ -18,9 +19,10 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const that = this;
-    if (that.authService.isLoggin === true) {
+    const role = that.loginService.getAttrSession('role');
+    if(role == 'USER_STUDENT') {
       return true;
     }
-    this.router.navigate(['signin']);
+    that.router.navigate(['not-found']);
   }
 }

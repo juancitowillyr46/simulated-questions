@@ -17,11 +17,17 @@ import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.
 import { QuestionsIndexComponent } from './maintainers/questions/questions-index/questions-index.component';
 import { QuestionsPostComponent } from './maintainers/questions/questions-post/questions-post.component';
 import { QuestionsListComponent } from './maintainers/questions/questions-list/questions-list.component';
-import { VericatePlanGuard } from './core/guards/verificate-plan.guard';
+import { VericateIsAdmin } from './core/guards/verificate-isadmin.guard';
 import { UsersListComponent } from './maintainers/users/users-list/users-list.component';
 import { UsersIndexComponent } from './maintainers/users/users-index/users-index.component';
+import { VericateIsStudent } from './core/guards/verificate-isstudent.guard';
 
 const routes: Routes = [
+  {
+    path:'',
+    redirectTo: 'signin',
+    pathMatch: 'full'
+  },
   {
     path: 'signin',
     component: LoginComponent
@@ -31,28 +37,25 @@ const routes: Routes = [
     component: SignupComponent
   },
   {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'not-found',
     component: NotFoundComponent
   },
-  
+
   /* Cliente  */
   {
     path: 'exams',
     component: ExamsEnabledComponent,
-    canActivate: [VericatePlanGuard]
+    canActivate: [AuthGuard, VericateIsStudent]
   },
   {
     path: 'exams/:keyExam/questions/:idQuestion',
     component: ExamsQuestionsComponent,
+    canActivate: [AuthGuard, VericateIsStudent]
   },
   {
     path: 'exams/:keyExam/score/:hash',
     component: ExamsScoreComponent,
+    canActivate: [AuthGuard, VericateIsStudent]
   },
 
 
@@ -60,6 +63,7 @@ const routes: Routes = [
   {
     path: 'manager/questions',
     component: QuestionsIndexComponent,
+    canActivate: [AuthGuard, VericateIsAdmin],
     children: [
       {
         path: '',
@@ -77,6 +81,7 @@ const routes: Routes = [
   {
     path: 'manager/users',
     component: UsersIndexComponent,
+    canActivate: [AuthGuard, VericateIsAdmin],
     children: [
       {
         path: '',
@@ -90,11 +95,7 @@ const routes: Routes = [
     ]
   },
 
-  {
-    path:'',
-    redirectTo: 'signin',
-    pathMatch: 'full'
-  }
+
 ];
 
 @NgModule({

@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
+import { UsersService } from '../maintainers/users/users.service';
+import { AuthService } from '../auth.service';
 // import { environment } from '../environments/environment';
 
 @Injectable({
@@ -9,38 +12,22 @@ import { map } from 'rxjs/operators';
 })
 export class LoginService {
 
-  private token: string;
-  constructor(
-    private db: AngularFireDatabase,
-    private http: HttpClient
-  ) {
+  constructor() {
     const that = this;
-    that.token = sessionStorage.getItem('token');
   }
 
-  public login(username: any) {
-    return this.db.list('/users', ref => ref.orderByChild('username').equalTo(username)).snapshotChanges()
-    .pipe(map(items => {
-      return items.map(a => {
-        const data = a.payload.val();
-        const key = a.payload.key;
-        return {key, data};           // or {key, ...data} in case data is Obj
-      });
-    }));
+  public addSession(response: any): boolean {
+      const that = this;
+      let key = Object.keys(response);
+      let user = response[key[0]];
+      localStorage.setItem('userId', key.toString());
+      localStorage.setItem('user', JSON.stringify(user));
+      return true;
   }
 
-  public GetNodeUser(uid: string) {
-    return this.db.list('/users', ref => ref.orderByChild('uid').equalTo(uid)).snapshotChanges()
-    .pipe(map(items => {
-      return items.map(a => {
-        const data = a.payload.val();
-        const key = a.payload.key;
-        return {key, data};           // or {key, ...data} in case data is Obj
-      });
-    }));
-    // const that = this;
-    // const token = sessionStorage.getItem('token');
-    // return this.http.get(environment.firebase.databaseURL + '/users/' + token + '.json');
+  public getAttrSession(key: string): any {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user[key];
   }
 
 }

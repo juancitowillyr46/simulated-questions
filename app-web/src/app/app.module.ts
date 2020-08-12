@@ -88,7 +88,7 @@ import {
   faChevronDown,
   faCircle,
   faUser,
-  faExclamation, faUsers
+  faExclamation, faUsers, faLock
  } from '@fortawesome/free-solid-svg-icons';
 
 import { faSquare as farSquare, faCheckSquare as farCheckSquare, faQuestionCircle as farQuestionCircle, faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
@@ -258,7 +258,8 @@ export class AppModule {
       farCircle,
       faUser,
       faExclamation,
-      faUsers
+      faUsers,
+      faLock
     );
 
   }

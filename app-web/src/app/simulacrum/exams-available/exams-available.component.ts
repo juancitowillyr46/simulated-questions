@@ -42,22 +42,22 @@ export class ExamsAvailableComponent implements OnInit {
     private categoriesService: CategoriesService,
     private usersService: UsersService
   ) {
-    library.add(faPlay, faClock, faListUl, faArrowCircleLeft, faSave, faSignOutAlt, faList);
+    // library.add(faPlay, faClock, faListUl, faArrowCircleLeft, faSave, faSignOutAlt, faList);
   }
 
   ngOnInit() {
     const that = this;
-    const userAuth: UserAuth = JSON.parse(localStorage.getItem('user'));
-    that.authService.CurrentUserData(userAuth.uid).subscribe( res => {
-      const assignedTests: any[] = res[0].data.assignedTests;
-      if (assignedTests.length > 0) {
-        assignedTests.forEach(at => {
-          that.categoriesService.read(at.key).subscribe(cat => {
-            that.categories.push(cat);
-          });
-        });
-      }
-    });
+    // const userAuth: UserAuth = JSON.parse(localStorage.getItem('user'));
+    // that.usersService.getUserByUid(userAuth.uid).then( res => {
+    //   const assignedTests: any[] = res[0].data.assignedTests;
+    //   if (assignedTests.length > 0) {
+    //     assignedTests.forEach(at => {
+    //       that.categoriesService.read(at.key).subscribe(cat => {
+    //         that.categories.push(cat);
+    //       });
+    //     });
+    //   }
+    // });
   }
 
   public logout() {

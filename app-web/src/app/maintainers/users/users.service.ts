@@ -18,6 +18,17 @@ export class UsersService {
     private db: AngularFireDatabase
   ) { }
 
+  public readByUid(uid: string): Observable<any> {
+    return this.db.list('/users', ref => ref.orderByChild('uid').equalTo(uid)).snapshotChanges()
+    .pipe(map(items => {
+      return items.map(a => {
+        const data = a.payload.val();
+        const key = a.payload.key;
+        return {key, data};
+      });
+    }));
+  }
+
   public list() {
     return this.http.get(
       environment.firebase.databaseURL + '/users.json'

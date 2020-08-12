@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-// import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
 import { UserAuth } from './core/models/userAuth.model';
@@ -29,49 +28,14 @@ export class AuthService {
     public signUpObservable: SignUpObservable,
     public authObservable: AuthObservable,
     public userService: UsersService,
+    
   ) {
     const that = this;
-    // that.afAuth.authState.subscribe(user => {
-    //   if (user) {
-    //     that.userData = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     JSON.parse(localStorage.getItem('user'));
-    //   } else {
-    //     localStorage.setItem('user', null);
-    //     JSON.parse(localStorage.getItem('user'));
-    //   }
-    // });
   }
 
-  SignIn(email, password) {
+  async signIn(email: string, password: string) {
     const that = this;
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      that.SetUserData(result.user);
-    }).catch((error) => {
-      that.loginObservable.changeMessage(error.message);
-    });
-  }
-
-  CurrentUserData(uid): Observable<any> {
-    const that = this;
-    return that.loginService.GetNodeUser(uid);
-  }
-
-
-  SetUserData(user) {
-    const that = this;
-    that.userService.getUserByUid(user.uid).then( res => {
-      let fKey = Object.keys(res);
-      let userData = res[fKey[0]];
-      localStorage.setItem('userId', fKey.toString());
-      localStorage.setItem('user', JSON.stringify(userData));
-      if(userData.role === 'USER_ADMIN'){
-        that.router.navigate(['/manager/questions']);
-      } else {
-        that.router.navigate(['/exams']);
-      }
-    });
+    return await that.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   SignOut() {

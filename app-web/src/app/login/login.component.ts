@@ -10,6 +10,9 @@ import {
 // import { User } from '../../core/models/user.model';
 import { AuthService } from '../auth.service';
 import { LoginObservable } from './login.observable';
+import { UsersService } from '../maintainers/users/users.service';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,13 +25,17 @@ export class LoginComponent implements OnInit {
   public submit: boolean;
   public error: boolean;
   public loginMessage: any = null;
+  public inProgressLogin: boolean;
 
   constructor(
       private formBuilder: FormBuilder,
       private authService: AuthService,
-      private loginObservable: LoginObservable
+      private usersService: UsersService,
+      private loginObservable: LoginObservable,
+      private loginService: LoginService,
+      public router: Router
   ) {
-    library.add(faLock, faUser, faAppleAlt);
+    
   }
 
   ngOnInit() {
@@ -37,19 +44,12 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
-
-    that.loginObservable.currentMessage.subscribe(res => {
-      if (res !== null) {
-        that.loginMessage = res;
-      }
-    });
-
   }
 
 
   get f() { return this.formGroup.controls; }
 
-  public login() {
+  public async login() {
     const that = this;
 
     if (that.formGroup.invalid === true) {
@@ -61,7 +61,30 @@ export class LoginComponent implements OnInit {
 
     const username = that.formGroup.value.username;
     const password =  that.formGroup.value.password;
-    that.authService.SignIn(username, password);
+
+    that.inProgressLogin = true;
+    await that.authService.signIn(username, password).then(siginRes => {
+      console.log(siginRes);
+      if(siginRes) {
+        that.usersService.getUserByUid(siginRes.user.uid).then( userRes => {
+          console.log(userRes);
+          const success = that.loginService.addSession(userRes);
+          if(success) {
+            const role = that.loginService.getAttrSession('role');
+            console.log(role);
+            that.inProgressLogin = false;
+            if(role === 'USER_ADMIN'){
+              that.router.navigate(['/manager/questions']);
+            } else {
+              that.router.navigate(['/exams']);
+            }
+          }
+        });
+      }
+    }).catch(error => {
+      that.inProgressLogin = false;
+      that.loginMessage = error;
+    });
   }
 
 }
