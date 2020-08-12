@@ -15,10 +15,13 @@ export class ExamsScoreComponent implements OnInit {
   public answerCheckedError = 0;
   public answerCheckedSuccess = 0;
   public porcApproved = 0;
+  public porcApprovedTxt:any;
   public alert = {
     type: '',
     message: ''
-  } 
+  };
+  
+  public category = null;
 
 
   constructor(config: NgbAccordionConfig,
@@ -31,6 +34,9 @@ export class ExamsScoreComponent implements OnInit {
     config.type = 'muted';
 
     const that = this;  
+
+
+    that.category = JSON.parse(localStorage.getItem("category"));
 
     if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
       this.getQuestions = JSON.parse(localStorage.getItem("questions"));
@@ -201,15 +207,23 @@ export class ExamsScoreComponent implements OnInit {
       }
     });
 
+    
+    const totalQuestions = (that.getQuestions.length);
+    const correctsQuestions =  that.answerCheckedSuccess;
+    const incorrectQuestions = that.answerCheckedError;
 
-    that.porcApproved = Math.round(((that.answerCheckedSuccess / this.getQuestions.length) * 100));
 
-    if(that.porcApproved >= 80) {
+    that.porcApproved = ((correctsQuestions * 100) / totalQuestions);  //Math.round(((that.answerCheckedSuccess * 100) / 80));
+    console.log(that.porcApproved);
+    that.porcApprovedTxt = that.porcApproved.toFixed(2).toString();
+    const approvalPercentage = (that.category.approvalPercentage)? that.category.approvalPercentage : 80;
+
+    if(that.porcApproved >= approvalPercentage) {
       that.alert.type = 'success';
-      that.alert.message = '¡Felicitaciones, aprobaste el examen!';
+      that.alert.message = '¡Felicitaciones!, aprobaste el exámen';
     } else {
       that.alert.type = 'warning';
-      that.alert.message = 'No pudiste aprobar el examen';
+      that.alert.message = 'No pudiste aprobar el exámen';
     }
 
     var myPieChart = new Chart(document.getElementById('realtime'), {

@@ -1,3 +1,43 @@
 .accordion .card{
     border: 1px solid rgb(255, 255, 255) !important;
 }
+
+
+.box-graph {
+    width: 100%; 
+    margin: 0 auto; 
+    display: flex;
+}
+    .box-graph > .section-graph {
+        display: inline-flex;
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        margin: 0 auto;
+    }
+
+    .box-detail {
+        width: 100%;
+        margin: 0 auto;
+        display: inline-flex;
+        align-content: center;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box-detail > div {
+        margin-right: 1em; 
+        margin-left: 1em;
+    }
+
+    .box-detail > .section-detail:nth-child(1) {
+        color: #36a2eb;
+    }
+    
+
+    .box-detail > .section-detail:nth-child(2) {
+        color: #ff6384;
+    }

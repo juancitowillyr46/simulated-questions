@@ -79,7 +79,7 @@
         <label for="exampleInputPassword1">Productos</label>
         <div>
           <div class="custom-control custom-checkbox" *ngFor="let category of categories; let i = index;" >
-            <input type="checkbox" class="custom-control-input" [disabled]="(!user.planAssigned)" (change)="checkProducts()" [id]="'customCheck' + i" [value]="category.clientKey">
+            <input type="checkbox" class="custom-control-input" [disabled]="(!user.planAssigned)" (change)="checkProductsByUser()" [id]="'customCheck' + i" [value]="category.clientKey">
             <label class="custom-control-label" [for]="'customCheck' + i">{{ (i + 1) }}. {{category.name.toUpperCase()}}</label>
           </div>
         </div>
