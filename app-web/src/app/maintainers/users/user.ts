@@ -9,4 +9,5 @@ export interface User {
     createdAt: string;
     role: string;
     categories: {key: string}[];
+    settingLanguage: string;
 }

@@ -32,7 +32,7 @@
                 <label for="exampleSelect1">Categoria de pregunta: </label>
                 <select class="custom-select" formControlName="category" placeholder="Seleccione el tipo de pregunta">
                     <option selected="selected" disabled="disabled">Categoria</option>
-                    <option [value]="typeCategory.key" *ngFor="let typeCategory of typeCategories">{{ typeCategory.name }}</option>
+                    <option [value]="category.clientKey" *ngFor="let category of categories">{{ category.name }}</option>
                 </select>
             </div>
 

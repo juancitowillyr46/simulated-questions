@@ -201,6 +201,21 @@ export class UsersListComponent implements OnInit {
       console.log(res);
     });
 
+    if(that.user.settingLanguage) {
+      // console.log('PUT');
+      // console.log(that.user.settingLanguage);
+      that.usersService.updateSettingLanguage(that.user.settingLanguage, that.user).subscribe( res => {
+        console.log(res);
+      });
+    } else {
+      // console.log('POST');
+      // console.log(that.user.settingLanguage);
+      that.usersService.postSettingLanguage(that.user.settingLanguage, that.user).subscribe( res => {
+        console.log(res);
+      });
+    }
+
+
     that.usersService.updatePlanDateExp(that.user.planDateExpiration, that.user).subscribe(res => {
       console.log(res);
       that.usersService.updatePlanAssigned(that.user.planAssigned, that.user).subscribe(res => {
@@ -213,7 +228,7 @@ export class UsersListComponent implements OnInit {
       });
 
       that.updateProducts();
-      alert("Nueva fecha de expiración: " + this.user.planDateExpiration);
+      //alert("Nueva fecha de expiración: " + this.user.planDateExpiration);
     });
   }
 

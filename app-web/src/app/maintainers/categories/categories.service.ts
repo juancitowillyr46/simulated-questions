@@ -72,18 +72,18 @@ export class CategoriesService {
     });
   }
 
-  public getCategoriesActive() {
-    let data = [];
-    return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
-    .pipe(map(items => {
-      data = [];
-      items.forEach(element => {
-        let value = element.payload.val()
-        data.push(value);
-      });
-      return {data};
-    }));
-  }
+  // public getCategoriesActive() {
+  //   let data = [];
+  //   return this.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
+  //   .pipe(map(items => {
+  //     data = [];
+  //     items.forEach(element => {
+  //       let value = element.payload.val()
+  //       data.push(value);
+  //     });
+  //     return {data};
+  //   }));
+  // }
 
   public getCategories(arrKeyCategories) {
     let data = [];
@@ -99,8 +99,30 @@ export class CategoriesService {
     }));
   }
 
+  public allQueryDB(): Observable<any[]> {
+    const that = this;
+    let data = [];
+    return that.db.list('/categories', ref => ref.orderByChild("active").equalTo(true) ).snapshotChanges()
+    .pipe(map(items => {
+      items.forEach(element => {
+        let value = element.payload.val()
+        data.push(value);
+      });
+      return data;
+    }));
+  }
+
   public all(): Observable<any[]> {
-    return this.http.get<any[]>(environment.firebase.databaseURL + '/categories.json');
+    let data: any[] = [];
+    return this.http.get<any[]>(environment.firebase.databaseURL + '/categories.json?orderBy="active"&startAt=true&print=pretty').pipe(map(items => {
+      let keys = Object.keys(items);
+      keys.forEach((user, key) => {
+        items[user]['key'] = keys[key];
+        items[user]['name'] = items[user]['name'].toUpperCase(); 
+        data.push(items[user]);
+      });
+      return data;
+    }));
   }
 
 }

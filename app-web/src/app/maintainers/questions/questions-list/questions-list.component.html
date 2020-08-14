@@ -24,6 +24,15 @@
   </div>
   <div class="row mb-4">
     <div class="col-3">
+      <label>Ver por el idioma</label>
+      <select [disabled]="inProgressSelect" class="form-control"[(ngModel)]="idioma" (change)="filter($event, 'category')">
+        <option value="1">ES(Español)</option>
+        <option value="2">EN(Inglés)</option>
+      </select>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-3">
       <div>
         <label>Por Categoria</label>
         <select [disabled]="inProgressSelect" class="form-control" id="exampleFormControlSelect1" [(ngModel)]="filters.category" (change)="filter($event, 'category')">
@@ -110,7 +119,8 @@
         <!-- {{ (i + 1) }}.  -->
       </div>
       <div class="d-inline-block">
-        <p>{{ question.question }}</p>
+        <p *ngIf="idioma == '1'">{{ question.question }}</p>
+        <p *ngIf="idioma == '2'">{{ question.questionEn }}</p>
       </div>
       
     </div>

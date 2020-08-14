@@ -19,7 +19,7 @@
           <div class="row">
             <div class="col-12">
               <div class="text-center" style="font-size: 2em; padding: 1em; color:#17a2b8">
-                <b>{{ porcApprovedTxt }}% de Aprobación</b>
+                <b>{{ (porcApprovedTxt == '0.00')? 0: porcApprovedTxt  }}% de Aprobación</b>
               </div>
             </div>
           </div>

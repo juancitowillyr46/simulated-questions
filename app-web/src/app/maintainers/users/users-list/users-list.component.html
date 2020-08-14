@@ -21,8 +21,8 @@
       </thead>
       <tbody>
       <tr *ngFor="let user of users; let i = index;">
-        <th scope="row">{{(i + 1)}}</th>
-        <th scope="row">{{user.key}}</th>
+        <th>{{(i + 1)}}</th>
+        <th>{{user.key}}</th>
         <td>
           {{user.displayName}}
         </td>
@@ -83,6 +83,14 @@
             <label class="custom-control-label" [for]="'customCheck' + i">{{ (i + 1) }}. {{category.name.toUpperCase()}}</label>
           </div>
         </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Idioma de preferencia</label>
+        <select class="form-control" [(ngModel)]="user.settingLanguage" [ngModelOptions]="{standalone: true}">
+          <option value="ES">Sólo Español(ES)</option>
+          <option value="EN">Sólo Inglés(EN)</option>
+          <option value="BOTH">Ambas</option>
+        </select>
       </div>
       <!-- <div class="form-group">
         <label for="exampleInputPassword1">Fecha de expiración</label>

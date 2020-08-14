@@ -30,12 +30,7 @@ import { MessageObservable } from '../../../observables/message.observable';
 })
 export class QuestionsPostComponent implements OnInit {
 
-  public typeCategories = [
-    { 'id': 1, 'key': 'PMI_ACP', 'name': 'Project Management Institute'},
-    { 'id': 2, 'key': 'SCRUM_MASTER', 'name': 'Scrum Master'}, // PSM
-    { 'id': 3, 'key': 'PSPO', 'name': 'PSPO I'},
-    { 'id': 4, 'key': 'PSKI', 'name': 'Scrum with Kanban Open'}
-  ];
+  public categories = [];
 
   public typeAnswer = [
     { 'id': 1, 'key': 'TRUE_OR_FALSE', 'name': 'Verdadero ó Falso', 'input' : 'radio' },
@@ -54,6 +49,7 @@ export class QuestionsPostComponent implements OnInit {
     action: 'new',
     isCorrect: false
   };
+
   public answerObj: Answer = null;
   // -- Answers -- //
   public formGroup: FormGroup = null;
@@ -80,9 +76,7 @@ export class QuestionsPostComponent implements OnInit {
   ngOnInit() {
     const that = this;
 
-    // that.categoriesService.getAllcategories().subscribe( res => {
-    //   console.log(res);
-    // });
+    that.getCategories();
 
     that.formGroup = this.formBuilder.group({
       question: ['', [Validators.required]],
@@ -319,6 +313,14 @@ export class QuestionsPostComponent implements OnInit {
       that.formQuestion.image = myReader.result;
     };
     myReader.readAsDataURL(file);
+  }
+
+  async getCategories() {
+    const that = this;
+    that.categories = [];
+    await that.categoriesService.all().subscribe( res => {
+      that.categories = res;
+    });
   }
 
 }

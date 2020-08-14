@@ -103,4 +103,19 @@ export class UsersService {
     return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/categories.json', body, {headers});
   }
 
+  public updateSettingLanguage(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.put<any>(environment.firebase.databaseURL + '/users/' + user.key + '/settingLanguage.json', body, {headers});
+  }
+
+  public postSettingLanguage(update: any, user: User): Observable<any> {
+    const body = JSON.stringify(update);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.http.post<any>(environment.firebase.databaseURL + '/users/' + user.key + '/settingLanguage.json', body, {headers});
+  }
 }

@@ -20,6 +20,7 @@ export class QuestionsListComponent implements OnInit {
   public inProgressSelect;
   public categories = [];
   public typesQuestions = [];
+  public idioma: string = '1';
 
   public filters = {
     category: '',
@@ -63,9 +64,9 @@ export class QuestionsListComponent implements OnInit {
     const that = this;
     that.inProgressSelect = true;
     that.categories = [];
-    that.categoriesServices.getCategoriesActive().subscribe( res => {
+    that.categoriesServices.all().subscribe( res => {
       that.inProgressSelect = false;
-      that.categories = res.data;
+      that.categories = res;
     });
 
   }

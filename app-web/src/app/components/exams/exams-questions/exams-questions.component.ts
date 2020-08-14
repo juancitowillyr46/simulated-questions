@@ -4,6 +4,8 @@ import { QuestionsService } from 'src/app/maintainers/questions/questions.servic
 import { CategoriesService } from 'src/app/maintainers/categories/categories.service';
 import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progress-bar.observable';
 import { ExamClearTimerObservable } from 'src/app/core/observables/exam-clear-timer.observable';
+import { UsersService } from 'src/app/maintainers/users/users.service';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-exams-questions',
@@ -24,13 +26,15 @@ export class ExamsQuestionsComponent implements OnInit {
   public saveOption = false;
 
   public isCollapsed = true;
+  public settingLanguage = 'BOTH';
 
   constructor(
     private routers: Router,
     private route: ActivatedRoute,
     private categoryService: CategoriesService,
     private examProgressBarObservable: ExamProgressBarObservable,
-    private examClearTimerObservable: ExamClearTimerObservable
+    private examClearTimerObservable: ExamClearTimerObservable,
+    private loginService: LoginService
   ) { 
     const that = this;
   }
@@ -65,6 +69,9 @@ export class ExamsQuestionsComponent implements OnInit {
         if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
           that.questions = JSON.parse(localStorage.getItem("questions"));
           that.question = that.questions[that.orderQuestion]['data'];
+
+          that.settingLanguage = that.loginService.getAttrSession('settingLanguage');
+
         } else {
           that.routers.navigateByUrl('/exams');
         }
