@@ -214,8 +214,8 @@ export class ExamsScoreComponent implements OnInit {
 
 
     that.porcApproved = ((correctsQuestions * 100) / totalQuestions);  //Math.round(((that.answerCheckedSuccess * 100) / 80));
-    console.log(that.porcApproved);
-    that.porcApprovedTxt = that.porcApproved.toFixed(2).toString();
+    //console.log(that.porcApproved);
+    that.porcApprovedTxt = that.porcApproved.toFixed(1).toString();
     const approvalPercentage = (that.category.approvalPercentage)? that.category.approvalPercentage : 80;
 
     if(that.porcApproved >= approvalPercentage) {

@@ -42,7 +42,7 @@
                       {{ question.question }}
                     </p>
                     <p class="mb-0" *ngIf="settingLanguage=='BOTH'">
-                      {{ question.question }}
+                      {{ question.questionEn }}
                     </p>
                   </div>
                   <div *ngIf="question.answers && question.answers.length">
@@ -88,7 +88,7 @@
                     {{ question.question }}
                   </p>
                   <p class="mb-0" *ngIf="settingLanguage=='BOTH'">
-                    {{ question.questionEn }}
+                    {{ question.question }}
                   </p>
                 </div>
 
@@ -104,7 +104,7 @@
                       <label class="form-check-label w-100 ">
                         <!-- <fa-icon [icon]="validateCheckedUser(answer, question.typeAnswer)" class="mr-2 text-info"></fa-icon> -->
                         <div class="d-inline-block"> 
-                          {{ answer.name }}
+                          - {{ answer.name }}
                         </div>
                       </label>
                     </div>

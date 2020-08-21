@@ -35,6 +35,7 @@ export class ExamsEnabledComponent implements OnInit {
 
   private obsPlan = new BehaviorSubject(null);
   public currentPlan = this.obsPlan.asObservable();
+  public settingLanguage: any;
   
   constructor(
     private plansService: PlansService,
@@ -62,6 +63,7 @@ export class ExamsEnabledComponent implements OnInit {
         // Registrando la fecha
         let diasDelPlan = res.validDays; // 0;
         let fechaRegistro = JSON.parse(localStorage.getItem("user")).planDateExpiration;// '2020-07-27T00:00:00';
+        
         let fechaExpiracion = this.verificatePlanService.incrementarPlan(fechaRegistro, diasDelPlan);
         that.checkPlanActive = this.verificatePlanService.verificarPlanPorFecha(fechaExpiracion);
       }
@@ -69,6 +71,7 @@ export class ExamsEnabledComponent implements OnInit {
       
       if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
         if(that.checkPlanActive !== false) {
+          that.settingLanguage = JSON.parse(localStorage.getItem("user")).settingLanguage;
           let userId = localStorage.getItem("userId");
           this.getUseCategoriesByKey(userId);
         }
