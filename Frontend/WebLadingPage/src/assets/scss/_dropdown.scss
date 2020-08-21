@@ -1,0 +1,93 @@
+/*============================*/
+/*======dropdowm menu=========*/
+/*============================*/
+.navbar .dropdown-menu {
+  padding: 10px;
+  margin: 0;
+  min-width:190px;
+  background-color: #fff;
+  border-radius:0px;
+  border:1px solid #ddd;
+  .dropdown-item{
+    color:#999;
+    font-family: $primary-font;
+    padding: 9px 20px;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: capitalize;
+    @include transition (all 0.3s ease-in);
+    &:hover,&:focus,&:active{
+      color: $skincolor;
+      background-color:transparent;
+    }
+  }
+}
+
+
+/******************
+
+MULTI LEVEL DROPDOWN CSS
+
+*********************/
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%!important;
+    margin-top: 0px;
+    margin-left: 0px;
+}
+.dropdown-submenu>.dropdown-menu>li>a{
+
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+.dropdown-submenu > a:after {
+        top: 7px;
+    right: 18px;
+    font-size: 11px;
+    content: "\f3d3" !important;
+    font-family: "Ionicons" !important;
+    position: absolute;
+    font-weight: normal;
+    display: inline-block;
+    font-family: FontAwesome;
+}
+
+.dropdown-submenu.float-left {
+    float: none;
+}
+
+.dropdown-submenu.float-left>.dropdown-menu {
+    left: -100%important;
+    margin-left: 10px;
+    @include border-radius(0px);
+}
+.lang-dropdown{
+    width:100px;
+    min-width: 100px;
+    right:0;
+    left: auto;
+    padding: 0px;
+    @include border-radius(0px);
+    @include box-shadow(none);
+    >li>a{
+        margin-right: 0px !important;
+    }
+}
+
+@media(min-width:992px){
+  .navbar .yamm-content{
+    .mega-vertical-nav{
+        .dropdown-item{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    }
+}  
+}
