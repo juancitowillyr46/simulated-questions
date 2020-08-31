@@ -1,0 +1,704 @@
+<!-- <div id="preloader">
+    <div id="preloader-inner"></div>
+</div> -->
+<!--/preloader-->
+<header class="header header-sticky header-light">
+    <div class="top-bar navbar">
+        <div class="container">
+            <ul class="navbar-nav nav flex-row mr-auto">
+                <li class="nav-item"><a href="#!"><i class="ion-ios-telephone mr-2"></i> info@domain.com</a></li>
+              </ul> 
+            <ul class="navbar-nav flex-row nav ml-auto">
+                <!-- <li class="nav-item">
+                    <a href="signup.html" class="nav-link">
+                        <i class="ion-lock mr-2"></i>
+                        Registro</a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="login.html" class="nav-link">
+                        <i class="ion-android-lock mr-2"></i> Ingreso
+                    </a>
+                </li>
+
+                <li class="dropdown nav-item" style="display:none">
+                    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Eng.</a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-menu-sm">
+                        <li><a href="#" class="dropdown-item">ENGLISH</a></li>
+                        <li><a href="#" class="dropdown-item">FRANCE</a></li>
+                        <li><a href="#" class="dropdown-item">GERMANY</a></li>
+                        <li><a href="#" class="dropdown-item">JAPANESE</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!--container end-->
+    </div>
+    <nav class="navbar navbar-expand-lg yamm">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/logo-dark.png" class="img-fluid logo-dark" alt="">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a [routerLink]="['/home']" class="nav-link" data-toggle="dropdown">Home</a> 
+                    </li>
+                    <li class="nav-item">
+                        <a [routerLink]="['/about']" class="nav-link">¿Quienes somos?</a>
+                    </li>
+                    <li class=" dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Cursos</a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/course/PSMI']">PROFESSIONAL SCRUM MASTER I</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/course/ACP']">AGILE CERTIFIED PRACTITIONER</a>
+                            </li>  
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/course/PAL']">PROFESSIONAL AGILE LEADERSHIP</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" [routerLink]="['/course/PSPO']">PROFESSIONAL SCRUM PRODUCT OWNER</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!--mega menu-->
+                    <li class="nav-item">
+                        <a [routerLink]="['/faq']" class="nav-link" data-toggle="dropdown">Preguntas frecuentes</a>
+                    </li>
+
+                    <li class="nav-item" style="display: none;">
+                        <a href="#" class="nav-link" data-toggle="dropdown">Planes  <i class="fa fa-angle-down"></i></a>
+                    </li> 
+                    <li class="nav-item">
+                        <a [routerLink]="['/contact']" class="nav-link" data-toggle="dropdown">Contáctanos</a>
+                    </li>
+                    <li class="nav-item" style="display: none;">
+                        <a href="#" class="nav-link" data-toggle="dropdown">Carrito</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="right-search ml-4 dropdown" style="display: none;">
+                <a class="icon-search" href="#!" data-toggle="dropdown">
+                    <i class="ion-ios-search-strong"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <form class="form-inline">
+                        <input type="text" placeholder="Search" class="form-control">
+                        <button type="button" class="form-search-button">
+                            <i class="ion-ios-search-strong"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav><!--nav end-->
+</header>
+
+<div id="carouselBizwrap" class="carousel carouselBizwrap slide" data-ride="carousel">
+    <div class="carousel-overlay"></div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" style="background-image: url('assets/img/bg-2.jpg')">
+            <div class="carousel-content">
+                  <div class="carousel-overlay"></div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 ml-auto">
+                            <h3>Perfect startup template for minimal businesses</h3>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...</p>
+                            <a href="#" class="btn theme-btn-color btn-radius btn-lg">Learn More</a>
+                        </div>
+                          <div class="col-md-5 mr-auto">
+                            <img src="assets/img/ipad.png" alt="" class="img-fluid float-right">
+                        </div>
+                    </div>
+                </div>                        
+            </div><!--content-->
+        </div>
+        <div class="carousel-item" style="background-image: url('assets/img/bg-1.jpg')">
+              <div class="carousel-content">
+                  <div class="carousel-overlay"></div>
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mr-auto ml-auto text-center">
+                            <h3>Built using modern tools</h3>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...</p>
+                            <a href="#" class="btn theme-btn-color btn-radius btn-lg">Learn More</a>
+                        </div>
+                        
+                    </div>
+                </div>                        
+            </div><!--content-->
+        </div>
+        <div class="carousel-item" style="background-image: url('assets/img/bg-4.jpg')">
+              <div class="carousel-content">
+                  <div class="carousel-overlay"></div>
+                <div class="container">
+                    <div class="row align-items-center">
+                          <div class="col-md-5 ml-auto">
+                            <img src="assets/img/mackbook-pro.png" alt="" class="img-fluid float-right">
+                        </div>
+                        <div class="col-md-5 mr-auto">
+                            <h3>Mobile friendly & cross browser support</h3>
+                            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...</p>
+                            <a href="#" class="btn theme-btn-color btn-radius btn-lg">Learn More</a>
+                        </div>
+                        
+                    </div>
+                </div>                        
+            </div><!--content-->
+        </div>
+    </div><!--inner-->
+    <a class="carousel-control-prev" href="#carouselBizwrap" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselBizwrap" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div class="space-50"></div>
+<div class="container">
+    <div class="row intro-row">
+        <!-- <div class="col-md-12 text-center wow animated fadeInUp">
+            <h2>¿Que te brindamos?</h2>
+            <h3 class="subtitle">With Clean and Modern Design</h3>
+        </div>
+        <div class="space-70"></div> -->
+        <div class=" col-md-4">
+            <div class="services-box">
+                <!-- <i class="ion-laptop"></i> -->
+                <!-- <h1>50%</h1> -->
+                <div class="jr-service-porcentage">
+                    50%
+                </div>
+                <!-- <h4>Soporte</h4> -->
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...
+                </p>
+            </div>
+        </div><!--services box-->
+        <div class=" col-md-4">
+            <div class="services-box">
+                <div class="jr-service-porcentage">
+                    60%
+                </div>
+                <!-- <i class="ion-ios-color-wand-outline"></i> -->
+                <!-- <h4>Grupos Interactivos</h4> -->
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...
+                </p>
+            </div>
+        </div><!--services box-->
+        <div class="col-md-4">
+            <div class="services-box">
+                <div class="jr-service-porcentage">
+                    90%
+                </div>
+                <!-- <i class="ion-social-twitter-outline"></i>
+                <h4>Simulador</h4> -->
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nisl risus, porta sit amet dui eget...
+                </p>
+            </div>
+        </div><!--services box-->
+    </div><!--row end-->
+    <!-- <div class="space-30"></div> -->
+    <!-- <div class="text-center">
+        <a class="modal-video theme-btn-color-outline btn-radius btn" href="https://www.youtube.com/watch?v=cctFcl5EFYk">Watch Video <i class="ion-play"></i></a>
+    </div> -->
+</div><!--intro with services end-->
+<div class="space-70"></div><div class="space-30"></div>
+<section id="content-region-1" class="padding-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="heading-sec">Te ofrecemos</h3>
+            </div>
+        </div><!--row-->
+        <div class="row">
+            <div class="col-md-12 features jr-features">
+                <!-- <h3>Sobre nuestros servicios</h3>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis. Praesent gravida dignissim felis, id sagittis mauris rutrum non. Nullam pretium id sem ut hendrerit.
+                </p> -->
+                <div class="space-30"></div>
+                <div class="row">
+                    <div class="col-md-3 services-icon" style="display: none;">
+                        <i class="ion-laptop"></i>
+                    </div>
+                    <div class="col-md-12 services-text">
+                        <h4 class="heading-mini">100% Responsive layout</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis. 
+                        </p>
+                    </div>
+                </div><!--services list-->
+                <div class="space-30"></div>
+                <div class="row">
+                    <div class="col-md-3 services-icon" style="display: none;">
+                        <i class="ion-ios-barcode-outline"></i>
+                    </div>
+                    <div class="col-md-12 services-text">
+                        <h4 class="heading-mini">Clean code</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis. 
+                        </p>
+                    </div>
+                </div><!--services list-->
+                <div class="space-30"></div>
+                <div class="row">
+                    <div class="col-md-3 services-icon" style="display: none;">
+                        <i class="ion-compose"></i>
+                    </div>
+                    <div class="col-md-12 services-text">
+                        <h4 class="heading-mini">Easy customization</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis. 
+                        </p>
+                    </div>
+                </div><!--services list-->
+
+
+            </div>
+            <div class="col-md-5" style="display: none;">
+                <img src="assets/img/ipad.png" class="img-fluid" alt="">
+            </div>
+        </div>
+
+    </div><!--container-->
+</section><!--features end-->
+<div class="space-70"></div><div class="space-30"></div>
+<div class="container-fluid content-bloques">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="heading-sec">Nuestros Cursos</h3>
+        </div>
+    </div><!--row-->
+    <div class="row justify-content-md-center">
+        <div class="col-md-4 col-sm-6 margin-btm-40">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-1.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">PROFESSIONAL SCRUM MASTER I</h4>
+                    <span class="portfolio-post-cat">PSMI</span>
+                    <h4><a [routerLink]="['/course/PSMI']" class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div><!--portfolio item -->
+        <!-- <div class="col-md-4 col-sm-6 margin-btm-40">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-2.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">AGILE CERTIFIED PRACTITIONER</h4>
+                    <span class="portfolio-post-cat">ACP</span>
+                    <h4><a [routerLink]="['/course/ACP']"  class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="col-md-4 col-sm-6 margin-btm-40">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-3.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">PROFESSIONAL AGILE LEADERSHIP</h4>
+                    <span class="portfolio-post-cat">PAL</span>
+                    <h4><a [routerLink]="['/course/PAL']" class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div> -->
+
+
+        <!-- <div class="col-md-4 col-sm-6 margin-btm-40">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-4.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">PROFESSIONAL SCRUM PRODUCT OWNER</h4>
+                    <span class="portfolio-post-cat">PSPO</span>
+                    <h4><a [routerLink]="['/course/PSPO']"  class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div> -->
+        <!--portfolio item -->
+        <!-- <div class="col-md-4 col-sm-6 margin-btm-40" style="display:none">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-5.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">portfolio item title here</h4>
+                    <span class="portfolio-post-cat">Branding</span>
+                    <h4><a href="portfolio-single.html" class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div> -->
+        <!--portfolio item -->
+        <!-- <div class="col-md-4 col-sm-6 margin-btm-40" style="display:none">
+            <div class="portfolio-sec">
+                <div class="portfolio-thumnail">
+                    <a href="portfolio-single.html">
+                        <img src="assets/img/work/work-6.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="portfolio-desc text-center">
+                    <h4 class="portfolio-post-title">portfolio item title here</h4>
+                    <span class="portfolio-post-cat">Branding</span>
+                    <h4><a href="portfolio-single.html" class="btn theme-btn-default btn-lg">Ver más</a></h4>
+                </div>
+            </div>
+        </div> -->
+        <!--portfolio item -->
+    </div><!--row portfolio item-->
+</div><!--recent work container end-->
+<div class="space-70"></div>
+<!-- <div class="space-30"></div> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="heading-sec">Nuestro equipo</h3>
+        </div>
+    </div><!--row-->
+    <div class="row justify-content-md-center">
+        <div class="col-lg-3 col-md-6  margin-btm-20">
+            <div class="person-section">
+                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <div class="person-desc jr-person-desc">
+                    <h3>John doe</h3>
+                    <!-- <span>web designer</span> -->
+
+                    <p>
+                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+                    </p>
+                    <!-- <ul class=" team list-inline social-btn">
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like On Facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-googleplus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On googleplus"></i></a></li>
+                    </ul> -->
+                    <a href="#" class="btn theme-btn-default btn-lg">Ver Perfil</a>
+                </div>
+            </div><!--person section end-->
+        </div><!--person col end-->
+        <div class="col-lg-3 col-md-6  margin-btm-20">
+            <div class="person-section">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <div class="person-desc jr-person-desc">
+                    <h3>John doe </h3>
+
+                    <p>
+                        adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+                    </p>
+                    <!-- <ul class=" team list-inline social-btn">
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like On Facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-googleplus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On googleplus"></i></a></li>
+                    </ul> -->
+                    <a href="#" class="btn theme-btn-default btn-lg">Ver Perfil</a>
+                </div>
+            </div><!--person section end-->
+        </div><!--person col end-->
+
+    </div><!--team 4 col end-->
+
+</div>
+
+<div class="space-70"></div>
+
+  <section id="content-region-2" class="slider-testimonials " style="display: none;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mr-auto ml-auto text-center">
+                <i class="ion-quote display-4 margin-btm-40 text-primary"></i>
+                <div class="swiper-container swiper-text">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <p class="lead">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis.  
+                            </p>
+                            <img src="assets/img/team/team-1.jpg" alt="" class="img-fluid rounded-circle" width="60">
+                            <h6>John Doe - <small>Bizwrap User</small></h6>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="lead">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis.  
+                            </p>
+                            <img src="assets/img/team/team-2.jpg" alt="" class="img-fluid rounded-circle" width="60">
+                            <h6>John Doe - <small>Bizwrap User</small></h6>
+                        </div>
+                        <div class="swiper-slide">
+                            <p class="lead">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut ipsum mauris. Fusce condimentum mollis eros vitae facilisis.  
+                            </p>
+                            <img src="assets/img/team/team-3.jpg" alt="" class="img-fluid rounded-circle" width="60">
+                            <h6>John Doe - <small>Bizwrap User</small></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> <!--testimonials section end here-->
+<div class="space-70"></div>
+<div class="container" style="display:none">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="heading-sec">PLANES</h3>
+        </div>
+    </div><!--row-->
+    <div class="row">
+        <div class="col-lg-4 margin-btm-20">
+            <div class="pricing-wrapper">
+                <div class="pricing-head">
+                    <h3>Plan A</h3>
+                </div>
+                <div class="pricing-rate">
+                    <h1>S/ 0.00<small> x 1 Mes</small></h1>
+                </div>
+                <div class="pricing-desc">
+                    <ul class="list-unstyled">
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt iaculis</li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                        <li><i class="ion-checkmark-round"></i> Lorem ipsum dolor sit amet</li>
+                        <li><i class="ion-checkmark-round"></i> Suspendisse tristique </li>
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt </li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                    </ul>
+                </div>
+                <div class="pricing-select">
+                    <a href="#" class="btn theme-btn-default btn-lg">Elegir Plan </a>
+                </div>
+            </div><!--pricing wrapper-->
+        </div><!--pricing col end-->
+        <div class="col-lg-4 margin-btm-20">
+            <div class="pricing-wrapper">
+                <div class="pricing-head">
+                    <h3>Plan B</h3>
+                </div>
+                <div class="pricing-rate">
+                    <h1>S/ 9.99<small> x 2 Meses</small></h1>
+                </div>
+                <div class="pricing-desc">
+                    <ul class="list-unstyled">
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt iaculis</li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                        <li><i class="ion-checkmark-round"></i> Lorem ipsum dolor sit amet</li>
+                        <li><i class="ion-checkmark-round"></i> Suspendisse tristique </li>
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt </li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                    </ul>
+                </div>
+                <div class="pricing-select">
+                    <a href="#" class="btn theme-btn-default btn-lg">Elegir Plan </a>
+                </div>
+            </div><!--pricing wrapper-->
+        </div><!--pricing col end-->
+        <div class="col-lg-4 margin-btm-20">
+            <div class="pricing-wrapper">
+                <div class="pricing-head">
+                    <h3>Plan C</h3>
+                </div>
+                <div class="pricing-rate">
+                    <h1>S/ 29.99<small> x 3 Meses</small></h1>
+                </div>
+                <div class="pricing-desc">
+                    <ul class="list-unstyled">
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt iaculis</li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                        <li><i class="ion-checkmark-round"></i> Lorem ipsum dolor sit amet</li>
+                        <li><i class="ion-checkmark-round"></i> Suspendisse tristique </li>
+                        <li><i class="ion-checkmark-round"></i> Curabitur tincidunt </li>
+                        <li><i class="ion-checkmark-round"></i> Vestibulum vitae nibh elit</li>
+                    </ul>
+                </div>
+                <div class="pricing-select">
+                    <a href="#" class="btn theme-btn-color btn-lg">Elegir Plan </a>
+                </div>
+            </div><!--pricing wrapper-->
+        </div><!--pricing col end-->
+
+    </div>
+    <div class="row" style="display: none;">
+        <div class="col-md-4 margin-btm-20" style="display: none;">
+            <div class="news-sec">
+                <div class="news-thumnail">
+                    <a href="blog-post.html">
+                        <img src="assets/img/blog/blog-1.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="news-desc">
+                    <h3 class="blog-post-title"><a href="blog-post.html" class="hover-color">Lorem ipsum dollor sit amet</a></h3>
+                    <span class="news-post-cat">On 26 may 2014 | sports</span>
+                    <p>
+                        aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna..
+                    </p>
+                </div>
+            </div>
+        </div><!--latest news items-->
+        <div class="col-md-4 margin-btm-20" style="display: none;">
+            <div class="news-sec">
+                <div class="news-thumnail">
+                    <a href="blog-post.html">
+                        <img src="assets/img/blog/blog-2.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="news-desc">
+                    <h3 class="blog-post-title"><a href="blog-post.html" class="hover-color">Lorem ipsum dollor sit amet</a></h3>
+                    <span class="news-post-cat">On 26 may 2014 | sports</span>
+                    <p>
+                        aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna..
+                    </p>
+                </div>
+            </div>
+        </div><!--latest news items-->
+        <div class="col-md-4 margin-btm-20" style="display: none;">
+            <div class="news-sec">
+                <div class="news-thumnail">
+                    <a href="blog-post.html">
+                        <img src="assets/img/blog/blog-4.jpg" class="img-fluid" alt="">
+                    </a>
+                </div>
+                <div class="news-desc">
+                    <h3 class="blog-post-title"><a href="blog-post.html" class="hover-color">Lorem ipsum dollor sit amet</a></h3>
+                    <span class="news-post-cat">On 26 may 2014 | sports</span>
+                    <p>
+                        aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna..
+                    </p>
+                </div>
+            </div>
+        </div><!--latest news items-->
+    </div><!--row end-->
+</div><!--container recent news end-->
+<div class="space-50" style="display:none"></div>
+<div class="newsletter-section" style="display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto">
+                <h3>Get latest news from us</h3>
+                <p>
+                    Subscribe to our newsletter
+                </p>
+            </div>
+        </div><!--row-->
+
+        <div class="row">
+            <div class="col-md-4 ml-auto mr-auto text-center">
+                <form method="post" action="#" class="form-subscribe">
+                    <input type="text" name="email" placeholder="Email Id..." class="form-control">
+                    <button type="submit" name="submit" class="btn theme-btn-color btn-block">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cta-bg" style="display: none;">
+    <div class="container text-center">
+        <h3>Simple and Minimal Design
+            <a href="#" class="btn btn-lg btn-white btn-radius">Purchase Now</a>
+        </h3>
+    </div>
+</div>
+<!--footer-->
+<div id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 margin-btm-20">
+                <div class="footer-col" style="display: none;">
+                    <h3>Bizwrap</h3>
+                    <p>
+                        aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna. aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+                    </p>
+                </div>
+                <div class="space-20" style="display: none;"></div>
+                <div class="footer-col">
+                    <h3>Información de contacto</h3>
+                    <!-- <p><i class="ion-home"></i> pearl tower,3rd floor,jaipur,302012</p> -->
+                    <p><i class="ion-iphone"></i> 9887568614</p>
+                    <p><i class="ion-email"></i> info@domain.com</p>
+                </div>
+                <div class="space-20"></div>
+                <!-- <div class="footer-col">
+                    <h3>Follow us</h3>
+                    <ul class=" list-inline social-btn">
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like On Facebook"></i></a></li>
+                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On twitter"></i></a></li>
+                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-googleplus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On googleplus"></i></a></li>
+                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-pinterest" data-toggle="tooltip" data-placement="top" title="" data-original-title="pinterest"></i></a></li>
+                        <li class="list-inline-item"><a href="#"><i class="ion-social-skype" data-toggle="tooltip" data-placement="top" title="" data-original-title="skype"></i></a></li>
+                    </ul>
+                </div> -->
+                <!--footer social col-->
+            </div><!--col-4 end-->
+            <div class="col-md-3 margin-btm-20" style="display: none;">
+                <div class="footer-col">
+                    <h3>Latest post</h3>
+                    <ul class="post-list list-unstyled">
+                        <li><a href="#" class="hover-color">Blog post with image</a></li>
+                        <li><a href="#" class="hover-color">lorem ipsum dollor sit amet</a></li>
+                        <li><a href="#" class="hover-color">Blog post with audio</a></li>
+                        <li><a href="#" class="hover-color">lorem ipsum dollor sit amet</a></li>
+                        <li><a href="#" class="hover-color">Blog post with quote</a></li>
+                    </ul>
+                </div>
+            </div><!--latest post col end-->
+            <div class="col-md-8">
+                <div class="footer-col">
+                    <h3>Escríbenos</h3>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Nombre...">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Correo...">
+                            </div>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" placeholder="Asunto...">
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" placeholder="Mensaje..." rows="7"></textarea>
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn btn-lg btn-white">Enviar mensaje</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!--get in touch col end-->
+        </div><!--footer main row end-->  
+        <div class="space-70"></div>
+        <div class="row">
+            <div class="col-md-12 text-center footer-bottom">
+                <a href="index.html"> <img src="assets/img/logo-white.png" alt=""></a>
+                <div class="space-20"></div>
+                <span>&copy;2020. All right reserved. Design by Juan rodas</span>
+            </div>
+        </div><!--footer copyright row end-->
+    </div><!--container-->
+</div><!--footer main end-->
+<!--back to top-->
+<a href="#" class="scrollToTop"><i class="ion-android-arrow-dropup-circle"></i></a>
+<!--back to top end-->
+
+

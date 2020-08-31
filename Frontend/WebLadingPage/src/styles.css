@@ -1,1 +1,181 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Home - Info % */
+.jr-service-porcentage {
+    border: 1px solid red;
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    /* color: #32d2ba; */
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    border: 1px solid #32d2ba;
+    -moz-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+
+.jr-features {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .jr-features {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        max-width: 75%;
+    }
+}
+
+.jr-person-desc{
+    text-align: center;
+}
+.jr-person-desc > p{
+    text-align: center;
+}
+
+
+body {
+    /* background: #0083ff !important;  */
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db);
+}
+
+.header .top-bar.navbar {
+    /* background: #0083ff !important; */
+    /* background-image: linear-gradient(128deg,#1e6dbd,#3287db); */
+    background: transparent !important;
+}
+
+.header.header-sticky.sticky-active nav.navbar.navbar-expand-lg { 
+    background-color: #ecf5fe !important;
+}
+
+.header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .navbar-nav, .header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .nav-link, .header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .icon-search {
+    color: #6a85a6 !important;
+}
+
+nav.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
+    color: #FFFFFF !important; 
+}
+
+.header .top-bar.navbar a {
+    color: #FFFFFF !important; 
+}
+
+.jr-service-porcentage {
+    color: #2677c8 !important;
+    border: 1px solid #ecf5fe !important;
+    background: #ecf5fe !important;
+}
+
+p {
+    color: #FFFFFF !important;
+}
+
+h3.heading-sec {
+    color: #FFFFFF !important;
+}
+
+h4, h3 {
+    color: #FFFFFF !important;
+}
+
+.btn {
+    background-color: #1d2126 !important;
+    /* opacity: .3; */
+    color: #ffffff !important;
+    border: 0px solid #1d2126 !important;
+    cursor: pointer !important;
+}
+
+.btn:hover {
+    background-color: #ffffff !important;
+    /* opacity: .3; */
+    color: #1d2126 !important;
+    border: 0px solid #1d2126 !important;
+}
+
+ul li {
+    color: #ffffff !important;
+}
+
+#footer {
+    background-color: #1d2126!important;
+}
+
+.pricing-head {
+    background-color: #1d2126 !important;
+}
+
+.pricing-rate{
+    background-color: #ecf5fe;
+}
+
+.pricing-rate h1 small {
+    color: #1d2126 !important;
+}
+
+h1 {
+    color: #1d2126 !important;
+}
+
+
+h4.portfolio-post-title{
+    color: #2575c7 !important;
+}
+
+
+.content-bloques {
+    background: #ecf5fe !important;
+}
+
+.content-bloques .heading-sec {
+    color: #2779ca !important;
+    padding-top: 18px !important;
+}
+
+.content-bloques .portfolio-post-cat {
+    font-size: 1em !important;
+}
+
+.content-bloques .portfolio-sec {
+    border: 1px solid #cccccc !important;
+}
+
+.content-shop {
+    background: #ecf5fe !important;
+}
+
+.content-shop ul li{
+    color: #000000 !important;
+}
+.content-shop h4.heading-mini{
+    color: #000000 !important;
+}
+
+.page-tree-bg2 {
+    background-color: #333 !important;
+    background-image: none !important
+}
+
+
+.logo-dark {
+    width: 25% !important;
+    top: 0.5em !important;
+}

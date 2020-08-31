@@ -122,6 +122,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "web-landing-page"
+    }
+  },
+  "defaultProject": "web-landing-page",
+  "cli": {
+    "analytics": false
+  }
 }
