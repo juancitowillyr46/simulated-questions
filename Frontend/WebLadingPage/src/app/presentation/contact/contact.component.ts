@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IsFooterObsevable } from 'src/app/shared/observables/is-footer.observable';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  constructor(private isFooterObsevable: IsFooterObsevable, private route: ActivatedRoute) { 
+
+    
+  }
 
   ngOnInit(): void {
+    const that = this;
   }
 
 }

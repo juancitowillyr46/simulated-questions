@@ -100,7 +100,7 @@ h4, h3 {
     background-color: #1d2126 !important;
     /* opacity: .3; */
     color: #ffffff !important;
-    border: 0px solid #1d2126 !important;
+    border: 1px solid #1d2126 !important;
     cursor: pointer !important;
 }
 
@@ -108,7 +108,7 @@ h4, h3 {
     background-color: #ffffff !important;
     /* opacity: .3; */
     color: #1d2126 !important;
-    border: 0px solid #1d2126 !important;
+    border: 1px solid #cccccc !important;
 }
 
 ul li {
@@ -175,7 +175,111 @@ h4.portfolio-post-title{
 }
 
 
-.logo-dark {
+.logo-dark, .logo-white {
     width: 25% !important;
     top: 0.5em !important;
+}
+.logo-white {
+    display: none;
+}
+
+/* Carrusel - Home */
+.carouselBizwrap .btn {
+    background-color: #2272c3 !important;
+    /* opacity: .3; */
+    color: #FFFFFF !important;
+    border: 1px solid #2272c3 !important;
+}
+.carouselBizwrap .btn:hover {
+    background-color: #ffffff !important;
+    /* opacity: .3; */
+    color: #1d2126 !important;
+    border: 1px solid #cccccc !important;
+}
+
+/* Nuestros - Cursos */
+.content-bloques .btn {
+    background-color: #2272c3 !important;
+    /* opacity: .3; */
+    color: #FFFFFF !important;
+    border: 1px solid #2272c3 !important;
+}
+
+.content-bloques .btn:hover {
+    background-color: #ffffff !important;
+    /* opacity: .3; */
+    color: #1d2126 !important;
+    border: 1px solid #cccccc !important;
+}
+
+.carouselBizwrap .btn {
+    background-color: #2272c3 !important;
+    /* opacity: .3; */
+    color: #FFFFFF !important;
+    border: 1px solid #2272c3 !important;
+}
+.carouselBizwrap .btn:hover {
+    background-color: #ffffff !important;
+    /* opacity: .3; */
+    color: #1d2126 !important;
+    border: 1px solid #cccccc !important;
+}
+
+/* Nuesto Equipo */
+.content-equipo .btn {
+    background-color: #666 !important;
+    border: 1px solid #666 !important;
+    color: #FFFFFF !important;
+}
+
+.content-equipo .btn:hover {
+    background-color: #2272c3 !important;
+    border: 1px solid #2272c3 !important;
+}
+
+/* Shopping cart - Menu */
+.cart-dropdown li{
+    color: #000000 !important;
+}
+.cart-dropdown .cart-desc {
+    padding-left: 1em !important;
+}
+
+.cart-dropdown .btn {
+    background-color: #2272c3 !important;
+    border: 1px solid #2272c3 !important;
+}
+.cart-dropdown .btn:hover {
+    background-color: #666 !important;
+    border: 1px solid #666 !important;
+    color: #FFFFFF !important;
+}
+
+/* Detalle del curso */
+.portfolio-details .btn {
+    background-color: #ffffff !important;
+    /* opacity: .3; */
+    color: #1d2126 !important;
+    border: 1px solid #cccccc !important;
+}
+.portfolio-details .btn:hover {
+    background-color: #666 !important;
+    border: 1px solid #666 !important;
+    color: #FFFFFF !important;
+}
+
+/* Shop Cart  */
+.content-shop .btn {
+    background-color: #2272c3 !important;
+    border: 1px solid #2272c3 !important;
+}
+.content-shop .btn:hover {
+    background-color: #666 !important;
+    border: 1px solid #666 !important;
+    color: #FFFFFF !important;
+}
+
+/* Footer */
+.footer-bottom img {
+    width: 25% !important;
 }

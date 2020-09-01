@@ -25,7 +25,7 @@ export class CourseComponent implements OnInit {
 
   ngOnInit(): void {
     const that = this;
-    $('html, body').animate({ scrollTop: 0 }, 100);
+    //$('html, body').animate({ scrollTop: 0 }, 100);
     that.route.paramMap.subscribe(params => {
       // console.log(params.get('key'));
       // console.log(params.get('key'));

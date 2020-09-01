@@ -6,14 +6,20 @@ $(function() {
     $(window).preloader({
         delay: 500
     });
+
+    $(".logo-white").hide();
     //sticky header on scroll
     $(window).on("scroll", function() {
         var scroll = $(window).scrollTop();
 
         if (scroll >= 100) {
             $(".header-sticky").addClass("sticky-active");
+            $(".logo-dark").hide();
+            $(".logo-white").show();
         } else {
             $(".header-sticky").removeClass("sticky-active");
+            $(".logo-dark").show();
+            $(".logo-white").hide();
         }
     });
     /**back to top**/

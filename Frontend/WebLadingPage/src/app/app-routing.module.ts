@@ -5,30 +5,36 @@ import { ContactComponent } from './presentation/contact/contact.component';
 import { CourseComponent } from './presentation/course/course.component';
 import { FaqComponent } from './presentation/faq/faq.component';
 import { HomeComponent } from './presentation/home/home.component';
-import { ShopCarComponent } from './presentation/shop-car/shop-car.component';
+import { ShopCartComponent } from './presentation/shop-cart/shop-cart.component';
 import { ShopCheckoutComponent } from './presentation/shop-checkout/shop-checkout.component';
+import { IsFooterGuard } from './shared/guards/is-footer.guard';
 
 
 const routes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: 'course/:key',
-    component: CourseComponent
+    component: CourseComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: 'faq',
-    component: FaqComponent
+    component: FaqComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: 'contact',
-    component: ContactComponent
+    component: ContactComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: '',
@@ -36,12 +42,14 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'shop-car',
-    component: ShopCarComponent
+    path: 'shop-cart',
+    component: ShopCartComponent,
+    canActivate: [IsFooterGuard]
   },
   {
     path: 'shop-checkout',
-    component: ShopCheckoutComponent
+    component: ShopCheckoutComponent,
+    canActivate: [IsFooterGuard]
   },
 ];
 
