@@ -179,6 +179,7 @@ h4.portfolio-post-title{
     width: 25% !important;
     top: 0.5em !important;
 }
+
 .logo-white {
     display: none;
 }
@@ -283,3 +284,48 @@ h4.portfolio-post-title{
 .footer-bottom img {
     width: 25% !important;
 }
+
+/* Logo Reponsive */
+@media (max-width: 767px) {
+
+    .logo-dark, 
+    .logo-white {
+        width: 62%!important;
+        top: .5em!important;
+    }
+    
+    .logo-white {
+        display: block !important;
+    }
+
+    .logo-dark {
+        display: none !important;
+    }
+
+    .navbar-toggler {
+        right: 0rem !important;
+    }
+
+    /* #navbarSupportedContent ul.navbar-nav li {
+        color: #2474c5 !important;
+    } */
+
+    nav.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
+        color: #2474c5 !important;
+    }
+
+    .navbar { 
+        background-color: #ecf5fe !important; 
+    }
+
+    .cart-dropdown {
+        padding: 0.5em !important;
+    }
+}
+
+/* Menus */
+.header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .navbar-nav, .header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .nav-link, .header.header-sticky.sticky-active nav.navbar.navbar-expand-lg .icon-search {
+    color: #2474c5 !important;
+}
+
+

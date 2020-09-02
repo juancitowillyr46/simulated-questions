@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as $ from "jquery";
+import { ShopCartAddItemUseCase } from 'src/app/domain/shop-cart/usecase/shop-cart-add-item.usecase';
+import { ShopCartListItemsUseCase } from 'src/app/domain/shop-cart/usecase/shop-cart-list-items.usecase';
 
 @Component({
   selector: 'app-course',
@@ -20,7 +22,9 @@ export class CourseComponent implements OnInit {
  
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private shopCartAddItemUseCase: ShopCartAddItemUseCase,
+    private shopCartListItemsUseCase: ShopCartListItemsUseCase  
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +36,33 @@ export class CourseComponent implements OnInit {
       if(params.get('key')){
         that.course = that.courses.find(f => f.key == params.get('key'));
       };
+    });
+
+    that.shopCartListItem();
+  }
+
+
+  shopCartaddItem() {
+    const that = this;
+    that.shopCartAddItemUseCase.execute({
+      image: 'http://imga.eomc',
+      price: 150.00,
+      productId: '12345',
+      productName: 'Producto',
+      quantity: 1,
+      subtotal: 150
+    }).subscribe(success => {
+      if(!success){
+        alert('El producto ya se encuentra agregado');
+      }
+      // console.log(success);
+    });
+  }
+
+  shopCartListItem() {
+    const that = this;
+    that.shopCartListItemsUseCase.execute().subscribe( res => {
+      console.log(res);
     });
   }
 
