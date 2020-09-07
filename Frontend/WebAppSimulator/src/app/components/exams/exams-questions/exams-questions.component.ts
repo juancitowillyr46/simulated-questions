@@ -6,6 +6,8 @@ import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progres
 import { ExamClearTimerObservable } from 'src/app/core/observables/exam-clear-timer.observable';
 import { UsersService } from 'src/app/maintainers/users/users.service';
 import { LoginService } from 'src/app/login/login.service';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { IsEndExamObservable } from 'src/app/core/observables/is-end-exam.observable';
 
 @Component({
   selector: 'app-exams-questions',
@@ -27,6 +29,23 @@ export class ExamsQuestionsComponent implements OnInit {
 
   public isCollapsed = true;
   public settingLanguage = 'BOTH';
+  public alphabeticalOrder = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+
+  public modalReference: NgbModalRef;
+  public disabledButtonNext;
+  public disabledButtonLast;
+  public isTraslate;
+
+  isProgressBar = true;
+
+  totalQuestions = 0;
+  totalAnswersChecked = 0;
+  totalNoAnswersChecked = 0;
+  totalPorcertange = 0;
+  numOption = 0;
+  isEndExam: any = false;
+  popupShowQuestions = [];
+  countBookMarked = 0;
 
   constructor(
     private routers: Router,
@@ -34,9 +53,12 @@ export class ExamsQuestionsComponent implements OnInit {
     private categoryService: CategoriesService,
     private examProgressBarObservable: ExamProgressBarObservable,
     private examClearTimerObservable: ExamClearTimerObservable,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private modalService: NgbModal,
+    private isEndExamObservable: IsEndExamObservable
   ) { 
     const that = this;
+    
   }
 
   // @HostListener('window:beforeunload', ['$event'])
@@ -58,6 +80,12 @@ export class ExamsQuestionsComponent implements OnInit {
     // localStorage.clear();
     this.timer();
 
+    that.isEndExamObservable.currentIsEndExam.subscribe( res => {
+      if(res) {
+        that.isEndExam = res;
+      }
+    });
+
     this.route.params.subscribe(res => {
       if(res){
         that.keyExam = res.keyExam;
@@ -66,8 +94,27 @@ export class ExamsQuestionsComponent implements OnInit {
         that.dismissible = false;
         that.orderQuestion = (Number(res.idQuestion) - 1);
         that.page = res.idQuestion;
+
+
+        // if(!Number.isInteger(res.idQuestion)){
+        //   // alert('No se encontró la pregunta');
+        //   this.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/1');
+        //   // return false;
+        // }
+
+        // if(that.page < 1) {
+        //   // alert('No se encontró la pregunta');
+        //   this.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/1');
+        //   // return false;
+        // }
+
         if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null){
           that.questions = JSON.parse(localStorage.getItem("questions"));
+
+          that.questions.forEach((question, index) => { 
+            that.questions[index]['data']['numQuestion'] = (index + 1);
+          });
+
           that.question = that.questions[that.orderQuestion]['data'];
 
           that.settingLanguage = that.loginService.getAttrSession('settingLanguage');
@@ -75,6 +122,15 @@ export class ExamsQuestionsComponent implements OnInit {
         } else {
           that.routers.navigateByUrl('/exams');
         }
+      }
+    });
+
+    that.examProgressBarObservable.currentMessage.subscribe( res => {
+      if(res) {
+       
+       that.calculateProgressExam();
+      } else {
+        that.calculateProgressExam();
       }
     });
 
@@ -96,12 +152,6 @@ export class ExamsQuestionsComponent implements OnInit {
   }
 
 
-  goQuestion(event: any) {
-    const that = this;
-    this.page = event.target.value;
-    this.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + event.target.value);
-  }
-
   loadPage(event: any) {
     const that = this;
     this.page = event;
@@ -113,7 +163,7 @@ export class ExamsQuestionsComponent implements OnInit {
     var h = Math.floor(d / 3600);
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
-    document.getElementById("timer").innerHTML =  ("0" + h).slice(-2) + " : " + ("0" + m).slice(-2) + " : " + ("0" + s).slice(-2); 
+    document.getElementById("timer").innerHTML =  ("0" + h).slice(-2) + ":" + ("0" + m).slice(-2) + ":" + ("0" + s).slice(-2); 
   }
 
   timer() {
@@ -135,10 +185,11 @@ export class ExamsQuestionsComponent implements OnInit {
       if (currentTime <= 0) { 
           localStorage.removeItem("seconds");
           window.clearInterval(x); 
-          document.getElementById("timer").innerHTML = "Tiempo cumplido";
+          // document.getElementById("timer").innerHTML = "Tiempo cumplido";
           that.cleanTimer();
           that.examClearTimerObservable.changeMessage(true);
           localStorage.setItem('endExam', 'true');
+          that.modalReference.close();
           localStorage.setItem("questions", JSON.stringify(that.questions));
 
           that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score/ngb-panel-0-header');
@@ -197,13 +248,16 @@ export class ExamsQuestionsComponent implements OnInit {
       that.progressService = true;
       setTimeout(() => {
         that.progressService = false;
+        
         localStorage.removeItem("seconds");
-        document.getElementById("timer").innerHTML = "Tiempo cumplido";
+        // document.getElementById("timer").innerHTML = "Tiempo cumplido";
         that.cleanTimer();
         that.examClearTimerObservable.changeMessage(true);
         localStorage.setItem('endExam', 'true');
         localStorage.setItem("questions", JSON.stringify(that.questions));
+        that.isEndExamObservable.changeIsEndExam(false);
         that.routers.navigateByUrl('/exams/'+ that.keyExam +'/score/ngb-panel-0-header');
+        
       }, 2000);
 
     } else {
@@ -236,5 +290,166 @@ export class ExamsQuestionsComponent implements OnInit {
   //   that.category.totalQuestions == ;
   //   that.questions.length
   // }
+
+
+  showAllPopup(content) {
+
+    const that = this;
+
+    that.modalReference = that.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg'});
+
+    let element = document.getElementById('ALL-QUESTIONS');
+    element.dispatchEvent(new Event('click', { 'bubbles': true }));
+
+    that.countBookMarked = that.questions.filter(f => f['data']['marked'] === true).length;
+
+  }
+
+  goQuestion(id: any) {
+    const that = this;
+    this.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + id);
+    that.modalReference.close();
+  }
+
+  translate() {
+    const that = this;
+    if(that.isTraslate == true){
+      that.isTraslate = false;
+    } else {
+      that.isTraslate = true;
+    }
+    
+  }
+
+  nextQuestion() {
+    const that = this;
+
+    that.disabledButtonNext = false;
+    if(Number(that.page) != (that.questions.length)){
+      that.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + (Number(that.page) + 1));
+    } else {
+      that.disabledButtonNext = true;
+    }
+
+    
+  }
+
+  lastQuestion() {
+    const that = this;
+
+    that.disabledButtonLast = false;
+    if(Number(that.page) > 1){
+      that.routers.navigateByUrl('/exams/'+ that.keyExam +'/questions/' + (Number(that.page) - 1));
+    } else {
+      that.disabledButtonLast = true;
+    }
+
+    
+  }
+
+  calculateProgressExam(): void {
+    const that = this;
+    that.totalAnswersChecked = 0;
+    if(typeof localStorage.getItem("questions") !== 'undefined' && localStorage.getItem("questions") != null) {
+      let timeExam = Number(localStorage.getItem('seconds'));
+      if(timeExam > 0){
+        let questions: any[] = JSON.parse(localStorage.getItem("questions"));
+        that.totalQuestions = (questions.length);
+        questions.forEach(question => {
+          that.numOption = 0;
+          question.data.answers.forEach(element => {
+            if(element.checked != null && element.checked == true){
+              that.numOption = that.numOption + 1;
+            }
+          });
+          if(that.numOption > 0){
+            that.totalAnswersChecked = that.totalAnswersChecked + 1;
+          }
+        });
+
+        // console.log((that.totalAnswersChecked / 100) * 100);
+
+        that.totalPorcertange = Math.round((that.totalAnswersChecked / 100) * 100);
+        that.totalNoAnswersChecked = (that.totalQuestions - that.totalAnswersChecked);
+        that.isProgressBar = true;
+
+      } else {
+        that.isProgressBar = false;
+      }
+
+    } else {
+      this.isProgressBar = false;
+    }
+  }
+
+
+  addBookMarks(question: any, orderQuestion: number) {
+
+    const that = this;
+    that.saveOption = true;
+    setTimeout( () => {
+      that.saveOption = false;
+      // console.log(that.questions[orderQuestion]);
+
+      if(that.questions[orderQuestion]['data']['marked'] === true) {
+        that.questions[orderQuestion]['data']['marked'] = false;
+      } else {
+        that.questions[orderQuestion]['data']['marked'] = true;
+      }
+      
+      console.log(that.questions[orderQuestion]);
+      //  = event.target.checked;
+      localStorage.setItem("questions", JSON.stringify(that.questions));
+      // // that.dismissible = true;
+      // that.examProgressBarObservable.changeMessage(true);
+      // setTimeout(() => this.dismissible = false, 1000);
+    }, 500);
+
+  }
+
+  showQuestionsForType(type: string) {
+    const that = this;
+
+    let results: any = [];
+
+    document.getElementById('ALL-QUESTIONS').classList.remove("activePopup");
+    document.getElementById('BOOKMARKED').classList.remove("activePopup");
+
+    if(type == 'ALL_QUESTIONS') {
+
+      document.getElementById('ALL-QUESTIONS').classList.add("activePopup");
+
+      results = that.questions;
+
+      results.forEach(question => {
+
+        let numOption = 0;
+
+        question.data.answers.forEach(element => {
+          if(element.checked != null && element.checked == true){
+            numOption = numOption + 1;
+          }
+        });
+
+        if(numOption > 0) {
+          question.data['isAnswered'] = true;
+        }
+
+      });
+
+    } else if(type == 'BOOKMARKED') {
+
+      document.getElementById('BOOKMARKED').classList.add("activePopup");
+
+      results = that.questions.filter(f => f['data']['marked'] === true);
+
+    }
+
+    console.log(results);
+
+    that.popupShowQuestions = results;
+    
+  }
+
 
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ExamProgressBarObservable } from 'src/app/core/observables/exam-progress-bar.observable';
 import { Chart } from 'chart.js';
+import { IsEndExamObservable } from 'src/app/core/observables/is-end-exam.observable';
+// import { truncate } from 'fs';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,13 +21,22 @@ export class SidebarComponent implements OnInit {
   totalPorcertange = 0;
   numOption = 0;
 
+  isEndExam: any = false;
+
   constructor(
-    private examProgressBarObservable: ExamProgressBarObservable
+    private examProgressBarObservable: ExamProgressBarObservable,
+    private isEndExamObservable: IsEndExamObservable
   ) { }
 
   ngOnInit() {
 
     const that = this;
+
+    that.isEndExamObservable.currentIsEndExam.subscribe( res => {
+      if(res) {
+        that.isEndExam = res;
+      }
+    });
 
     that.examProgressBarObservable.currentMessage.subscribe( res => {
       if(res) {

@@ -8,6 +8,8 @@ import { VerificatePlanService } from 'src/app/core/services/verificate-plan.ser
 import { environment } from 'src/environments/environment';
 import { PlansService } from 'src/app/maintainers/plans/plans.service';
 import { BehaviorSubject } from 'rxjs';
+import { CategoryObservable } from 'src/app/core/observables/category.observable';
+import { IsEndExamObservable } from 'src/app/core/observables/is-end-exam.observable';
 // import Swal from 'sweetalert2';
 
 @Component({
@@ -36,7 +38,8 @@ export class ExamsEnabledComponent implements OnInit {
   private obsPlan = new BehaviorSubject(null);
   public currentPlan = this.obsPlan.asObservable();
   public settingLanguage: any;
-  
+  isEndExam: any = false;
+
   constructor(
     private plansService: PlansService,
     private routers: Router,
@@ -45,13 +48,21 @@ export class ExamsEnabledComponent implements OnInit {
     private categoriesService: CategoriesService,
     private userService: UsersService,
     private questionsService: QuestionsService,
-    private verificatePlanService: VerificatePlanService
+    private verificatePlanService: VerificatePlanService,
+    private categoryObservable: CategoryObservable,
+    private isEndExamObservable: IsEndExamObservable
   ) { }
 
   ngOnInit() {
 
     const that = this;
 
+    that.isEndExamObservable.currentIsEndExam.subscribe( res => {
+      if(res) {
+        that.isEndExam = res;
+      }
+    });
+    
     that.cleanTimer();
 
     that.getPlans();
@@ -82,7 +93,7 @@ export class ExamsEnabledComponent implements OnInit {
     });
 
     
-    
+
 
     // if(typeof localStorage.getItem("userId") !== 'undefined' && localStorage.getItem("userId") != null){
     //   if(that.checkPlanActive !== false) {
@@ -179,6 +190,8 @@ export class ExamsEnabledComponent implements OnInit {
         localStorage.setItem('seconds', category.timerSeconds); //category.timerSeconds
         localStorage.setItem('keyExam', category.clientKey);
         localStorage.setItem("category", JSON.stringify(that.category));
+
+        that.categoryObservable.changeCategory(JSON.stringify(that.category));
 
         setTimeout(() => {
           that.disabledButton = false;

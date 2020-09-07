@@ -8,7 +8,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "build.prod": "ng build --prod --base-href=/simulacrum/v12/"
+        "build.dev": "ng build --prod --base-href=/simulacrum/v13/",
+        "starthost": "ng serve --host 0.0.0.0"
     },
     "private": true,
     "dependencies": {

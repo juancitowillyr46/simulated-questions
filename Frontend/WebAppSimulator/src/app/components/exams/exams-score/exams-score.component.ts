@@ -3,6 +3,7 @@ import { NgbAccordionConfig, NgbPanelChangeEvent } from '@ng-bootstrap/ng-bootst
 import { Chart } from 'chart.js';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ExamClearTimerObservable } from 'src/app/core/observables/exam-clear-timer.observable';
+import { IsEndExamObservable } from 'src/app/core/observables/is-end-exam.observable';
 
 @Component({
   selector: 'app-exams-score',
@@ -22,12 +23,13 @@ export class ExamsScoreComponent implements OnInit {
   };
   
   public category = null;
-
+  isEndExam: any = false;
 
   constructor(config: NgbAccordionConfig,
     private routers: Router,
     private route: ActivatedRoute,
-    private examClearTimerObservable: ExamClearTimerObservable
+    private examClearTimerObservable: ExamClearTimerObservable,
+    private isEndExamObservable: IsEndExamObservable
   ) 
     { 
     config.closeOthers = true;
@@ -61,6 +63,12 @@ export class ExamsScoreComponent implements OnInit {
             element.scrollIntoView({behavior: 'smooth', block: 'start', inline: 'nearest'});
           }, 200 );
         }
+      }
+    });
+
+    that.isEndExamObservable.currentIsEndExam.subscribe( res => {
+      if(res) {
+        that.isEndExam = res;
       }
     });
     

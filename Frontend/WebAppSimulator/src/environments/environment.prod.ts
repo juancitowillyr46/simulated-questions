@@ -7,5 +7,6 @@ export const environment = {
     projectId: 'simulated-questions-2019',
     // storageBucket: 'vwise-2ed94.appspot.com',
     // messagingSenderId: '698934152542'
-  }
+  },
+  URL_IMAGE: 'http://christianveralivia.com/simulacrum/v13/'
 };

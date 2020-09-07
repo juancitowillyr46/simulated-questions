@@ -12,6 +12,7 @@ export const environment = {
     // messagingSenderId: '698934152542'
   },
   // plans: [{id: 0, name: 'PLAN A', days: 1}, {id: 1, name: 'PLAN B', days: 2}, {id: 2, name: 'PLAN C', days: 3}] // Lista de planes
+  URL_IMAGE: '/../../../'
 };
 
 /*

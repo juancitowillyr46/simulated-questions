@@ -88,10 +88,20 @@ import {
   faChevronDown,
   faCircle,
   faUser,
-  faExclamation, faUsers, faLock
+  faExclamation, faUsers, faLock,
+  faBookmark,
+  faListOl,
+  faCaretSquareDown,
+  faEye
  } from '@fortawesome/free-solid-svg-icons';
 
-import { faSquare as farSquare, faCheckSquare as farCheckSquare, faQuestionCircle as farQuestionCircle, faCircle as farCircle } from '@fortawesome/free-regular-svg-icons';
+import { 
+  faSquare as farSquare, 
+  faCheckSquare as farCheckSquare, 
+  faQuestionCircle as farQuestionCircle, 
+  faCircle as farCircle,
+  faBookmark as farBookmark
+} from '@fortawesome/free-regular-svg-icons';
 
 
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
@@ -100,7 +110,7 @@ import { ExamsScoreComponent } from './components/exams/exams-score/exams-score.
 import { ExamsQuestionsComponent } from './components/exams/exams-questions/exams-questions.component';
 import { ExamsEnabledComponent } from './components/exams/exams-enabled/exams-enabled.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule, NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbAlertModule, NgbProgressbarModule, NgbAccordionModule, NgbModalModule, NgbCollapseModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ExamProgressBarObservable } from './core/observables/exam-progress-bar.observable';
 
@@ -111,6 +121,8 @@ import { ExamClearTimerObservable } from './core/observables/exam-clear-timer.ob
 import { UsersListComponent } from './maintainers/users/users-list/users-list.component';
 import { UsersIndexComponent } from './maintainers/users/users-index/users-index.component';
 import { UsersPostComponent } from './maintainers/users/users-post/users-post.component';
+import { CategoryObservable } from './core/observables/category.observable';
+import { IsEndExamObservable } from './core/observables/is-end-exam.observable';
 
 @NgModule({
   declarations: [
@@ -167,6 +179,7 @@ import { UsersPostComponent } from './maintainers/users/users-post/users-post.co
     NgCircleProgressModule.forRoot(),
     NgbModalModule,
     NgbCollapseModule,
+    NgbTooltipModule,
     
     CategoriesModule,
     // QuestionsModule,
@@ -189,7 +202,8 @@ import { UsersPostComponent } from './maintainers/users/users-post/users-post.co
     MessageObservable,
     ExamProgressBarObservable,
     ExamClearTimerObservable,
-
+    CategoryObservable,
+    IsEndExamObservable,
     AuthService,
     AuthGuard,
     UsersGuard
@@ -259,7 +273,11 @@ export class AppModule {
       faUser,
       faExclamation,
       faUsers,
-      faLock
+      faLock,
+      faBookmark,
+      farBookmark,
+      faListOl,
+      faEye
     );
 
   }
