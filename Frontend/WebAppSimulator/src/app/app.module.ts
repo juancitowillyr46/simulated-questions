@@ -92,7 +92,8 @@ import {
   faBookmark,
   faListOl,
   faCaretSquareDown,
-  faEye
+  faEye,
+  faHandPointRight
  } from '@fortawesome/free-solid-svg-icons';
 
 import { 
@@ -100,7 +101,8 @@ import {
   faCheckSquare as farCheckSquare, 
   faQuestionCircle as farQuestionCircle, 
   faCircle as farCircle,
-  faBookmark as farBookmark
+  faBookmark as farBookmark,
+  faArrowAltCircleRight
 } from '@fortawesome/free-regular-svg-icons';
 
 
@@ -277,7 +279,8 @@ export class AppModule {
       faBookmark,
       farBookmark,
       faListOl,
-      faEye
+      faEye,
+      faHandPointRight
     );
 
   }

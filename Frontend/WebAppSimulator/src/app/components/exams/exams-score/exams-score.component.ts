@@ -24,6 +24,8 @@ export class ExamsScoreComponent implements OnInit {
   
   public category = null;
   isEndExam: any = false;
+  public alphabeticalOrder = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+  public isTraslate;
 
   constructor(config: NgbAccordionConfig,
     private routers: Router,
@@ -75,17 +77,6 @@ export class ExamsScoreComponent implements OnInit {
 
   }
 
-  public validateOptionCorrect(answer, typeAnswer) {
-    if(answer.checked !== undefined) {
-      if(answer.checked === answer.isCorrect && answer.checked === true && answer.isCorrect === true) {
-        return ['fas', 'check'];
-      } else {
-        return ['fas', 'times'];
-      }
-    } else if(answer.checked === undefined) {
-      return ['fas', 'user'];
-    }
-  }
 
   public checkedIsNullOption(answer, typeAnswer) {
     if(answer.checked === undefined) {
@@ -95,21 +86,34 @@ export class ExamsScoreComponent implements OnInit {
     }
   }
 
+  public validateOptionCorrect(answer, typeAnswer): number {
+    if(answer.checked !== undefined) {
+      if(answer.checked === true && answer.isCorrect === true) {
+        return 1;
+      } else if(answer.isCorrect !== true && answer.checked === true){
+        return 2;
+      } else if(answer.isCorrect === true && answer.checked !== true) {
+        return 3;
+      }
+    } else if(answer.checked === undefined) {
+      return 3;
+    }
+  }
 
-  public validateCheckedUser(answer, typeAnswer) {
+  public validateCheckedUser(answer, typeAnswer): boolean {
     
     if(typeAnswer === 'MULTIPLE_ANSWER') {
       
       if(answer.checked !== undefined){
 
         if(answer.checked === true) {
-          return ['fas','square'];
+          return true;
         } else  if(answer.checked === null) {
-          return ['far','square'];
+          return false;
         }
 
       } else  if(answer.checked === undefined){
-        return ['far','square'];
+        return false;
       }
 
     } else if(typeAnswer === 'ONE_ANSWER') {
@@ -117,13 +121,13 @@ export class ExamsScoreComponent implements OnInit {
       if(answer.checked !== undefined){
 
         if(answer.checked === true) {
-          return ['fas','circle'];
+          return true;
         } else  if(answer.checked === null) {
-          return ['far','circle'];
+          return false;
         }
 
       } else  if(answer.checked === undefined){
-        return ['far','circle'];
+        return false;
       }
 
     } else if(typeAnswer === 'TRUE_OR_FALSE') {
@@ -131,46 +135,95 @@ export class ExamsScoreComponent implements OnInit {
       if(answer.checked !== undefined){
 
         if(answer.checked === true) {
-          return ['fas','circle'];
+          return true;
         } else  if(answer.checked === null) {
-          return ['far','circle'];
+          return false;
         }
 
       } else  if(answer.checked === undefined){
-        return ['far','circle'];
+        return false;
       }
 
     }
     
   }
 
-  public validateCheckedSystem(answer, typeAnswer) {
+  public validateCheckedSystem(answer, typeAnswer): boolean {
     if(typeAnswer === 'MULTIPLE_ANSWER') {
       
       if(answer.isCorrect === true){
-        return ['fas','square'];
+        return true;
       } else if(answer.isCorrect === null){
-        return ['far','square'];
+        return false;
       }
 
     } else if(typeAnswer === 'ONE_ANSWER') {
 
       if(answer.isCorrect === true){
-        return ['fas','circle'];
+        return true
       } else if(answer.isCorrect === null){
-        return ['far','circle'];
+        return false;
       }
 
     } else if(typeAnswer === 'TRUE_OR_FALSE') {
 
       if(answer.isCorrect === true){
-        return ['fas','circle'];
+        return true;
       } else if(answer.isCorrect === null){
-        return ['far','circle'];
+        return false;
       }
 
     }
   }
+
+  // public validate(answer, typeAnswer): number {
+
+  //   if(typeAnswer === 'MULTIPLE_ANSWER') {
+      
+  //     if(answer.checked !== undefined){
+
+  //       if(answer.checked === true) {
+  //         return true;
+  //       } else  if(answer.checked === null) {
+  //         return false;
+  //       }
+
+  //     } else  if(answer.checked === undefined){
+  //       return false;
+  //     }
+
+  //   } else if(typeAnswer === 'ONE_ANSWER') {
+
+  //     if(answer.checked !== undefined){
+
+  //       if(answer.checked === true) {
+  //         return true;
+  //       } else  if(answer.checked === null) {
+  //         return false;
+  //       }
+
+  //     } else  if(answer.checked === undefined){
+  //       return false;
+  //     }
+
+  //   } else if(typeAnswer === 'TRUE_OR_FALSE') {
+
+  //     if(answer.checked !== undefined){
+
+  //       if(answer.checked === true) {
+  //         return true;
+  //       } else  if(answer.checked === null) {
+  //         return false;
+  //       }
+
+  //     } else  if(answer.checked === undefined){
+  //       return false;
+  //     }
+
+  //   }
+
+  // }
+
 
 
   ngOnInit() {
@@ -234,39 +287,39 @@ export class ExamsScoreComponent implements OnInit {
       that.alert.message = 'No pudiste aprobar el exámen';
     }
 
-    var myPieChart = new Chart(document.getElementById('realtime'), {
-        type: 'pie',
-        data: {
-          labels: ['Correctas', 'Incorrectas'],
-          datasets: [{
-            data: [that.answerCheckedSuccess, that.answerCheckedError],
-            backgroundColor: [
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 99, 132, 1)'
-            ],
-            borderColor: [
-              'rgba(54, 162, 235, 1)',
-              'rgba(255,99,132,1)'
-            ],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          title: {
-            display: false,
-            text: 'Resultado'
-          },
-          responsive: true,
-          layout: {
-            padding: {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            }
-        }
-      }
-    });
+    // var myPieChart = new Chart(document.getElementById('realtime'), {
+    //     type: 'pie',
+    //     data: {
+    //       labels: ['Correctas', 'Incorrectas'],
+    //       datasets: [{
+    //         data: [that.answerCheckedSuccess, that.answerCheckedError],
+    //         backgroundColor: [
+    //           'rgba(54, 162, 235, 1)',
+    //           'rgba(255, 99, 132, 1)'
+    //         ],
+    //         borderColor: [
+    //           'rgba(54, 162, 235, 1)',
+    //           'rgba(255,99,132,1)'
+    //         ],
+    //         borderWidth: 0
+    //       }]
+    //     },
+    //     options: {
+    //       title: {
+    //         display: false,
+    //         text: 'Resultado'
+    //       },
+    //       responsive: true,
+    //       layout: {
+    //         padding: {
+    //             left: 0,
+    //             right: 0,
+    //             top: 0,
+    //             bottom: 0
+    //         }
+    //     }
+    //   }
+    // });
 
 
   }
@@ -300,6 +353,16 @@ export class ExamsScoreComponent implements OnInit {
     localStorage.removeItem("intervalId");
     
     that.routers.navigateByUrl('/exams');
+  }
+
+  translate() {
+    const that = this;
+    if(that.isTraslate == true){
+      that.isTraslate = false;
+    } else {
+      that.isTraslate = true;
+    }
+    
   }
 
 }

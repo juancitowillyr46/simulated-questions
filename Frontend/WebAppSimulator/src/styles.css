@@ -187,3 +187,22 @@ html {
         text-decoration: underline !important;
     }
     
+
+/* Active Traducción */
+.active-traslate{
+    background-color: #28a745 !important;
+    color: #ffffff !important;
+}
+
+.active-traslate a{
+    color: #ffffff !important;
+}
+
+.active-traslate fa-icon{
+    color: #ffffff !important;
+}
+
+.answer-correct {
+    background-color: #28a745;
+    color: #ffffff;
+}
