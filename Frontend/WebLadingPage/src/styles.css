@@ -53,7 +53,8 @@
 
 body {
     /* background: #0083ff !important;  */
-    background-image: linear-gradient(128deg,#1e6dbd,#3287db);
+    /* background-image: linear-gradient(128deg,#1e6dbd,#3287db); */
+    background-color: transparent !important;
 }
 
 .header .top-bar.navbar {
@@ -142,7 +143,8 @@ h4.portfolio-post-title{
 
 
 .content-bloques {
-    background: #ecf5fe !important;
+    /*background: #ecf5fe !important;*/
+    background: transparent !important;
 }
 
 .content-bloques .heading-sec {
@@ -155,7 +157,8 @@ h4.portfolio-post-title{
 }
 
 .content-bloques .portfolio-sec {
-    border: 1px solid #cccccc !important;
+    border: none !important;
+    /* border: 1px solid #cccccc !important; */
 }
 
 .content-shop {
@@ -231,6 +234,8 @@ h4.portfolio-post-title{
     background-color: #666 !important;
     border: 1px solid #666 !important;
     color: #FFFFFF !important;
+    font-size: 1.2em !important;
+    text-transform: initial !important;
 }
 
 .content-equipo .btn:hover {
@@ -328,4 +333,449 @@ h4.portfolio-post-title{
     color: #2474c5 !important;
 }
 
+/* Cursos */
+.portfolio-desc ul li, 
+.portfolio-desc p, 
+.portfolio-desc h5, 
+.portfolio-desc h3, 
+.price h4,
+.price{
+    color: #2272c3 !important;
+}
 
+
+
+
+.portfolio-sec p{
+    line-height: 2em !important;
+    font-size: 1.2em !important;
+}
+
+.portfolio-sec {
+    padding-right: 1em !important;
+    padding-left: 1em !important;
+}
+
+.portfolio-sec .portfolio-post-title {
+    padding-bottom: 0.2em !important;
+}
+
+.portfolio-desc {
+    padding-top: 3em !important;
+}
+
+.portfolio-desc p{
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: 1.4em !important;
+    line-height: 1.8em !important;
+}
+
+
+.portfolio-desc ul {
+    list-style: circle;
+    text-align: left;
+ }
+
+ /* Slider */
+ .carousel.carouselBizwrap .carousel-inner .carousel-item {
+    background-size: cover !important;
+    background-position: center !important;
+ }
+
+ .carousel.carouselBizwrap .carousel-overlay {
+    background-image: none !important;
+ }
+ 
+ .carousel-control-prev, .carousel-control-next {
+    display: none !important;
+ }
+
+ /* secciones */
+ .content-bloques .heading-sec, 
+ .content-ofrecemos .heading-sec,
+ .content-indicadores .heading-sec,
+ .content-equipo .heading-sec {
+    color: #2779ca !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+    margin-bottom: 0px !important;
+    text-transform: inherit !important;
+    font-size: 3em !important;
+}
+
+.content-bloques .heading-info { 
+    padding-bottom: 2em !important;
+    width: 70% !important;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* .content-bloques .heading-sec {
+    color: #2779ca !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+} */
+
+.content-bloques p, 
+.content-ofrecemos p,
+.content-indicadores p,
+.content-equipo p{
+    color: #2779ca !important;
+    font-size: 1.5em !important;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    line-height: 1.5em !important;
+    padding-bottom: 1em !important;
+}
+
+.content-indicadores .heading-sec {
+    color: #FFFFFF !important;
+}
+.content-indicadores p {
+    color: #FFFFFF !important;
+}
+
+/* Header */
+.header {
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+}
+
+.nav-item a{
+    text-transform: none !important;
+}
+
+
+.services-text h3{
+    color: #2779ca !important;
+    text-align: center;
+    text-transform: inherit !important;
+}
+
+/* Indicadores */
+.jr-service-porcentage {
+    width: 150px !important;
+    height: 150px !important;
+    line-height: 150px !important;
+    font-weight: 600 !important;
+    font-size: 3em !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FFFFFF !important;
+    background: transparent !important;
+}
+
+.services-box {
+    border: 1px solid transparent !important;
+}
+
+.carousel.carouselBizwrap .carousel-content h3 {
+    font-size: 3rem !important;
+    font-weight: 400 !important;
+    line-height: 4rem !important;
+}
+
+.carousel.carouselBizwrap .carousel-content h3 {
+    font-size: 3rem !important;
+    font-weight: 400 !important;
+    line-height: 4rem !important;
+}
+
+.content-indicadores{
+    padding-top: 50px;
+    padding-bottom: 120px;
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+}
+
+nav.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
+    font-size: 15px !important;
+}
+
+/* Equipo */
+.person-desc h3{
+    color: #2379ca !important;
+    text-align: center;
+    text-transform: inherit !important;
+    font-size: 18px !important;
+    font-weight: 400 !important;
+    margin-bottom: 8px !important;
+}
+
+.content-equipo .btn {
+    background-color: #2272c3 !important;
+    /* opacity: .3; */
+    color: #FFFFFF !important;
+    border: 1px solid #2272c3 !important;
+}
+
+.content-equipo p{
+    font-size: 1.2em !important;
+}
+
+.person-section {
+    border: 0px solid #eee !important;
+}
+
+.content-equipo .heading-info {
+    padding-bottom: 2em !important;
+    width: 70% !important;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nav-item .btn-order-now{
+    /* background-color: #1e7e34 !important;
+    border-color: #1e7e34 !important;
+    color: #ffffff !important;
+    border: 1px solid #1e7e34 !important;
+    cursor: pointer !important;
+    font-size: 15px !important; */
+}
+
+.header.header-sticky.sticky-active nav.navbar.navbar-expand-lg {
+    background-color: #FFFFFF !important;
+}
+
+.swiper-fullwidth .swiper-slide .swiper-overlay {
+    background-color: none !important;
+    background-image: none !important;
+}
+
+/* Slider  */
+.swiper-overlay .btn{
+    background-color: #2272c3 !important;
+    /* opacity: .3; */
+    color: #FFFFFF !important;
+    border: 1px solid #2272c3 !important;
+}   
+
+.header.header-transparent .navbar-brand img.logo-dark {
+    opacity: 1 !important;
+}
+
+/* Suscribete ya */
+.btn-suscription {
+    background-color: #b0f95b !important;
+    color: #000000cb !important;
+    font-weight: 600 !important;
+    border: none !important;
+    font-size: 20px !important;
+}
+
+.btn-suscription:hover {
+    background: #233212 !important;
+    color: #b0f95a !important;
+    opacity: 1 !important;
+}
+
+.swiper-overlay .btn {
+    background-color: #b0f95b !important;
+    color: #000000cb !important;
+    text-transform: inherit !important;
+    border: none !important;
+    font-size: 20px !important;
+}
+
+.swiper-overlay .btn:hover {
+    background: #233212 !important;
+    color: #b0f95a !important;
+    opacity: 1 !important;
+}
+
+
+.swiper-fullwidth .swiper-slide .swiper-overlay .swiper-title {
+    text-transform: inherit !important;
+}
+
+#footer {
+    background-color: #2b7ed0!important;
+}
+
+.footer-col form .form-control {
+    background-color: #fff;
+    border: none;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-bottom span {
+    color: #fff;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.footer-bottom {
+    border-top: 1px solid #fff;
+    padding-top: 30px;
+}
+
+#footer .btn {
+    /* background-color: #1d2126 !important; */
+    /* opacity: .3; */
+    color: #ffffff !important;
+    border: 1px solid #FFFFFF !important;
+    cursor: pointer !important;
+    background-color: #2b7ed0 !important;
+}
+
+.swiper-fullwidth .swiper-slide .swiper-overlay {
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.swiper-fullwidth .swiper-slide .swiper-overlay .swiper-title {
+    font-size: 4em !important;
+}
+
+/* Botón de inscríbete */
+
+/* General  */
+.btn-suscription:hover {
+    border: 0px solid #FFFFFF !important;
+}
+
+.btn-suscription {
+   padding: 0.5em !important; 
+   /* width: 100% !important; */
+   margin: 0 auto !important;
+   text-transform: none !important;
+}
+
+.pricing-select {
+    width: 50%;
+    margin: 0 auto;
+}
+
+/* en el Menu */
+.header .btn-suscription {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+/* en el Slider */
+
+.swiper-overlay .btn-suscription {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+}
+
+/* Precios */
+.pricing-desc ul li {
+    color: #2779ca !important;
+    font-size: 1.5em !important;
+    line-height: 1.5em !important;
+}
+
+.pricing-head {
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+}
+
+.pricing-wrapper .pricing-rate{
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+    color: #FFFFFF !important;
+}
+
+.pricing-wrapper .pricing-rate h1{
+    color: #FFFFFF !important;
+}
+
+.pricing-head h3{
+    text-align: left !important;
+    padding-left: 1em !important;
+}
+
+.list-unstyled {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+
+.list-unstyled li{
+    border-bottom: 0px solid #FFFFFF !important;
+}
+
+.pricing-select {
+    padding-top: 2em !important;
+}
+
+.pricing-wrapper {
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
+    border: 0px solid #eee !important;
+    padding-bottom: 1em !important;
+}
+
+.disabled-price .btn-suscription {
+    width: 100% !important;
+}
+
+.disabled-price .pricing-head {
+    color: #1d2126 !important;
+    background-image: linear-gradient(128deg,#d3d3d3,#d3d3d3) !important;
+}
+
+.disabled-price .pricing-head h3{
+    color: #1d2126 !important;
+}
+
+.disabled-price .pricing-rate {
+    background-image: linear-gradient(128deg,#d3d3d3,#d3d3d3) !important;
+    color: #1d2126 !important;
+}
+
+.disabled-price .pricing-rate h1{
+    color: #1d2126 !important;
+}
+
+.disabled-price .btn-suscription{
+    background-color: #d3d3d3 !important;
+}
+
+.disabled-price .btn-suscription:hover{
+    
+    color: #000000cb !important;
+}
+
+.disabled-price { 
+    opacity: 0.5 !important;
+}
+
+.footer-col {
+    text-align: center;
+}
+
+.footer-col img{
+    width: 30%;
+    padding-bottom: 2.5em !important;
+}
+
+
+.footer-col .logo i{
+    font-size: 2em;
+}
+
+.footer-col a {
+    color: #FFFFFF;
+    font-size: 1em;
+}
+
+.footer-col p {
+    color: #FFFFFF;
+    font-size: 1em;
+}
+
+.footer-col {
+    font-size: 1.2em !important;
+}
+
+.footer-col hr {
+    color: #FFFFFF !important;
+    border-color: #FFFFFF !important;
+}
+
+#footer {
+    padding-bottom: 10px !important;
+}
+
+.modal-body p{
+    color: #000000 !important;
+}

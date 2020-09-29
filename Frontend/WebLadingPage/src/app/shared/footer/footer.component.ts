@@ -21,10 +21,10 @@ export class FooterComponent implements OnInit {
   ngOnInit(): void {
     const that = this;
     console.log(that.router.navigateByUrl);
-    that.isFooterObsevable.currentIsFooterData.subscribe( res => {
-      console.log(res);
-      that.isShowFooter = res;
-    });
+    // that.isFooterObsevable.currentIsFooterData.subscribe( res => {
+    //   console.log(res);
+    //   that.isShowFooter = res;
+    // });
 
     // this.route.url.subscribe( res => {
     //   console.log(res);

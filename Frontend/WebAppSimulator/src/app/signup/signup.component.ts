@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLock, faUser, faAppleAlt, faAt } from '@fortawesome/free-solid-svg-icons';
-import { UserAuth } from '../core/models/userAuth.model';
+import { UserAuth, CreateUser } from '../core/models/userAuth.model';
 import { SignUpObservable } from './signup.observable';
 
 @Component({
@@ -29,9 +29,10 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     const that = this;
     that.formGroup = that.formBuilder.group({
-      displayName: ['', [Validators.required]],
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
 
     that.signUpObservable.currentMessage.subscribe(res => {
@@ -55,20 +56,14 @@ export class SignupComponent implements OnInit {
 
     that.error = false;
 
-    const userAuth: UserAuth = {
-      displayName: that.formGroup.value.displayName,
-      password: that.formGroup.value.password,
+    const createUser: CreateUser = {
       email: that.formGroup.value.email,
-      active: true,
-      createdAt: new Date(),
-      emailVerified: true,
-      photoURL: '',
-      role: 'USER_STUDENT',
-      uid: '',
-      assignedTests: []
-    };
+      firstName: that.formGroup.value.firstName,
+      lastName: that.formGroup.value.lastName,
+      password: that.formGroup.value.password
+    }
 
-    that.authService.SignUp(userAuth);
+    that.authService.SignUp(createUser);
   }
 
 }

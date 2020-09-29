@@ -11,11 +11,11 @@ import { IsFooterGuard } from './shared/guards/is-footer.guard';
 
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: HomeComponent,
-    canActivate: [IsFooterGuard]
-  },
+  // {
+  //   path: 'home',
+  //   component: HomeComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
   {
     path: 'course/:key',
     component: CourseComponent,
@@ -38,8 +38,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    component: HomeComponent
   },
   {
     path: 'shop-cart',
@@ -54,7 +53,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true })],
+  imports: [RouterModule.forRoot(routes, {useHash: false })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -1,12 +1,19 @@
-export interface UserAuth {
+export interface StorageInFirebase {
  uid: string;
  email: string;
  displayName: string;
+ firstName: string;
+ lastName: string;
  photoURL: string;
  emailVerified: boolean;
  role: string;
- password?: string;
  active?: boolean;
  createdAt?: Date;
- assignedTests?: any[];
+}
+
+export interface CreateUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
 }

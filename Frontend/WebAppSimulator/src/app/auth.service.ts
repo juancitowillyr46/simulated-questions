@@ -2,7 +2,7 @@ import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { LoginService } from './login/login.service';
-import { UserAuth } from './core/models/userAuth.model';
+import { StorageInFirebase, CreateUser } from './core/models/userAuth.model';
 import { Observable } from 'rxjs';
 import { LoginObservable } from './login/login.observable';
 import { AuthObservable } from './auth.observable';
@@ -17,7 +17,7 @@ export class AuthService {
   userData: any;
   userNavigate: any = '';
   userRole: any = '';
-  userAttr: UserAuth;
+  userAttr: any;//UserAuth
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -47,25 +47,39 @@ export class AuthService {
     });
   }
 
-  SignUp(userAuth: UserAuth) {
+  SignUp(createUser: CreateUser) {
     const that = this;
-    this.afAuth.auth.createUserWithEmailAndPassword(userAuth.email, userAuth.password)
+    this.afAuth.auth.createUserWithEmailAndPassword(createUser.email, createUser.password)
     .then((result) => {
-      const uid: any = result.user.uid;
-      userAuth.uid = uid;
-      userAuth.password = null;
-      that.SignUpSetData(userAuth);
+
+      const storageInFirebase: StorageInFirebase = {
+        uid: result.user.uid,
+        displayName: createUser.firstName + ' ' + createUser.lastName,
+        email: createUser.email,
+        emailVerified: false,
+        firstName: createUser.firstName,
+        lastName: createUser.lastName,
+        photoURL: '',
+        role: 'USER_STUDENT',
+        active: true,
+        createdAt: new Date()
+      };
+
+      that.SignUpSetData(storageInFirebase);
+
     }).catch((error) => {
-      that.signUpObservable.changeMessage(error.message);
+      alert(error.message);
+      // that.signUpObservable.changeMessage(error.message);
     });
   }
 
-  SignUpSetData(userAuth) {
+  SignUpSetData(storageInFirebase: StorageInFirebase) {
     const that = this;
-    that.userService.create(userAuth).subscribe( res => {
+    that.userService.create(storageInFirebase).subscribe( res => {
       if (res) {
         that.ngZone.run(() => {
-          that.router.navigate(['dashboard']);
+          alert('Gracias por registrarte validaremos tus datos');
+          that.router.navigate(['exams']);
         });
       }
     });

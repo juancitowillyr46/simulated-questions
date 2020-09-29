@@ -1,80 +1,96 @@
 <!--footer-->
 
-<div id="footer" *ngIf="isShowFooter">
+<div id="footer">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 margin-btm-20">
-                <div class="footer-col" style="display: none;">
-                    <h3>Bizwrap</h3>
-                    <p>
-                        aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna. aliqua.adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.
+            <div class="col-md-12 margin-btm-10">
+                <div class="footer-col">
+                    <a href="#home"> 
+                        <img src="assets/img/logo-white.png" alt="">
+                    </a>
+                    <p class="logo">
+                        <a href="https://www.facebook.com">
+                            <i class="fa fa-facebook-official mr-4" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://pe.linkedin.com/">
+                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                        </a>
                     </p>
-                </div>
-                <div class="space-20" style="display: none;"></div>
-                <div class="footer-col">
-                    <h3>Información de contacto</h3>
-                    <!-- <p><i class="ion-home"></i> pearl tower,3rd floor,jaipur,302012</p> -->
-                    <p><i class="ion-iphone"></i> 9887568614</p>
-                    <p><i class="ion-email"></i> info@domain.com</p>
-                </div>
-                <div class="space-20"></div>
-                <!-- <div class="footer-col">
-                    <h3>Follow us</h3>
-                    <ul class=" list-inline social-btn">
-                        <li class="list-inline-item"><a href="#"><i class="ion-social-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Like On Facebook"></i></a></li>
-                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On twitter"></i></a></li>
-                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-googleplus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Follow On googleplus"></i></a></li>
-                        <li style="display: none;" class="list-inline-item"><a href="#"><i class="ion-social-pinterest" data-toggle="tooltip" data-placement="top" title="" data-original-title="pinterest"></i></a></li>
-                        <li class="list-inline-item"><a href="#"><i class="ion-social-skype" data-toggle="tooltip" data-placement="top" title="" data-original-title="skype"></i></a></li>
-                    </ul>
-                </div> -->
-                <!--footer social col-->
-            </div><!--col-4 end-->
-            <div class="col-md-3 margin-btm-20" style="display: none;">
-                <div class="footer-col">
-                    <h3>Latest post</h3>
-                    <ul class="post-list list-unstyled">
-                        <li><a href="#" class="hover-color">Blog post with image</a></li>
-                        <li><a href="#" class="hover-color">lorem ipsum dollor sit amet</a></li>
-                        <li><a href="#" class="hover-color">Blog post with audio</a></li>
-                        <li><a href="#" class="hover-color">lorem ipsum dollor sit amet</a></li>
-                        <li><a href="#" class="hover-color">Blog post with quote</a></li>
-                    </ul>
-                </div>
-            </div><!--latest post col end-->
-            <div class="col-md-8">
-                <div class="footer-col">
-                    <h3>Escríbenos</h3>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" placeholder="Nombre...">
+                    <div class="pt-4">
+                        <p>
+                            Contáctate con nosotros para gestionar tu inscripción
+                        </p>
+                        <p class="mb-2">
+                            <a href="mailto:info@yourtrustedadvisor.com">
+                                <i class="fa fa-envelope-o  mr-1" aria-hidden="true"></i>
+                                info@yourtrustedadvisor.com
+                            </a>
+                        </p>
+                        <p class="p-0 m-0 pb-2 pt-2">ó</p>
+                        <p class="mb-4">
+                            <a href="https://wa.me/+51992394194/?text=Hola deseo incribirme" class="btn btn-radius" style="background-color: #4dc247 !important;
+                            width: 25%;">
+                                <i class="fa fa-whatsapp mr-1" aria-hidden="true" style="font-size: 1.5em;vertical-align: middle;"></i>
+                                +51 992 394 194
+                            </a>
+                        </p>
+                        <p>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#terminos_condiciones">Terminos y condiciones de uso</a>
+                        </p>
+
+                         <!-- Modal -->
+                        <div class="modal fade" id="terminos_condiciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h4 class="modal-title text-center" id="exampleModalLabel" style="text-align: center !important; width: 100%; color: #000000 !important;">Términos y condiciones</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                    <p>
+                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
+                                    </p>
+                                </div>
+                                <!-- <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                                </div> -->
                             </div>
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" placeholder="Correo...">
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" placeholder="Asunto...">
-                            </div>
-                            <div class="col-md-12">
-                                <textarea class="form-control" placeholder="Mensaje..." rows="7"></textarea>
-                            </div>
-                            <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-lg btn-white">Enviar mensaje</button>
                             </div>
                         </div>
-                    </form>
+
+                        <div class="space-70"></div>
+                        <hr>
+                        <p>
+                            <span>Copyright &copy;2020 YourtrustedAdvisor. Designed YourtrustedAdvisor</span>
+                        </p>
+                        
+                    </div>
                 </div>
-            </div><!--get in touch col end-->
-        </div><!--footer main row end-->  
-        <div class="space-70"></div>
-        <div class="row">
-            <div class="col-md-12 text-center footer-bottom">
-                <a href="index.html"> <img src="assets/img/logo-white.png" alt=""></a>
-                <div class="space-20"></div>
-                <span>&copy;2020. Derechos reservados. Designed by JR</span>
-            </div>
-        </div><!--footer copyright row end-->
+
+            </div><!--col-4 end-->
+            
+        </div>
     </div><!--container-->
 </div><!--footer main end-->
 <!--back to top-->

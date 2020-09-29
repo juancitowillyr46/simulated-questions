@@ -1,6 +1,4 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { IsFooterObsevable } from './shared/observables/is-footer.observable';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',

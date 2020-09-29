@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build.prod": "ng build --prod --base-href=/landingpage/"
+    "build.prod": "ng build --prod --base-href=/landingpage/v3/"
   },
   "private": true,
   "dependencies": {

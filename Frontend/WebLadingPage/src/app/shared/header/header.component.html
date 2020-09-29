@@ -2,7 +2,7 @@
     <div id="preloader-inner"></div>
 </div> -->
 <!--/preloader-->
-<header class="header header-sticky header-light">
+<header class="header header-sticky header-transparent header-light">
     <div class="top-bar navbar">
         <div class="container">
             <ul class="navbar-nav nav flex-row mr-auto" style="display: none;">
@@ -14,11 +14,11 @@
                         <i class="ion-lock mr-2"></i>
                         Registro</a>
                 </li> -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="login.html" class="nav-link">
                         <i class="ion-android-lock mr-2"></i> Ingreso
                     </a>
-                </li>
+                </li> -->
 
                 <li class="dropdown nav-item" style="display:none">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"> Eng.</a>
@@ -38,84 +38,34 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-brand" [routerLink]="['/home']">
-                <img src="assets/img/logo-white.png" class="img-fluid logo-dark" alt="">
-                <img src="assets/img/logo-dark.png" class="img-fluid logo-white hide" alt="">
+                <img src="assets/img/logo-white.png" class="img-fluid logo-dark hide" alt="">
+                <img src="assets/img/logo-dark.png" class="img-fluid logo-white" alt="">
             </a>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
+                <ul class="nav navbar-nav ml-auto smooth-scroll">
                     <li class="nav-item">
-                        <a [routerLink]="['/home']" class="nav-link" data-toggle="dropdown">Home</a> 
+                        <a href="#inicio" class="nav-link" >Home</a> 
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#course">Cursos</a>
                     </li>
                     <li class="nav-item">
-                        <a [routerLink]="['/about']" class="nav-link">¿Quienes somos?</a>
-                    </li>
-                    <li class=" dropdown nav-item">
-                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">Cursos</a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a class="dropdown-item" [routerLink]="['/course/PSMI']">PROFESSIONAL SCRUM MASTER I</a>
-                            </li>
-                            <li style="display: none;">
-                                <a class="dropdown-item" [routerLink]="['/course/ACP']">AGILE CERTIFIED PRACTITIONER</a>
-                            </li>  
-                            <li style="display: none;">
-                                <a class="dropdown-item" [routerLink]="['/course/PAL']">PROFESSIONAL AGILE LEADERSHIP</a>
-                            </li>
-                            <li style="display: none;">
-                                <a class="dropdown-item" [routerLink]="['/course/PSPO']">PROFESSIONAL SCRUM PRODUCT OWNER</a>
-                            </li>
-                        </ul>
+                        <a class="nav-link" href="#team">Nosotros</a>
                     </li>
                     <!--mega menu-->
                     <li class="nav-item">
-                        <a [routerLink]="['/faq']" class="nav-link" data-toggle="dropdown">Preguntas frecuentes</a>
+                        <a class="nav-link" href="#prices">Precios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faq">Preguntas frecuentes</a>
                     </li>
 
-                    <li class="nav-item" style="display: none;">
-                        <a href="#" class="nav-link" data-toggle="dropdown">Planes  <i class="fa fa-angle-down"></i></a>
-                    </li> 
                     <li class="nav-item">
-                        <a [routerLink]="['/contact']" class="nav-link" data-toggle="dropdown">Contáctanos</a>
+                        <a href="#footer" class="btn btn-suscription btn-success btn-radius btn-lg btn-order-now" data-toggle="dropdown">Inscríbete</a>
                     </li>
-                    <li class=" dropdown nav-item ">
-                        <a href="javascript:void(0)" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="ion-ios-cart fs20"></i> (1)</a>
-                        <ul class="dropdown-menu dropdown-menu-right cart-dropdown">
-                             <li>Tu Carrito</li>
-                                <li class="clearfix">                                       
-                                    <img src="assets/img/shop/p1.jpg" width="60" alt="" class="img-responsive">                                     
-                                    <div class="cart-desc">
-                                        <h5><a href="#">Profesional Scrum Master I</a></h5>
-                                        <span class="cart-item-price">
-                                            <em>$36.00</em> x 1
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="clearfix" style="display: none;">                                     
-                                    <img src="assets/img/shop/p2.jpg" width="60" alt="">                                  
-                                    <div class="cart-desc">
-                                        <h5><a href="#">Product title</a></h5>
-                                        <span class="cart-item-price">
-                                            <em>$54.00</em> x 1
-                                        </span>
-                                    </div>
-                                </li>
-                                 <li class="clearfix" style="display: none;">                                      
-                                    <img src="assets/img/shop/p4.jpg" width="60" alt="">                                  
-                                    <div class="cart-desc">
-                                        <h5><a href="#">Product title</a></h5>
-                                        <span class="cart-item-price">
-                                            <em>$34.00</em> x 1
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="cart-footer d-flex flex-column pt-4">
-                                     <a href="#" class="btn-dark btn btn-block">Ver Carrito</a>
-                                     <a href="#" class="theme-btn-color btn btn-block">Pagar</a>
-                                  
-                                </li>
-                        </ul>
-                    </li>
+ 
                     
                 </ul>
             </div>
