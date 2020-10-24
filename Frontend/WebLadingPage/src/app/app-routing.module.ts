@@ -19,41 +19,41 @@ const routes: Routes = [
   {
     path: 'course/:key',
     component: CourseComponent,
-    canActivate: [IsFooterGuard]
+    // canActivate: [IsFooterGuard]
   },
-  {
-    path: 'faq',
-    component: FaqComponent,
-    canActivate: [IsFooterGuard]
-  },
-  {
-    path: 'about',
-    component: AboutComponent,
-    canActivate: [IsFooterGuard]
-  },
-  {
-    path: 'contact',
-    component: ContactComponent,
-    canActivate: [IsFooterGuard]
-  },
+  // {
+  //   path: 'faq',
+  //   component: FaqComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
+  // {
+  //   path: 'about',
+  //   component: AboutComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
+  // {
+  //   path: 'contact',
+  //   component: ContactComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
   {
     path: '',
     component: HomeComponent
   },
-  {
-    path: 'shop-cart',
-    component: ShopCartComponent,
-    canActivate: [IsFooterGuard]
-  },
-  {
-    path: 'shop-checkout',
-    component: ShopCheckoutComponent,
-    canActivate: [IsFooterGuard]
-  },
+  // {
+  //   path: 'shop-cart',
+  //   component: ShopCartComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
+  // {
+  //   path: 'shop-checkout',
+  //   component: ShopCheckoutComponent,
+  //   canActivate: [IsFooterGuard]
+  // },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: false })],
+  imports: [RouterModule.forRoot(routes, {useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

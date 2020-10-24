@@ -378,13 +378,23 @@ h4.portfolio-post-title{
  }
 
  /* Slider */
- .carousel.carouselBizwrap .carousel-inner .carousel-item {
+ /* .carousel.carouselBizwrap .carousel-inner .carousel-item {
     background-size: cover !important;
     background-position: center !important;
+ } */
+
+ .carousel.carouselBizwrap .carousel-inner .carousel-item {
+    background-size: cover !important;
+    background-position: bottom !important;
  }
+
+ /* .carousel.carouselBizwrap .carousel-overlay {
+    background-image: none !important;
+ } */
 
  .carousel.carouselBizwrap .carousel-overlay {
     background-image: none !important;
+    background-color: inherit !important;
  }
  
  .carousel-control-prev, .carousel-control-next {
@@ -697,9 +707,9 @@ nav.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
 }
 
 .pricing-wrapper {
-    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
-    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.03) !important;
+    -webkit-box-shadow: 8px 8px 3px 0px rgba(0,0,0,0.02) !important;
+    -moz-box-shadow: 8px 8x 3px 0px rgba(0,0,0,0.02) !important;
+    box-shadow: 8px 8px 3px 0px rgba(0,0,0,0.02) !important;
     border: 0px solid #eee !important;
     padding-bottom: 1em !important;
 }
@@ -778,4 +788,64 @@ nav.navbar.navbar-expand-lg .navbar-nav .nav-item .nav-link {
 
 .modal-body p{
     color: #000000 !important;
+}
+
+.slider-reg {
+    background-color: #2b7ed0 !important;
+}
+
+.btn-info{
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+    border: 1px solid #1e6dbd !important;
+    text-transform: initial !important;
+    color: #FFFFFF !important;
+    font-size: 1.2em !important;
+}
+.btn-info:hover{
+    color: #FFFFFF !important;
+}
+
+.use-cookies {
+    padding: 1em;
+    text-align: center;
+}
+
+.use-cookies p {
+    color: #000000 !important;
+}
+
+.course-detail p{
+    font-size: 14px !important;
+}
+
+.course-detail h4{
+    color: #000000 !important;
+}
+
+.course-detail .modal-header {
+    background-image: linear-gradient(128deg,#1e6dbd,#3287db) !important;
+    color: #ffffff !important;
+}
+
+.course-detail .modal-header h4 {
+    color: #ffffff !important;
+    text-align: center !important;
+    width: 100%;
+    font-size: 2.5em !important;
+}
+
+.course-detail .portal{
+    /* text-align: center !important;
+    margin: 0 auto !important; */
+    background: red;
+    height: 250px;
+    
+    background-position: right;
+    background-size: cover;
+}
+
+.course-detail .modal-body img{
+    width: 32% !important;
+    text-align: center !important;
+    margin: 0 auto !important;
 }

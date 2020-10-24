@@ -11,6 +11,7 @@ export class FooterComponent implements OnInit {
 
 
   public isShowFooter = true;
+  public isAcceptCookies = false;
 
   constructor(private router: Router, private route: ActivatedRoute, private isFooterObsevable: IsFooterObsevable) { 
     const that = this;
@@ -35,6 +36,11 @@ export class FooterComponent implements OnInit {
     //     that.isShowFooter = true;
     //   }
     // });
+  }
+
+  acceptCookies(): void {
+    const that = this;
+    that.isAcceptCookies = true;
   }
 
 }

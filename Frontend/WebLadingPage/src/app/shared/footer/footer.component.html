@@ -13,7 +13,10 @@
                             <i class="fa fa-facebook-official mr-4" aria-hidden="true"></i>
                         </a>
                         <a href="https://pe.linkedin.com/">
-                            <i class="fa fa-linkedin-square" aria-hidden="true"></i>
+                            <i class="fa fa-linkedin-square mr-4" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://pe.linkedin.com/">
+                            <i class="fa fa-instagram mr-4" aria-hidden="true"></i>
                         </a>
                     </p>
                     <div class="pt-4">
@@ -48,7 +51,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>
-                                <div class="modal-body">
+                                <div class="modal-body" style="font-size: 12px !important;">
                                     <p>
                                         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusamus dolorem in illum eum blanditiis ea laborum ipsum accusantium consequuntur, libero, deleniti explicabo ducimus fugit totam odio, et odit assumenda quae.
                                     </p>
@@ -96,3 +99,9 @@
 <!--back to top-->
 <a href="#" class="scrollToTop"><i class="ion-android-arrow-dropup-circle"></i></a>
 <!--back to top end-->
+<div class="use-cookies" *ngIf="!isAcceptCookies">
+    <p>
+        Usamos cookies para mejorar su experiencia en nuestro sitio y mostrarle publicidad relevante.
+    </p>
+    <a href="#" (click)="acceptCookies()" class="btn btn-success">Acepto</a>
+</div>
